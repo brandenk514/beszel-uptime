@@ -87,14 +87,14 @@ fetch-smartctl-conditional:
 
 # Update build-agent to include conditional .NET build
 build-agent: tidy build-dotnet-conditional fetch-smartctl-conditional
-	GOOS=$(OS) GOARCH=$(ARCH) go build $(AGENT_GO_TAGS) -o ./build/beszel-agent_$(OS)_$(ARCH)$(EXE_EXT) -ldflags "-w -s" ./internal/cmd/agent
+	GOTOOLCHAIN=auto GOOS=$(OS) GOARCH=$(ARCH) go build $(AGENT_GO_TAGS) -o ./build/beszel-agent_$(OS)_$(ARCH)$(EXE_EXT) -ldflags "-w -s" ./internal/cmd/agent
 
 build-hub: tidy $(if $(filter false,$(SKIP_WEB)),build-web-ui)
-	GOOS=$(OS) GOARCH=$(ARCH) go build -o ./build/beszel_$(OS)_$(ARCH)$(EXE_EXT) -ldflags "-w -s" ./internal/cmd/hub
+	GOTOOLCHAIN=auto GOOS=$(OS) GOARCH=$(ARCH) go build -o ./build/beszel_$(OS)_$(ARCH)$(EXE_EXT) -ldflags "-w -s" ./internal/cmd/hub
 
 build-hub-dev: tidy
 	mkdir -p ./internal/site/dist && touch ./internal/site/dist/index.html
-	GOOS=$(OS) GOARCH=$(ARCH) go build -tags development -o ./build/beszel-dev_$(OS)_$(ARCH)$(EXE_EXT) -ldflags "-w -s" ./internal/cmd/hub
+	GOTOOLCHAIN=auto GOOS=$(OS) GOARCH=$(ARCH) go build -tags development -o ./build/beszel-dev_$(OS)_$(ARCH)$(EXE_EXT) -ldflags "-w -s" ./internal/cmd/hub
 
 build: build-agent build-hub
 
@@ -113,6 +113,7 @@ dev-server: generate-locales
 	fi
 
 dev-hub: export ENV=dev
+dev-hub: export GOTOOLCHAIN=auto
 dev-hub:
 	mkdir -p ./internal/site/dist && touch ./internal/site/dist/index.html
 	@if command -v entr >/dev/null 2>&1; then \

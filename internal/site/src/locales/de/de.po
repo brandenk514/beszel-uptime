@@ -121,6 +121,13 @@ msgstr "Aktiver Zustand"
 msgid "Add {foo}"
 msgstr "{foo} hinzufügen"
 
+#: src/components/routes/uptime.tsx
+#: src/components/routes/uptime.tsx
+#: src/components/routes/uptime.tsx
+#: src/components/routes/uptime.tsx
+msgid "Add Monitor"
+msgstr ""
+
 #: src/components/routes/settings/notifications.tsx
 msgid "Add URL"
 msgstr "URL hinzufügen"
@@ -178,6 +185,10 @@ msgstr "Alle Container"
 #: src/components/systems-table/systems-table.tsx
 msgid "All Systems"
 msgstr "Alle Systeme"
+
+#: src/components/routes/uptime.tsx
+msgid "An error occurred"
+msgstr ""
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Are you sure you want to delete {name}?"
@@ -318,6 +329,8 @@ msgstr "Kann stoppen"
 
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/settings/quiet-hours.tsx
+#: src/components/routes/uptime.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -573,13 +586,22 @@ msgstr "Standardzeitraum"
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/system/smart-table.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Delete"
 msgstr "Löschen"
 
+#: src/components/routes/uptime.tsx
+msgid "Delete <0>{monitorName}</0>? This will also remove all associated check history."
+msgstr ""
+
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "Delete fingerprint"
 msgstr "Fingerabdruck löschen"
+
+#: src/components/routes/uptime.tsx
+msgid "Delete Monitor"
+msgstr ""
 
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Description"
@@ -646,6 +668,7 @@ msgstr "Dokumentation"
 #. Context: System is down
 #: src/components/alerts-history-columns.tsx
 #: src/components/routes/system/info-bar.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 #: src/lib/alerts.ts
 msgid "Down"
@@ -673,6 +696,10 @@ msgstr "Bearbeiten"
 msgid "Edit {foo}"
 msgstr "{foo} bearbeiten"
 
+#: src/components/routes/uptime.tsx
+msgid "Edit Monitor"
+msgstr ""
+
 #: src/components/login/auth-form.tsx
 #: src/components/login/forgot-pass-form.tsx
 #: src/components/login/otp-forms.tsx
@@ -687,6 +714,10 @@ msgstr "E-Mail-Benachrichtigungen"
 #: src/lib/i18n.ts
 msgid "Empty"
 msgstr "Leer"
+
+#: src/components/routes/uptime.tsx
+msgid "Enabled"
+msgstr ""
 
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
@@ -899,6 +930,10 @@ msgctxt "Button to copy install command"
 msgid "Homebrew command"
 msgstr "Homebrew-Befehl"
 
+#: src/components/routes/uptime.tsx
+msgid "Host"
+msgstr ""
+
 #: src/components/add-system.tsx
 msgid "Host / IP"
 msgstr ""
@@ -947,6 +982,10 @@ msgstr "Inaktiv"
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Interval"
 msgstr "Intervall"
+
+#: src/components/routes/uptime.tsx
+msgid "Interval (s)"
+msgstr ""
 
 #: src/components/login/auth-form.tsx
 msgid "Invalid email address."
@@ -998,6 +1037,10 @@ msgstr "Systemlast"
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Load state"
 msgstr "Ladezustand"
+
+#: src/components/routes/uptime.tsx
+msgid "Loading monitors…"
+msgstr ""
 
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Loading..."
@@ -1076,9 +1119,14 @@ msgstr "Arbeitsspeichernutzung der Docker-Container"
 msgid "Model"
 msgstr "Modell"
 
+#: src/components/routes/uptime.tsx
+msgid "My Website"
+msgstr ""
+
 #: src/components/add-system.tsx
 #: src/components/alerts-history-columns.tsx
 #: src/components/containers-table/containers-table-columns.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systemd-table/systemd-table-columns.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Name"
@@ -1110,6 +1158,14 @@ msgstr "Netzwerkeinheit"
 #: src/components/systemd-table/systemd-table.tsx
 msgid "No"
 msgstr "Nein"
+
+#: src/components/routes/uptime.tsx
+msgid "No data yet"
+msgstr ""
+
+#: src/components/routes/uptime.tsx
+msgid "No monitors yet. Add one to start tracking uptime."
+msgstr ""
 
 #: src/components/command-palette.tsx
 #: src/components/systemd-table/systemd-table.tsx
@@ -1218,6 +1274,7 @@ msgstr "Vergangen"
 msgid "Pause"
 msgstr ""
 
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Paused"
 msgstr "Pausiert"
@@ -1285,6 +1342,7 @@ msgid "Please sign in to your account"
 msgstr "Bitte melde dich bei deinem Konto an"
 
 #: src/components/add-system.tsx
+#: src/components/routes/uptime.tsx
 msgid "Port"
 msgstr ""
 
@@ -1373,6 +1431,14 @@ msgstr "Passwort zurücksetzen"
 msgid "Resolved"
 msgstr "Gelöst"
 
+#: src/components/routes/uptime.tsx
+msgid "response"
+msgstr ""
+
+#: src/components/routes/uptime.tsx
+msgid "Response time (last 60 checks)"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Restarts"
 msgstr "Neustarts"
@@ -1405,6 +1471,10 @@ msgstr "S.M.A.R.T.-Details"
 #: src/components/routes/system/smart-table.tsx
 msgid "S.M.A.R.T. Self-Test"
 msgstr "S.M.A.R.T.-Selbsttest"
+
+#: src/components/routes/uptime.tsx
+msgid "Save"
+msgstr ""
 
 #: src/components/add-system.tsx
 msgid "Save {foo}"
@@ -1653,6 +1723,10 @@ msgstr "Durchsatz des Root-Dateisystems"
 msgid "Time format"
 msgstr "Zeitformat"
 
+#: src/components/routes/uptime.tsx
+msgid "Timeout (s)"
+msgstr ""
+
 #: src/components/routes/settings/notifications.tsx
 msgid "To email(s)"
 msgstr "An E-Mail(s)"
@@ -1759,6 +1833,7 @@ msgstr "Löst aus, wenn die Nutzung einer Festplatte einen Schwellenwert übersc
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/system/smart-table.tsx
+#: src/components/routes/uptime.tsx
 msgid "Type"
 msgstr "Typ"
 
@@ -1777,6 +1852,7 @@ msgid "Universal token"
 msgstr "Universeller Token"
 
 #. Context: Battery state
+#: src/components/routes/uptime.tsx
 #: src/lib/i18n.ts
 msgid "Unknown"
 msgstr "Unbekannt"
@@ -1788,6 +1864,7 @@ msgstr "Unbegrenzt"
 
 #. Context: System is up
 #: src/components/routes/system/info-bar.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Up"
 msgstr "Aktiv"
@@ -1814,10 +1891,21 @@ msgstr "Alle 10 Minuten aktualisiert."
 msgid "Upload"
 msgstr "Hochladen"
 
+#: src/components/routes/uptime.tsx
+msgid "uptime"
+msgstr ""
+
+#: src/components/navbar.tsx
+#: src/components/navbar.tsx
 #: src/components/routes/system/info-bar.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Uptime"
 msgstr "Betriebszeit"
+
+#: src/components/routes/uptime.tsx
+msgid "Uptime Monitors"
+msgstr ""
 
 #: src/components/routes/system/charts/disk-charts.tsx
 #: src/components/routes/system/charts/gpu-charts.tsx

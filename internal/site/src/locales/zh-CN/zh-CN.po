@@ -121,6 +121,13 @@ msgstr "活动状态"
 msgid "Add {foo}"
 msgstr "添加 {foo}"
 
+#: src/components/routes/uptime.tsx
+#: src/components/routes/uptime.tsx
+#: src/components/routes/uptime.tsx
+#: src/components/routes/uptime.tsx
+msgid "Add Monitor"
+msgstr ""
+
 #: src/components/routes/settings/notifications.tsx
 msgid "Add URL"
 msgstr "添加 URL"
@@ -178,6 +185,10 @@ msgstr "所有容器"
 #: src/components/systems-table/systems-table.tsx
 msgid "All Systems"
 msgstr "所有客户端"
+
+#: src/components/routes/uptime.tsx
+msgid "An error occurred"
+msgstr ""
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Are you sure you want to delete {name}?"
@@ -318,6 +329,8 @@ msgstr "可停止"
 
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/settings/quiet-hours.tsx
+#: src/components/routes/uptime.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Cancel"
 msgstr "取消"
@@ -573,13 +586,22 @@ msgstr "默认时间段"
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/system/smart-table.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Delete"
 msgstr "删除"
 
+#: src/components/routes/uptime.tsx
+msgid "Delete <0>{monitorName}</0>? This will also remove all associated check history."
+msgstr ""
+
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "Delete fingerprint"
 msgstr "删除指纹"
+
+#: src/components/routes/uptime.tsx
+msgid "Delete Monitor"
+msgstr ""
 
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Description"
@@ -646,6 +668,7 @@ msgstr "文档"
 #. Context: System is down
 #: src/components/alerts-history-columns.tsx
 #: src/components/routes/system/info-bar.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 #: src/lib/alerts.ts
 msgid "Down"
@@ -673,6 +696,10 @@ msgstr "编辑"
 msgid "Edit {foo}"
 msgstr "编辑 {foo}"
 
+#: src/components/routes/uptime.tsx
+msgid "Edit Monitor"
+msgstr ""
+
 #: src/components/login/auth-form.tsx
 #: src/components/login/forgot-pass-form.tsx
 #: src/components/login/otp-forms.tsx
@@ -687,6 +714,10 @@ msgstr "电子邮件通知"
 #: src/lib/i18n.ts
 msgid "Empty"
 msgstr "空电"
+
+#: src/components/routes/uptime.tsx
+msgid "Enabled"
+msgstr ""
 
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
@@ -899,6 +930,10 @@ msgctxt "Button to copy install command"
 msgid "Homebrew command"
 msgstr "Homebrew 安装命令"
 
+#: src/components/routes/uptime.tsx
+msgid "Host"
+msgstr ""
+
 #: src/components/add-system.tsx
 msgid "Host / IP"
 msgstr "主机/IP"
@@ -947,6 +982,10 @@ msgstr "非活跃"
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Interval"
 msgstr "间隔"
+
+#: src/components/routes/uptime.tsx
+msgid "Interval (s)"
+msgstr ""
 
 #: src/components/login/auth-form.tsx
 msgid "Invalid email address."
@@ -998,6 +1037,10 @@ msgstr "负载"
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Load state"
 msgstr "加载状态"
+
+#: src/components/routes/uptime.tsx
+msgid "Loading monitors…"
+msgstr ""
 
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Loading..."
@@ -1076,9 +1119,14 @@ msgstr "Docker 容器的内存使用率"
 msgid "Model"
 msgstr "型号"
 
+#: src/components/routes/uptime.tsx
+msgid "My Website"
+msgstr ""
+
 #: src/components/add-system.tsx
 #: src/components/alerts-history-columns.tsx
 #: src/components/containers-table/containers-table-columns.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systemd-table/systemd-table-columns.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Name"
@@ -1110,6 +1158,14 @@ msgstr "网络单位"
 #: src/components/systemd-table/systemd-table.tsx
 msgid "No"
 msgstr "否"
+
+#: src/components/routes/uptime.tsx
+msgid "No data yet"
+msgstr ""
+
+#: src/components/routes/uptime.tsx
+msgid "No monitors yet. Add one to start tracking uptime."
+msgstr ""
 
 #: src/components/command-palette.tsx
 #: src/components/systemd-table/systemd-table.tsx
@@ -1218,6 +1274,7 @@ msgstr "过去"
 msgid "Pause"
 msgstr "暂停"
 
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Paused"
 msgstr "已暂停"
@@ -1285,6 +1342,7 @@ msgid "Please sign in to your account"
 msgstr "请登录您的账户"
 
 #: src/components/add-system.tsx
+#: src/components/routes/uptime.tsx
 msgid "Port"
 msgstr "端口"
 
@@ -1373,6 +1431,14 @@ msgstr "重置密码"
 msgid "Resolved"
 msgstr "已解决"
 
+#: src/components/routes/uptime.tsx
+msgid "response"
+msgstr ""
+
+#: src/components/routes/uptime.tsx
+msgid "Response time (last 60 checks)"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Restarts"
 msgstr "重启次数"
@@ -1405,6 +1471,10 @@ msgstr "S.M.A.R.T. 详情"
 #: src/components/routes/system/smart-table.tsx
 msgid "S.M.A.R.T. Self-Test"
 msgstr "S.M.A.R.T. 自检"
+
+#: src/components/routes/uptime.tsx
+msgid "Save"
+msgstr ""
 
 #: src/components/add-system.tsx
 msgid "Save {foo}"
@@ -1653,6 +1723,10 @@ msgstr "根文件系统的吞吐量"
 msgid "Time format"
 msgstr "时间格式"
 
+#: src/components/routes/uptime.tsx
+msgid "Timeout (s)"
+msgstr ""
+
 #: src/components/routes/settings/notifications.tsx
 msgid "To email(s)"
 msgstr "发送到电子邮件"
@@ -1759,6 +1833,7 @@ msgstr "当任何磁盘的使用率超过阈值时触发"
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/system/smart-table.tsx
+#: src/components/routes/uptime.tsx
 msgid "Type"
 msgstr "类型"
 
@@ -1777,6 +1852,7 @@ msgid "Universal token"
 msgstr "通用令牌"
 
 #. Context: Battery state
+#: src/components/routes/uptime.tsx
 #: src/lib/i18n.ts
 msgid "Unknown"
 msgstr "未知"
@@ -1788,6 +1864,7 @@ msgstr "无限制"
 
 #. Context: System is up
 #: src/components/routes/system/info-bar.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Up"
 msgstr "在线"
@@ -1814,10 +1891,21 @@ msgstr "每 10 分钟更新一次。"
 msgid "Upload"
 msgstr "上传"
 
+#: src/components/routes/uptime.tsx
+msgid "uptime"
+msgstr ""
+
+#: src/components/navbar.tsx
+#: src/components/navbar.tsx
 #: src/components/routes/system/info-bar.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Uptime"
 msgstr "正常运行时间"
+
+#: src/components/routes/uptime.tsx
+msgid "Uptime Monitors"
+msgstr ""
 
 #: src/components/routes/system/charts/disk-charts.tsx
 #: src/components/routes/system/charts/gpu-charts.tsx

@@ -121,6 +121,13 @@ msgstr "Aktivní stav"
 msgid "Add {foo}"
 msgstr "Přidat {foo}"
 
+#: src/components/routes/uptime.tsx
+#: src/components/routes/uptime.tsx
+#: src/components/routes/uptime.tsx
+#: src/components/routes/uptime.tsx
+msgid "Add Monitor"
+msgstr ""
+
 #: src/components/routes/settings/notifications.tsx
 msgid "Add URL"
 msgstr "Přidat URL"
@@ -178,6 +185,10 @@ msgstr "Všechny kontejnery"
 #: src/components/systems-table/systems-table.tsx
 msgid "All Systems"
 msgstr "Všechny systémy"
+
+#: src/components/routes/uptime.tsx
+msgid "An error occurred"
+msgstr ""
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Are you sure you want to delete {name}?"
@@ -318,6 +329,8 @@ msgstr "Může zastavit"
 
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/settings/quiet-hours.tsx
+#: src/components/routes/uptime.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Cancel"
 msgstr "Zrušit"
@@ -573,13 +586,22 @@ msgstr "Výchozí doba"
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/system/smart-table.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Delete"
 msgstr "Odstranit"
 
+#: src/components/routes/uptime.tsx
+msgid "Delete <0>{monitorName}</0>? This will also remove all associated check history."
+msgstr ""
+
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "Delete fingerprint"
 msgstr "Smazat identifikátor"
+
+#: src/components/routes/uptime.tsx
+msgid "Delete Monitor"
+msgstr ""
 
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Description"
@@ -646,6 +668,7 @@ msgstr "Dokumentace"
 #. Context: System is down
 #: src/components/alerts-history-columns.tsx
 #: src/components/routes/system/info-bar.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 #: src/lib/alerts.ts
 msgid "Down"
@@ -673,6 +696,10 @@ msgstr "Upravit"
 msgid "Edit {foo}"
 msgstr "Upravit {foo}"
 
+#: src/components/routes/uptime.tsx
+msgid "Edit Monitor"
+msgstr ""
+
 #: src/components/login/auth-form.tsx
 #: src/components/login/forgot-pass-form.tsx
 #: src/components/login/otp-forms.tsx
@@ -687,6 +714,10 @@ msgstr "Emailová upozornění"
 #: src/lib/i18n.ts
 msgid "Empty"
 msgstr "Prázdná"
+
+#: src/components/routes/uptime.tsx
+msgid "Enabled"
+msgstr ""
 
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
@@ -899,6 +930,10 @@ msgctxt "Button to copy install command"
 msgid "Homebrew command"
 msgstr "Homebrew příkaz"
 
+#: src/components/routes/uptime.tsx
+msgid "Host"
+msgstr ""
+
 #: src/components/add-system.tsx
 msgid "Host / IP"
 msgstr "Hostitel / IP"
@@ -946,6 +981,10 @@ msgstr "Neaktivní"
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Interval"
+msgstr ""
+
+#: src/components/routes/uptime.tsx
+msgid "Interval (s)"
 msgstr ""
 
 #: src/components/login/auth-form.tsx
@@ -998,6 +1037,10 @@ msgstr "Prům. zatížení"
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Load state"
 msgstr "Stav načtení"
+
+#: src/components/routes/uptime.tsx
+msgid "Loading monitors…"
+msgstr ""
 
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Loading..."
@@ -1076,9 +1119,14 @@ msgstr "Využití paměti docker kontejnerů"
 msgid "Model"
 msgstr ""
 
+#: src/components/routes/uptime.tsx
+msgid "My Website"
+msgstr ""
+
 #: src/components/add-system.tsx
 #: src/components/alerts-history-columns.tsx
 #: src/components/containers-table/containers-table-columns.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systemd-table/systemd-table-columns.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Name"
@@ -1110,6 +1158,14 @@ msgstr "Síťová jednotka"
 #: src/components/systemd-table/systemd-table.tsx
 msgid "No"
 msgstr "Ne"
+
+#: src/components/routes/uptime.tsx
+msgid "No data yet"
+msgstr ""
+
+#: src/components/routes/uptime.tsx
+msgid "No monitors yet. Add one to start tracking uptime."
+msgstr ""
 
 #: src/components/command-palette.tsx
 #: src/components/systemd-table/systemd-table.tsx
@@ -1218,6 +1274,7 @@ msgstr "Minulé"
 msgid "Pause"
 msgstr "Pozastavit"
 
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Paused"
 msgstr "Pozastaveno"
@@ -1285,6 +1342,7 @@ msgid "Please sign in to your account"
 msgstr "Přihlaste se prosím k vašemu účtu"
 
 #: src/components/add-system.tsx
+#: src/components/routes/uptime.tsx
 msgid "Port"
 msgstr ""
 
@@ -1373,6 +1431,14 @@ msgstr "Obnovit heslo"
 msgid "Resolved"
 msgstr "Vyřešeno"
 
+#: src/components/routes/uptime.tsx
+msgid "response"
+msgstr ""
+
+#: src/components/routes/uptime.tsx
+msgid "Response time (last 60 checks)"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Restarts"
 msgstr "Restarty"
@@ -1405,6 +1471,10 @@ msgstr "S.M.A.R.T. Detaily"
 #: src/components/routes/system/smart-table.tsx
 msgid "S.M.A.R.T. Self-Test"
 msgstr "S.M.A.R.T. Vlastní test"
+
+#: src/components/routes/uptime.tsx
+msgid "Save"
+msgstr ""
 
 #: src/components/add-system.tsx
 msgid "Save {foo}"
@@ -1653,6 +1723,10 @@ msgstr "Propustnost kořenového souborového systému"
 msgid "Time format"
 msgstr "Formát času"
 
+#: src/components/routes/uptime.tsx
+msgid "Timeout (s)"
+msgstr ""
+
 #: src/components/routes/settings/notifications.tsx
 msgid "To email(s)"
 msgstr "Na email(y)"
@@ -1759,6 +1833,7 @@ msgstr "Spustí se, když využití disku překročí prahovou hodnotu"
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/system/smart-table.tsx
+#: src/components/routes/uptime.tsx
 msgid "Type"
 msgstr "Typ"
 
@@ -1777,6 +1852,7 @@ msgid "Universal token"
 msgstr "Univerzální token"
 
 #. Context: Battery state
+#: src/components/routes/uptime.tsx
 #: src/lib/i18n.ts
 msgid "Unknown"
 msgstr "Neznámá"
@@ -1788,6 +1864,7 @@ msgstr "Neomezeno"
 
 #. Context: System is up
 #: src/components/routes/system/info-bar.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Up"
 msgstr "Funkční"
@@ -1814,10 +1891,21 @@ msgstr "Aktualizováno každých 10 minut."
 msgid "Upload"
 msgstr "Odeslání"
 
+#: src/components/routes/uptime.tsx
+msgid "uptime"
+msgstr ""
+
+#: src/components/navbar.tsx
+#: src/components/navbar.tsx
 #: src/components/routes/system/info-bar.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Uptime"
 msgstr "Doba provozu"
+
+#: src/components/routes/uptime.tsx
+msgid "Uptime Monitors"
+msgstr ""
 
 #: src/components/routes/system/charts/disk-charts.tsx
 #: src/components/routes/system/charts/gpu-charts.tsx

@@ -133,6 +133,8 @@ func (h *Hub) registerApiRoutes(se *core.ServeEvent) error {
 		// get container info
 		apiAuth.GET("/containers/info", h.getContainerInfo)
 	}
+	// uptime: trigger an immediate check for a monitor
+	apiAuth.POST("/uptime/check-now", h.uptimeCheckNow).BindFunc(excludeReadOnlyRole)
 	return nil
 }
 
@@ -386,5 +388,24 @@ func (h *Hub) refreshSmartData(e *core.RequestEvent) error {
 		return e.InternalServerError("", err)
 	}
 
+	return e.JSON(http.StatusOK, map[string]string{"status": "ok"})
+}
+
+// uptimeCheckNow triggers an immediate check for a monitor.
+func (h *Hub) uptimeCheckNow(e *core.RequestEvent) error {
+	var body struct {
+		ID string `json:"id"`
+	}
+	if err := e.BindBody(&body); err != nil || body.ID == "" {
+		return e.BadRequestError("monitor id is required", err)
+	}
+	// Verify the monitor belongs to the requesting user.
+	monitor, err := h.FindRecordById("uptime_monitors", body.ID)
+	if err != nil || monitor.GetString("user") != e.Auth.Id {
+		return e.NotFoundError("", nil)
+	}
+	if err := h.uptm.RunCheckNow(body.ID); err != nil {
+		return e.InternalServerError("", err)
+	}
 	return e.JSON(http.StatusOK, map[string]string{"status": "ok"})
 }

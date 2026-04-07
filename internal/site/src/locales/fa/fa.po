@@ -121,6 +121,13 @@ msgstr "وضعیت فعال"
 msgid "Add {foo}"
 msgstr "افزودن {foo}"
 
+#: src/components/routes/uptime.tsx
+#: src/components/routes/uptime.tsx
+#: src/components/routes/uptime.tsx
+#: src/components/routes/uptime.tsx
+msgid "Add Monitor"
+msgstr ""
+
 #: src/components/routes/settings/notifications.tsx
 msgid "Add URL"
 msgstr "افزودن آدرس اینترنتی"
@@ -178,6 +185,10 @@ msgstr "همه کانتینرها"
 #: src/components/systems-table/systems-table.tsx
 msgid "All Systems"
 msgstr "همه سیستم‌ها"
+
+#: src/components/routes/uptime.tsx
+msgid "An error occurred"
+msgstr ""
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Are you sure you want to delete {name}?"
@@ -318,6 +329,8 @@ msgstr "می‌تواند متوقف شود"
 
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/settings/quiet-hours.tsx
+#: src/components/routes/uptime.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Cancel"
 msgstr "لغو"
@@ -573,13 +586,22 @@ msgstr "بازه زمانی پیش‌فرض"
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/system/smart-table.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Delete"
 msgstr "حذف"
 
+#: src/components/routes/uptime.tsx
+msgid "Delete <0>{monitorName}</0>? This will also remove all associated check history."
+msgstr ""
+
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "Delete fingerprint"
 msgstr "حذف اثر انگشت"
+
+#: src/components/routes/uptime.tsx
+msgid "Delete Monitor"
+msgstr ""
 
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Description"
@@ -646,6 +668,7 @@ msgstr "مستندات"
 #. Context: System is down
 #: src/components/alerts-history-columns.tsx
 #: src/components/routes/system/info-bar.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 #: src/lib/alerts.ts
 msgid "Down"
@@ -673,6 +696,10 @@ msgstr "ویرایش"
 msgid "Edit {foo}"
 msgstr "ویرایش {foo}"
 
+#: src/components/routes/uptime.tsx
+msgid "Edit Monitor"
+msgstr ""
+
 #: src/components/login/auth-form.tsx
 #: src/components/login/forgot-pass-form.tsx
 #: src/components/login/otp-forms.tsx
@@ -687,6 +714,10 @@ msgstr "اعلان‌های ایمیلی"
 #: src/lib/i18n.ts
 msgid "Empty"
 msgstr "خالی"
+
+#: src/components/routes/uptime.tsx
+msgid "Enabled"
+msgstr ""
 
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
@@ -899,6 +930,10 @@ msgctxt "Button to copy install command"
 msgid "Homebrew command"
 msgstr "دستور Homebrew"
 
+#: src/components/routes/uptime.tsx
+msgid "Host"
+msgstr ""
+
 #: src/components/add-system.tsx
 msgid "Host / IP"
 msgstr "میزبان / IP"
@@ -947,6 +982,10 @@ msgstr "غیرفعال"
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Interval"
 msgstr "بازه زمانی"
+
+#: src/components/routes/uptime.tsx
+msgid "Interval (s)"
+msgstr ""
 
 #: src/components/login/auth-form.tsx
 msgid "Invalid email address."
@@ -998,6 +1037,10 @@ msgstr "میانگین بار"
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Load state"
 msgstr "وضعیت بارگذاری"
+
+#: src/components/routes/uptime.tsx
+msgid "Loading monitors…"
+msgstr ""
 
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Loading..."
@@ -1076,9 +1119,14 @@ msgstr "میزان استفاده از حافظه کانتینرهای داکر"
 msgid "Model"
 msgstr "مدل"
 
+#: src/components/routes/uptime.tsx
+msgid "My Website"
+msgstr ""
+
 #: src/components/add-system.tsx
 #: src/components/alerts-history-columns.tsx
 #: src/components/containers-table/containers-table-columns.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systemd-table/systemd-table-columns.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Name"
@@ -1110,6 +1158,14 @@ msgstr "واحد شبکه"
 #: src/components/systemd-table/systemd-table.tsx
 msgid "No"
 msgstr "خیر"
+
+#: src/components/routes/uptime.tsx
+msgid "No data yet"
+msgstr ""
+
+#: src/components/routes/uptime.tsx
+msgid "No monitors yet. Add one to start tracking uptime."
+msgstr ""
 
 #: src/components/command-palette.tsx
 #: src/components/systemd-table/systemd-table.tsx
@@ -1218,6 +1274,7 @@ msgstr "گذشته"
 msgid "Pause"
 msgstr "توقف"
 
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Paused"
 msgstr "مکث شده"
@@ -1285,6 +1342,7 @@ msgid "Please sign in to your account"
 msgstr "لطفاً به حساب کاربری خود وارد شوید"
 
 #: src/components/add-system.tsx
+#: src/components/routes/uptime.tsx
 msgid "Port"
 msgstr "پورت"
 
@@ -1373,6 +1431,14 @@ msgstr "بازنشانی رمز عبور"
 msgid "Resolved"
 msgstr "حل شده"
 
+#: src/components/routes/uptime.tsx
+msgid "response"
+msgstr ""
+
+#: src/components/routes/uptime.tsx
+msgid "Response time (last 60 checks)"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Restarts"
 msgstr "راه‌اندازی مجدد"
@@ -1405,6 +1471,10 @@ msgstr "جزئیات S.M.A.R.T"
 #: src/components/routes/system/smart-table.tsx
 msgid "S.M.A.R.T. Self-Test"
 msgstr "تست خود S.M.A.R.T"
+
+#: src/components/routes/uptime.tsx
+msgid "Save"
+msgstr ""
 
 #: src/components/add-system.tsx
 msgid "Save {foo}"
@@ -1653,6 +1723,10 @@ msgstr "توان عملیاتی سیستم فایل ریشه"
 msgid "Time format"
 msgstr "فرمت زمان"
 
+#: src/components/routes/uptime.tsx
+msgid "Timeout (s)"
+msgstr ""
+
 #: src/components/routes/settings/notifications.tsx
 msgid "To email(s)"
 msgstr "به ایمیل(ها)"
@@ -1759,6 +1833,7 @@ msgstr "هنگامی که استفاده از هر دیسکی از یک آستا
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/system/smart-table.tsx
+#: src/components/routes/uptime.tsx
 msgid "Type"
 msgstr "نوع"
 
@@ -1777,6 +1852,7 @@ msgid "Universal token"
 msgstr "توکن جهانی"
 
 #. Context: Battery state
+#: src/components/routes/uptime.tsx
 #: src/lib/i18n.ts
 msgid "Unknown"
 msgstr "ناشناخته"
@@ -1788,6 +1864,7 @@ msgstr "نامحدود"
 
 #. Context: System is up
 #: src/components/routes/system/info-bar.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Up"
 msgstr "فعال"
@@ -1814,10 +1891,21 @@ msgstr "هر ۱۰ دقیقه به‌روزرسانی می‌شود."
 msgid "Upload"
 msgstr "آپلود"
 
+#: src/components/routes/uptime.tsx
+msgid "uptime"
+msgstr ""
+
+#: src/components/navbar.tsx
+#: src/components/navbar.tsx
 #: src/components/routes/system/info-bar.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Uptime"
 msgstr "آپتایم"
+
+#: src/components/routes/uptime.tsx
+msgid "Uptime Monitors"
+msgstr ""
 
 #: src/components/routes/system/charts/disk-charts.tsx
 #: src/components/routes/system/charts/gpu-charts.tsx

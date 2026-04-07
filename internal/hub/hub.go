@@ -15,6 +15,7 @@ import (
 	"github.com/henrygd/beszel/internal/hub/config"
 	"github.com/henrygd/beszel/internal/hub/heartbeat"
 	"github.com/henrygd/beszel/internal/hub/systems"
+	"github.com/henrygd/beszel/internal/hub/uptime"
 	"github.com/henrygd/beszel/internal/records"
 	"github.com/henrygd/beszel/internal/users"
 
@@ -30,6 +31,7 @@ type Hub struct {
 	um     *users.UserManager
 	rm     *records.RecordManager
 	sm     *systems.SystemManager
+	uptm   *uptime.UptimeManager
 	hb     *heartbeat.Heartbeat
 	hbStop chan struct{}
 	pubKey string
@@ -44,6 +46,7 @@ func NewHub(app core.App) *Hub {
 	hub.um = users.NewUserManager(hub)
 	hub.rm = records.NewRecordManager(hub)
 	hub.sm = systems.NewSystemManager(hub)
+	hub.uptm = uptime.NewUptimeManager(hub)
 	hub.hb = heartbeat.New(app, GetEnv)
 	if hub.hb != nil {
 		hub.hbStop = make(chan struct{})
