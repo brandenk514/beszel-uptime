@@ -2,6 +2,7 @@ package hub
 
 import (
 	"context"
+	"database/sql"
 	"net/http"
 	"regexp"
 	"strings"
@@ -434,10 +435,11 @@ func (h *Hub) runMonitorPush(e *core.RequestEvent) error {
 	return e.JSON(http.StatusOK, map[string]string{"status": "ok"})
 }
 
-// getPublicStatusPage returns an enabled status page by slug (unauthenticated,
-// uptime-kuma style public status page). Monitor status is fetched separately
-// by the frontend through the collection API, which restricts publicly
-// visible monitors to those attached to an enabled status page.
+// getPublicStatusPage returns an enabled status page by slug together with
+// the current status of its attached monitors (unauthenticated,
+// uptime-kuma style public status page). Monitors are fetched server-side
+// with a parameterized query so the public page has no dependency on the
+// monitors collection rules.
 func (h *Hub) getPublicStatusPage(e *core.RequestEvent) error {
 	slug := strings.TrimSpace(e.Request.URL.Query().Get("slug"))
 	if slug == "" {
@@ -449,11 +451,40 @@ func (h *Hub) getPublicStatusPage(e *core.RequestEvent) error {
 		return e.NotFoundError("", nil)
 	}
 
+	type publicMonitor struct {
+		Id       string `json:"id"`
+		Name     string `json:"name"`
+		Type     string `json:"type"`
+		Status   string `json:"status"`
+		LastPing string `json:"last_ping,omitempty"`
+	}
+
+	var rows []struct {
+		Id       string
+		Name     string
+		Type     string
+		Status   string
+		LastPing sql.NullString
+	}
+	if err := e.App.DB().
+		NewQuery("SELECT m.id, m.name, m.type, m.status, m.last_ping FROM monitors AS m WHERE m.status_page = {:pageId} ORDER BY m.name ASC").
+		Bind(dbx.Params{"pageId": page.Id}).
+		All(&rows); err != nil {
+		return err
+	}
+
+	monitors := make([]publicMonitor, 0, len(rows))
+	for _, row := range rows {
+		m := publicMonitor{Id: row.Id, Name: row.Name, Type: row.Type, Status: row.Status, LastPing: row.LastPing.String}
+		monitors = append(monitors, m)
+	}
+
 	return e.JSON(http.StatusOK, map[string]any{
-		"id":          page.Id,
-		"name":        page.GetString("name"),
-		"slug":        page.GetString("slug"),
-		"description": page.GetString("description"),
+		"id":            page.Id,
+		"name":          page.GetString("name"),
+		"slug":          page.GetString("slug"),
+		"description":   page.GetString("description"),
 		"show_monitors": page.GetBool("show_monitors"),
+		"monitors":      monitors,
 	})
 }

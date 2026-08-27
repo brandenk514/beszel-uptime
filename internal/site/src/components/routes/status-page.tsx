@@ -6,7 +6,12 @@ import { SystemStatus } from "@/lib/enums"
 import { cn, getHubURL } from "@/lib/utils"
 import type { MonitorRecord, StatusPageRecord } from "@/types"
 
-type PageInfo = Pick<StatusPageRecord, "name" | "slug" | "description" | "show_monitors"> & { id: string }
+type PublicMonitor = Pick<MonitorRecord, "id" | "name" | "type" | "status" | "last_ping">
+
+type PageInfo = Pick<StatusPageRecord, "name" | "slug" | "description" | "show_monitors"> & {
+	id: string
+	monitors: PublicMonitor[]
+}
 
 function StatusDot({ status }: { status: string }) {
 	if (status === SystemStatus.Up) {
@@ -57,24 +62,13 @@ export default memo(function StatusPage({ slug }: { slug: string }) {
 	useEffect(() => {
 		let active = true
 
-		async function fetchMonitors(pageId: string): Promise<MonitorRecord[]> {
-			return pb
-				.collection<MonitorRecord>("monitors")
-				.getFullList({
-					sort: "+name",
-					filter: `status_page = "${pageId}"`,
-					fields: "id,name,type,status,last_ping",
-				})
-				.catch(() => [] as MonitorRecord[])
-		}
-
 		async function load() {
 			setLoading(true)
 			try {
 				const page = await pb.send<PageInfo>(`/api/beszel/status-page?slug=${encodeURIComponent(slug)}`)
 				if (!active) return
 				setInfo(page)
-				setMonitors(await fetchMonitors(page.id))
+				setMonitors(page.monitors ?? [])
 			} catch (err) {
 				console.error(err)
 				if (active) setNotFound(true)
@@ -85,10 +79,8 @@ export default memo(function StatusPage({ slug }: { slug: string }) {
 		load()
 
 		// Public realtime subscriptions require auth, so poll for updates.
-		const interval = window.setInterval(async () => {
-			if (!info) return
-			const list = await fetchMonitors(info.id)
-			if (active && list.length) setMonitors(list)
+		const interval = window.setInterval(() => {
+			void load()
 		}, 15000)
 
 		return () => {
