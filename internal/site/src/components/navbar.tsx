@@ -4,6 +4,7 @@ import { getPagePath } from "@nanostores/router"
 import {
 	ContainerIcon,
 	DatabaseBackupIcon,
+	GlobeIcon,
 	HardDriveIcon,
 	HeartPulseIcon,
 	LogOutIcon,
@@ -111,8 +112,20 @@ export default function Navbar() {
 							<DropdownMenuItem onClick={() => navigate(getPagePath($router, "smart"))} className="flex items-center">
 								<HardDriveIcon className="h-4 w-4 me-2.5" strokeWidth={1.5} />
 								<span>S.M.A.R.T.</span>
-							</DropdownMenuItem>
-							<DropdownMenuItem
+							</DropdownMenuItem>						<DropdownMenuItem
+							onClick={() => navigate(getPagePath($router, "monitors"))}
+							className="flex items-center"
+						>
+							<HeartPulseIcon className="h-4 w-4 me-2.5" strokeWidth={1.5} />
+							<Trans>Monitors</Trans>
+						</DropdownMenuItem>
+						<DropdownMenuItem
+							onClick={() => navigate(getPagePath($router, "statusPages"))}
+							className="flex items-center"
+						>
+							<GlobeIcon className="h-4 w-4 me-2.5" strokeWidth={1.5} />
+							<Trans>Status Pages</Trans>
+						</DropdownMenuItem>							<DropdownMenuItem
 								onClick={() => navigate(getPagePath($router, "settings", { name: "general" }))}
 								className="flex items-center"
 							>
@@ -195,6 +208,20 @@ export default function Navbar() {
 					</TooltipTrigger>
 					<TooltipContent>
 						<Trans>Monitors</Trans>
+					</TooltipContent>
+				</Tooltip>
+				<Tooltip>
+					<TooltipTrigger asChild>
+						<Link
+							href={getPagePath($router, "statusPages")}
+							className={cn("hidden md:grid", buttonVariants({ variant: "ghost", size: "icon" }))}
+							aria-label="Status Pages"
+						>
+							<GlobeIcon className="h-[1.2rem] w-[1.2rem]" strokeWidth={1.5} />
+						</Link>
+					</TooltipTrigger>
+					<TooltipContent>
+						<Trans>Status Pages</Trans>
 					</TooltipContent>
 				</Tooltip>
 				<ModeToggle />

@@ -7,6 +7,8 @@ const routes = {
 	system: `/system/:id`,
 	monitors: "/monitors",
 	monitor: `/monitor/:id`,
+	statusPages: "/status-pages",
+	statusPage: `/status/:slug`,
 	settings: `/settings/:name?`,
 	forgot_password: `/forgot-password`,
 	request_otp: `/request-otp`,

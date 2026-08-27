@@ -129,6 +129,10 @@ func (h *Hub) registerApiRoutes(se *core.ServeEvent) error {
 	apiAuth.GET("/systemd/info", h.getSystemdInfo)
 	// run an uptime monitor check now
 	apiAuth.GET("/uptime/check-now", h.runMonitorCheckNow).BindFunc(excludeReadOnlyRole)
+	// record a push monitor heartbeat (uptime-kuma /api/push style), unauthenticated by design
+	apiNoAuth.POST("/uptime/push", h.runMonitorPush)
+	// public status page (uptime-kuma style), unauthenticated by design
+	apiNoAuth.GET("/status-page", h.getPublicStatusPage)
 	// /containers routes
 	if enabled, _ := utils.GetEnv("CONTAINER_DETAILS"); enabled != "false" {
 		// get container logs
@@ -405,4 +409,51 @@ func (h *Hub) runMonitorCheckNow(e *core.RequestEvent) error {
 	}
 	h.mm.RunCheckNow(monitor.Id)
 	return e.JSON(http.StatusOK, map[string]string{"status": "ok"})
+}
+
+// runMonitorPush records a heartbeat for a push-type monitor. It is unauthenticated:
+// the push token (generated per monitor) is the only credential, matching
+// uptime-kuma's public push endpoint.
+func (h *Hub) runMonitorPush(e *core.RequestEvent) error {
+	token := e.Request.URL.Query().Get("token")
+	if token == "" {
+		if err := e.Request.ParseForm(); err == nil {
+			token = e.Request.Form.Get("token")
+		}
+	}
+	if token == "" {
+		return e.BadRequestError("Missing token parameter", nil)
+	}
+
+	monitor, err := h.FindFirstRecordByFilter("monitors", "push_token = {:token} && type = \"push\"", dbx.Params{"token": token})
+	if err != nil {
+		return e.NotFoundError("", nil)
+	}
+
+	h.mm.RunPush(monitor.Id)
+	return e.JSON(http.StatusOK, map[string]string{"status": "ok"})
+}
+
+// getPublicStatusPage returns an enabled status page by slug (unauthenticated,
+// uptime-kuma style public status page). Monitor status is fetched separately
+// by the frontend through the collection API, which restricts publicly
+// visible monitors to those attached to an enabled status page.
+func (h *Hub) getPublicStatusPage(e *core.RequestEvent) error {
+	slug := strings.TrimSpace(e.Request.URL.Query().Get("slug"))
+	if slug == "" {
+		return e.BadRequestError("Missing slug parameter", nil)
+	}
+
+	page, err := h.FindFirstRecordByFilter("status_pages", "slug = {:slug} && enabled = true", dbx.Params{"slug": slug})
+	if err != nil {
+		return e.NotFoundError("", nil)
+	}
+
+	return e.JSON(http.StatusOK, map[string]any{
+		"id":          page.Id,
+		"name":        page.GetString("name"),
+		"slug":        page.GetString("slug"),
+		"description": page.GetString("description"),
+		"show_monitors": page.GetBool("show_monitors"),
+	})
 }

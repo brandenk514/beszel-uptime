@@ -136,6 +136,31 @@ func setCollectionAuthSettings(app core.App) error {
 		return err
 	}
 
+	// status pages are managed by their owner
+	if err := applyCollectionRules(app, []string{"status_pages"}, collectionRules{
+		list:   &monitorReadRule,
+		view:   &monitorReadRule,
+		create: &monitorWriteRule,
+		update: &monitorWriteRule,
+		delete: &monitorWriteRule,
+	}); err != nil {
+		return err
+	}
+
+	// monitors attached to an enabled status page are also publicly
+	// readable so the public status page can fetch their current status
+	publicMonitorRule := monitorReadRule +
+		` || status_page IN (SELECT record FROM status_pages WHERE enabled = true)`
+	if err := applyCollectionRules(app, []string{"monitors"}, collectionRules{
+		list:   &publicMonitorRule,
+		view:   &publicMonitorRule,
+		create: &monitorWriteRule,
+		update: &monitorWriteRule,
+		delete: &monitorWriteRule,
+	}); err != nil {
+		return err
+	}
+
 	return nil
 }
 

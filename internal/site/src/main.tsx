@@ -34,6 +34,8 @@ const Smart = lazy(() => import("@/components/routes/smart.tsx"))
 const SystemDetail = lazy(() => import("@/components/routes/system.tsx"))
 const Monitors = lazy(() => import("@/components/routes/monitors.tsx"))
 const MonitorDetail = lazy(() => import("@/components/routes/monitor.tsx"))
+const StatusPages = lazy(() => import("@/components/routes/status-pages.tsx"))
+const StatusPage = lazy(() => import("@/components/routes/status-page.tsx"))
 const CopyToClipboardDialog = lazy(() => import("@/components/copy-to-clipboard.tsx"))
 
 const App = memo(() => {
@@ -89,6 +91,10 @@ const App = memo(() => {
 		return <Monitors />
 	} else if (page.route === "monitor") {
 		return <MonitorDetail id={page.params.id} />
+	} else if (page.route === "statusPages") {
+		return <StatusPages />
+	} else if (page.route === "statusPage") {
+		return <StatusPage slug={page.params.slug} />
 	} else if (page.route === "containers") {
 		return <Containers />
 	} else if (page.route === "smart") {

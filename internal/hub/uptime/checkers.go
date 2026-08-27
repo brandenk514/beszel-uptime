@@ -3,6 +3,7 @@ package uptime
 import (
 	"context"
 	"crypto/tls"
+	"encoding/json"
 	"fmt"
 	"io"
 	"net"
@@ -69,9 +70,42 @@ func runCheck(ctx context.Context, rec *core.Record) (bool, int64, string) {
 		return checkTCP(ctx, rec)
 	case "ping":
 		return checkPing(ctx, rec)
+	case "dns":
+		return checkDns(ctx, rec)
+	case "docker":
+		return checkDocker(ctx, rec)
+	case "websocket":
+		return checkWebSocket(ctx, rec)
+	case "steam":
+		return checkSteam(ctx, rec)
+	case "push":
+		return checkPush(ctx, rec)
 	default:
 		return false, 0, "Unknown monitor type"
 	}
+}
+
+// checkPush validates push monitors by comparing the recorded last_ping time
+// against the check interval (uptime-kuma style heartbeat monitors).
+func checkPush(ctx context.Context, rec *core.Record) (bool, int64, string) {
+	raw := strings.TrimSpace(rec.GetString("last_ping"))
+	if raw == "" {
+		return false, 0, "No heartbeat received yet (waiting for first push)"
+	}
+	last, err := time.Parse(time.RFC3339, raw)
+	if err != nil {
+		return false, 0, "Invalid last heartbeat timestamp"
+	}
+	interval := rec.GetInt("interval")
+	if interval <= 0 {
+		interval = defaultIntervalSec
+	}
+	// allow one interval of grace so a delayed push doesn't flap
+	elapsed := time.Since(last)
+	if elapsed <= time.Duration(interval)*time.Second {
+		return true, elapsed.Milliseconds(), "Last heartbeat " + last.Format(time.RFC3339)
+	}
+	return false, 0, fmt.Sprintf("No heartbeat for %s", elapsed.Round(time.Second))
 }
 
 // checkHTTP performs an HTTP(S) check.
@@ -138,9 +172,36 @@ func checkHTTP(ctx context.Context, rec *core.Record) (bool, int64, string) {
 		return false, elapsed.Milliseconds(), fmt.Sprintf("Status %d", resp.StatusCode)
 	}
 
+	// optional JSON query path (uptime-kuma style, e.g. ".status" or ".data.msg").
+	// When set, the expected value is compared against the resolved JSON value
+	// instead of searching the raw body.
+	jsonPath := strings.TrimSpace(rec.GetString("json_query"))
 	expectedBody := strings.TrimSpace(rec.GetString("expected_body"))
-	if expectedBody != "" && !strings.Contains(string(body), expectedBody) {
+	if jsonPath != "" {
+		value, err := jsonQuery(body, jsonPath)
+		if err != nil {
+			return false, elapsed.Milliseconds(), "JSON query failed: " + err.Error()
+		}
+		if expectedBody != "" && fmt.Sprint(value) != expectedBody {
+			return false, elapsed.Milliseconds(), fmt.Sprintf("JSON value %q != expected %q", value, expectedBody)
+		}
+	} else if expectedBody != "" && !strings.Contains(string(body), expectedBody) {
 		return false, elapsed.Milliseconds(), "Expected body not found"
+	}
+
+	// optional certificate expiry check for https monitors
+	if rec.GetBool("check_cert") {
+		u, err := url.Parse(target)
+		if err == nil && u.Scheme == "https" && u.Hostname() != "" {
+			port := 443
+			if p := u.Port(); p != "" {
+				port, _ = strconv.Atoi(p)
+			}
+			ok, _, msg := checkCertExpiry(ctx, u.Hostname(), port)
+			if !ok {
+				return false, elapsed.Milliseconds(), msg
+			}
+		}
 	}
 
 	return true, elapsed.Milliseconds(), ""
@@ -256,4 +317,84 @@ func pingIP(ctx context.Context, ip string) (bool, int64, string) {
 			return true, time.Since(start).Milliseconds(), ""
 		}
 	}
+}
+
+// jsonQuery resolves a simple dot-path like ".status" or ".data.items[0].name"
+// against the decoded JSON body and returns the final value.
+func jsonQuery(body []byte, path string) (any, error) {
+	path = strings.TrimSpace(path)
+	path = strings.TrimPrefix(path, "$")
+	path = strings.TrimPrefix(path, ".")
+	if path == "" {
+		return nil, fmt.Errorf("empty json path")
+	}
+
+	var root any
+	if err := json.Unmarshal(body, &root); err != nil {
+		return nil, err
+	}
+
+	current := root
+	for _, part := range splitJSONPath(path) {
+		if part == "" {
+			continue
+		}
+		// split key and optional array index
+		key := part
+		index := -1
+		if i := strings.Index(part, "["); i >= 0 && strings.HasSuffix(part, "]") {
+			key = part[:i]
+			n, err := strconv.Atoi(part[i+1 : len(part)-1])
+			if err != nil {
+				return nil, fmt.Errorf("invalid array index in %q", part)
+			}
+			index = n
+		}
+		if key != "" {
+			m, ok := current.(map[string]any)
+			if !ok {
+				return nil, fmt.Errorf("path segment %q is not an object", key)
+			}
+			val, ok := m[key]
+			if !ok {
+				return nil, fmt.Errorf("key %q not found", key)
+			}
+			current = val
+		}
+		if index >= 0 {
+			arr, ok := current.([]any)
+			if !ok {
+				return nil, fmt.Errorf("expected array at index %d", index)
+			}
+			if index >= len(arr) {
+				return nil, fmt.Errorf("index %d out of range", index)
+			}
+			current = arr[index]
+		}
+	}
+	return current, nil
+}
+
+// splitJSONPath splits "a.b[0].c" into ["a" "b[0]" "c"].
+func splitJSONPath(path string) []string {
+	var parts []string
+	var buf strings.Builder
+	depth := 0
+	for _, r := range path {
+		switch {
+		case r == '[':
+			depth++
+			buf.WriteRune(r)
+		case r == ']':
+			depth--
+			buf.WriteRune(r)
+		case r == '.' && depth == 0:
+			parts = append(parts, buf.String())
+			buf.Reset()
+		default:
+			buf.WriteRune(r)
+		}
+	}
+	parts = append(parts, buf.String())
+	return parts
 }

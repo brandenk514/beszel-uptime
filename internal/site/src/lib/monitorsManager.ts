@@ -4,7 +4,8 @@ import type { MonitorRecord } from "@/types"
 import { SystemStatus } from "./enums"
 
 const COLLECTION = pb.collection<MonitorRecord>("monitors")
-const FIELDS_DEFAULT = "id,name,type,url,host,port,interval,timeout,secure,retry,method,expected_status,expected_body,status,num_retries"
+const FIELDS_DEFAULT =
+	"id,name,type,url,host,port,interval,timeout,secure,retry,method,expected_status,expected_body,status,num_retries,retry_delay,json_query,dns_type,dns_value,app_id,docker_url,push_token,last_ping,check_cert,status_page"
 
 let initialized = false
 // biome-ignore lint/suspicious/noConfusingVoidType: typescript rocks

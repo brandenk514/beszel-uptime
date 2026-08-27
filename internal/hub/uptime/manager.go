@@ -157,6 +157,47 @@ func (m *MonitorManager) RunCheckNow(monitorID string) {
 	go m.runSingleCheck(context.Background(), monitorID)
 }
 
+// RunPush records a push-type heartbeat for the given monitor: marks it up,
+// updates last_ping and broadcasts the change (uptime-kuma push style).
+func (m *MonitorManager) RunPush(monitorID string) {
+	record, err := m.hub.FindRecordById("monitors", monitorID)
+	if err != nil {
+		return
+	}
+	if record.GetString("type") != "push" {
+		return
+	}
+
+	wasUp := record.GetString("status") == statusUp
+	record.Set("status", statusUp)
+	record.Set("last_ping", time.Now().UTC().Format(time.RFC3339))
+	if err := m.hub.SaveNoValidate(record); err != nil {
+		m.hub.Logger().Error("Failed to save push heartbeat", "monitor", monitorID, "err", err)
+		return
+	}
+	m.broadcast(record)
+
+	// record the check for the history chart
+	if collection, err := m.hub.FindCollectionByNameOrId("monitor_checks"); err == nil {
+		check := core.NewRecord(collection)
+		check.Set("monitor", record.Id)
+		check.Set("up", true)
+		check.Set("ms", 0)
+		check.Set("msg", "Heartbeat received")
+		_ = m.hub.Save(check)
+	}
+
+	// alert on down -> up transition
+	if !wasUp {
+		m.mu.Lock()
+		if rt, ok := m.monitors[monitorID]; ok {
+			rt.lastStatus = statusUp
+		}
+		m.mu.Unlock()
+		m.sendStatusAlert(record, statusUp, "")
+	}
+}
+
 // stopMonitor cancels the check loop for a monitor.
 func (m *MonitorManager) stopMonitor(monitorID string) {
 	m.mu.Lock()
@@ -185,8 +226,8 @@ func (m *MonitorManager) checkLoop(ctx context.Context, monitorID string, interv
 	}
 }
 
-// runSingleCheck performs one check, records the result, updates status,
-// sends alerts and broadcasts realtime data.
+// runSingleCheck performs one check (with optional retries), records the
+// result, updates status, sends alerts and broadcasts realtime data.
 func (m *MonitorManager) runSingleCheck(ctx context.Context, monitorID string) {
 	record, err := m.hub.FindRecordById("monitors", monitorID)
 	if err != nil {
@@ -200,17 +241,33 @@ func (m *MonitorManager) runSingleCheck(ctx context.Context, monitorID string) {
 	if timeout <= 0 {
 		timeout = checkTimeoutSec * time.Second
 	}
-	checkCtx, cancel := context.WithTimeout(ctx, timeout)
-	defer cancel()
 
-	start := time.Now()
-	up, _, errMsg := runCheck(checkCtx, record)
-	elapsed := time.Since(start).Milliseconds()
-	if checkCtx.Err() != nil {
-		up = false
-		if errMsg == "" {
-			errMsg = "Timeout"
+	up, elapsed, errMsg := m.attemptCheck(ctx, record, timeout)
+
+	// retry on failure (uptime-kuma style: extra attempts before giving up)
+	maxRetries := 0
+	if record.GetBool("retry") {
+		maxRetries = record.GetInt("num_retries")
+		if maxRetries < 1 {
+			maxRetries = 1
 		}
+	}
+	retryDelay := time.Duration(record.GetInt("retry_delay")) * time.Second
+	if retryDelay <= 0 {
+		retryDelay = 5 * time.Second
+	}
+	for !up && maxRetries > 0 {
+		maxRetries--
+		select {
+		case <-ctx.Done():
+			return
+		case <-time.After(retryDelay):
+		}
+		record, err = m.hub.FindRecordById("monitors", monitorID)
+		if err != nil {
+			return
+		}
+		up, elapsed, errMsg = m.attemptCheck(ctx, record, timeout)
 	}
 
 	newStatus := statusDown
@@ -231,6 +288,19 @@ func (m *MonitorManager) runSingleCheck(ctx context.Context, monitorID string) {
 	check.Set("msg", errMsg)
 	if err := m.hub.Save(check); err != nil {
 		m.hub.Logger().Error("Failed to save monitor check", "monitor", monitorID, "err", err)
+	}
+
+	// push monitors receive heartbeats out of band; only update status here
+	if record.GetString("type") == "push" {
+		if newStatus == statusUp && record.GetString("status") != statusUp {
+			record.Set("status", newStatus)
+			if err := m.hub.Save(record); err != nil {
+				m.hub.Logger().Error("Failed to save monitor status", "id", monitorID, "err", err)
+			}
+			m.broadcast(record)
+			m.sendStatusAlert(record, newStatus, errMsg)
+		}
+		return
 	}
 
 	// update monitor status
@@ -255,6 +325,23 @@ func (m *MonitorManager) runSingleCheck(ctx context.Context, monitorID string) {
 		(prevStatus == "" && newStatus == statusUp) {
 		m.sendStatusAlert(record, newStatus, errMsg)
 	}
+}
+
+// attemptCheck runs one probe for the monitor and returns up, elapsed ms, err.
+func (m *MonitorManager) attemptCheck(ctx context.Context, record *core.Record, timeout time.Duration) (bool, int64, string) {
+	checkCtx, cancel := context.WithTimeout(ctx, timeout)
+	defer cancel()
+
+	start := time.Now()
+	up, _, errMsg := runCheck(checkCtx, record)
+	elapsed := time.Since(start).Milliseconds()
+	if checkCtx.Err() != nil {
+		up = false
+		if errMsg == "" {
+			errMsg = "Timeout"
+		}
+	}
+	return up, elapsed, errMsg
 }
 
 // sendStatusAlert notifies the monitor owner about an up/down transition.

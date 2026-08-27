@@ -2,15 +2,29 @@ import { t } from "@lingui/core/macro"
 import { Trans } from "@lingui/react/macro"
 import { memo, useCallback, useEffect, useMemo, useState } from "react"
 import { Link } from "../router"
-import { AlertCircleIcon, ArrowLeftIcon, CheckIcon, GlobeIcon, NetworkIcon, PauseIcon, XIcon, ZapIcon } from "lucide-react"
+import {
+	AlertCircleIcon,
+	ArrowLeftIcon,
+	CheckIcon,
+	ContainerIcon,
+	GlobeIcon,
+	NetworkIcon,
+	PauseIcon,
+	RadioIcon,
+	RssIcon,
+	SearchIcon,
+	XIcon,
+	ZapIcon,
+} from "lucide-react"
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 import { pb } from "@/lib/api"
 import { isReadOnlyUser } from "@/lib/api"
 import { $allMonitorsById } from "@/lib/stores"
 import { SystemStatus } from "@/lib/enums"
-import { cn, decimalString, formatShortDate, toFixedFloat } from "@/lib/utils"
+import { cn, decimalString, formatShortDate, getHubURL, toFixedFloat } from "@/lib/utils"
 import type { MonitorCheckRecord, MonitorRecord } from "@/types"
 import { Badge } from "@/components/ui/badge"
+import { DockerIcon, SteamIcon } from "@/components/ui/icons"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { MonitorDialog } from "@/components/add-monitor"
@@ -19,6 +33,11 @@ const MONITOR_TYPE_ICONS: Record<string, typeof GlobeIcon> = {
 	http: GlobeIcon,
 	tcp: NetworkIcon,
 	ping: ZapIcon,
+	dns: SearchIcon,
+	docker: DockerIcon,
+	websocket: RadioIcon,
+	steam: SteamIcon,
+	push: RssIcon,
 }
 
 function formatMs(ms: number) {
@@ -262,12 +281,26 @@ export default memo(function MonitorDetail({ id }: { id: string }) {
 	}
 
 	const TypeIcon = MONITOR_TYPE_ICONS[monitor.type] ?? GlobeIcon
-	const targetLabel =
-		monitor.type === "http"
-			? monitor.url
-			: monitor.type === "tcp"
-				? `${monitor.host}:${monitor.port ?? ""}`
-				: monitor.host
+	const targetLabel = (() => {
+		switch (monitor.type) {
+			case "http":
+				return monitor.url
+			case "tcp":
+				return `${monitor.host}:${monitor.port ?? ""}`
+			case "dns":
+				return `${monitor.dns_type?.toUpperCase() ?? "A"} ${monitor.host}`
+			case "docker":
+				return `${monitor.host ?? monitor.url ?? ""}${monitor.docker_url ? ` (${monitor.docker_url})` : ""}`
+			case "websocket":
+				return monitor.url
+			case "steam":
+				return `App ${monitor.app_id}`
+			case "push":
+				return monitor.push_token ? `${getHubURL()}/api/beszel/uptime/push?token=***}` : t`Push heartbeat`
+			default:
+				return monitor.host ?? monitor.url
+		}
+	})()
 
 	const upChecks = checks.filter((c) => c.up).length
 	const totalChecks = checks.length

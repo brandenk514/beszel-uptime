@@ -6,12 +6,15 @@ import type { ColumnDef, HeaderContext } from "@tanstack/react-table"
 import {
 	ArrowUpDownIcon,
 	CheckCheckIcon,
+	ContainerIcon,
 	GlobeIcon,
 	HourglassIcon,
 	NetworkIcon,
 	PauseCircleIcon,
 	PenBoxIcon,
 	PlayCircleIcon,
+	RadioIcon,
+	RssIcon,
 	Trash2Icon,
 } from "lucide-react"
 import { memo, useRef, useState } from "react"
@@ -20,6 +23,7 @@ import { SystemStatus } from "@/lib/enums"
 import { cn } from "@/lib/utils"
 import type { MonitorRecord } from "@/types"
 import { MonitorDialog } from "../add-monitor"
+import { DockerIcon, SteamIcon } from "../ui/icons"
 import { $router, Link } from "../router"
 import {
 	AlertDialog,
@@ -39,12 +43,22 @@ export const MONITOR_TYPE_LABELS = {
 	http: () => t`HTTP`,
 	tcp: () => t`TCP`,
 	ping: () => t`Ping`,
+	dns: () => t`DNS`,
+	docker: () => t`Docker`,
+	websocket: () => t`WebSocket`,
+	steam: () => t`Steam`,
+	push: () => t`Push`,
 } as const
 
 export const MONITOR_TYPE_ICONS = {
 	http: GlobeIcon,
 	tcp: NetworkIcon,
 	ping: CheckCheckIcon,
+	dns: SearchIcon,
+	docker: DockerIcon,
+	websocket: RadioIcon,
+	steam: SteamIcon,
+	push: RssIcon,
 } as const
 
 const STATUS_COLORS = {

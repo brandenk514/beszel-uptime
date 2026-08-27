@@ -50,6 +50,15 @@ export function FreeBsdIcon(props: SVGProps<SVGSVGElement>) {
 	)
 }
 
+// lucide (ISC) https://github.com/lucide-icons/lucide/blob/main/LICENSE
+export function SteamIcon(props: SVGProps<SVGSVGElement>) {
+	return (
+		<svg fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="2" viewBox="0 0 24 24" {...props}>
+			<path d="M12 2a8 8 0 0 0-8 8c0 .44.05.87.13 1.28A5 5 0 0 0 2 15a5 5 0 0 0 5 5 5 5 0 0 0 2.66-.78A8 8 0 0 0 12 22a8 8 0 0 0 0-20m3.5 11.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7m0 1.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4m-7-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0" />
+		</svg>
+	)
+}
+
 // ion icons (MIT) https://github.com/ionic-team/ionicons/blob/main/LICENSE
 export function DockerIcon(props: SVGProps<SVGSVGElement>) {
 	return (
