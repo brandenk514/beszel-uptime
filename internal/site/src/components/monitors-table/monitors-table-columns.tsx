@@ -15,6 +15,7 @@ import {
 	PlayCircleIcon,
 	RadioIcon,
 	RssIcon,
+	SearchIcon,
 	Trash2Icon,
 } from "lucide-react"
 import { memo, useRef, useState } from "react"
