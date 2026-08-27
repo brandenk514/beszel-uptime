@@ -6,7 +6,6 @@ import {
 	AlertCircleIcon,
 	ArrowLeftIcon,
 	CheckIcon,
-	ContainerIcon,
 	GlobeIcon,
 	NetworkIcon,
 	PauseIcon,
@@ -27,6 +26,7 @@ import { Badge } from "@/components/ui/badge"
 import { DockerIcon, SteamIcon } from "@/components/ui/icons"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Dialog } from "@/components/ui/dialog"
 import { MonitorDialog } from "@/components/add-monitor"
 
 const MONITOR_TYPE_ICONS: Record<string, typeof GlobeIcon> = {
@@ -99,7 +99,7 @@ function UptimeChart({ checks }: { checks: MonitorCheckRecord[] }) {
 					type="number"
 					scale="time"
 					domain={["dataMin", "dataMax"]}
-					tickFormatter={(val) => formatShortDate(String(val))}
+					tickFormatter={(val) => formatShortDate(new Date(Number(val)).toISOString())}
 					tickLine={false}
 					axisLine={false}
 				/>
@@ -211,7 +211,7 @@ export default memo(function MonitorDetail({ id }: { id: string }) {
 		pb
 			.collection<MonitorCheckRecord>("monitor_checks")
 			.getFullList({
-				filter: pb.filter("monitor = {:id}", { id }),
+				filter: `monitor = "${encodeURIComponent(id)}"`,
 				sort: "-created",
 				totalItems: 0,
 				batch: 1000,
@@ -222,43 +222,26 @@ export default memo(function MonitorDetail({ id }: { id: string }) {
 			})
 			.catch(() => {})
 
-		let unsubscribe: (() => void) | undefined
-		try {
-			pb
-				.collection("monitor_checks")
-				.subscribe(
-					"*",
-					(e) => {
-						const rec = e.record as unknown as MonitorCheckRecord
-						if (!rec || rec.monitor !== id) {
-							return
-						}
-						setChecks((prev) => {
-							const idx = prev.findIndex((c) => c.id === rec.id)
-							if (idx >= 0) {
-								const next = [...prev]
-								next[idx] = rec
-								return next
-							}
-							return [rec, ...prev].slice(0, 500)
-						})
-					},
-					{ fields: "id,monitor,up,ms,msg,created" }
-				)
-				.then((unsub) => {
-					if (cancelled) {
-						unsub()
-						return
-					}
-					unsubscribe = unsub
-				})
-		} catch (e) {
-			/* realtime unavailable */
-		}
+// poll for new checks every 15s (beszel realtime hub connection is agent-only)
+	const refresh = () => {
+		pb
+			.collection<MonitorCheckRecord>("monitor_checks")
+			.getFullList({
+				filter: `monitor = "${encodeURIComponent(id)}"`,
+				sort: "-created",
+				totalItems: 0,
+				batch: 1000,
+			})
+			.then((recs) => {
+				if (!cancelled) setChecks(recs.slice(0, 500))
+			})
+			.catch(() => {})
+	}
+	const timer = window.setInterval(refresh, 15000)
 
-		return () => {
-			cancelled = true
-			unsubscribe?.()
+	return () => {
+		cancelled = true
+		window.clearInterval(timer)
 		}
 	}, [id])
 
@@ -308,7 +291,11 @@ export default memo(function MonitorDetail({ id }: { id: string }) {
 
 	return (
 		<>
-			{editOpen && <MonitorDialog monitor={monitor} setOpen={setEditOpen} />}
+			{editOpen && (
+				<Dialog open={editOpen} onOpenChange={setEditOpen}>
+					<MonitorDialog monitor={monitor} setOpen={setEditOpen} />
+				</Dialog>
+			)}
 			<div className="flex flex-col gap-4">
 				<div className="flex items-start justify-between gap-4">
 					<div className="flex items-center gap-3 min-w-0">
