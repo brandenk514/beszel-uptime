@@ -1214,8 +1214,8 @@ msgid "Log Out"
 msgstr "Одјави се"
 
 #: src/components/login/login.tsx
-msgid "Login"
-msgstr "Пријава"
+#~ msgid "Login"
+#~ msgstr "Пријава"
 
 #: src/components/login/auth-form.tsx
 #: src/components/login/forgot-pass-form.tsx

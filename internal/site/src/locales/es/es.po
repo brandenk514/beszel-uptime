@@ -1214,8 +1214,8 @@ msgid "Log Out"
 msgstr "Cerrar sesión"
 
 #: src/components/login/login.tsx
-msgid "Login"
-msgstr "Iniciar sesión"
+#~ msgid "Login"
+#~ msgstr "Iniciar sesión"
 
 #: src/components/login/auth-form.tsx
 #: src/components/login/forgot-pass-form.tsx

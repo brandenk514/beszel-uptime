@@ -1214,8 +1214,8 @@ msgid "Log Out"
 msgstr "ログアウト"
 
 #: src/components/login/login.tsx
-msgid "Login"
-msgstr "ログイン"
+#~ msgid "Login"
+#~ msgstr "ログイン"
 
 #: src/components/login/auth-form.tsx
 #: src/components/login/forgot-pass-form.tsx

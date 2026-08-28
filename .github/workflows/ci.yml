@@ -50,13 +50,12 @@ jobs:
           go tool cover -func=coverage.out | tail -n 1
 
       - name: Upload coverage
-        uses: dorny/test-reporter@v1
-        if: always()
+        if: always() && !cancelled()
+        uses: actions/upload-artifact@v4
         with:
-          name: Go Coverage
+          name: go-coverage
           path: coverage.out
-          reporter: go-tests
-          fail-on-error: false
+          if-no-files-found: warn
 
   go-build:
     name: Cross-platform build (${{ matrix.goos }}/${{ matrix.goarch }})
@@ -87,6 +86,15 @@ jobs:
         with:
           go-version: stable
           cache: true
+
+      - name: Set up bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Build site (for hub embed)
+        working-directory: ./internal/site
+        run: |
+          bun install
+          bun run build
 
       - name: Build agent
         run: go build -tags no_ui -o /dev/null ./internal/cmd/agent

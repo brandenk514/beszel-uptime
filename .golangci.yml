@@ -7,6 +7,7 @@ run:
 linters:
   enable:
     - gosec          # security patterns (TLS config, file perms, command injection, weak crypto)
+    - depguard       # forbid deprecated stdlib packages (io/ioutil)
     - govet          # suspicious constructs
     - staticcheck    # correctness, performance, idiomatic issues
     - revive         # style + correctness (successor to golint)
@@ -31,13 +32,13 @@ linters:
           deny:
             - pkg: "io/ioutil"
               desc: "use io or os packages instead (io/ioutil is deprecated)"
+  exclusions:
+    paths:
+      - build
+      - internal/site/dist
+      - internal/site/node_modules
+      - agent/lhm/bin
 
 issues:
   max-issues-per-linter: 0
   max-same-issues: 0
-
-exclude-dirs:
-  - build
-  - internal/site/dist
-  - internal/site/node_modules
-  - agent/lhm/bin
