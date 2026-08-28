@@ -122,12 +122,19 @@ export function MonitorTableColumns(_viewMode: "table" | "grid"): ColumnDef<Moni
 				const { name, id, type } = info.row.original
 				const linkUrl = getPagePath($router, "monitor", { id })
 				const TypeIcon = MONITOR_TYPE_ICONS[type as keyof typeof MONITOR_TYPE_ICONS] || GlobeIcon
+				const labelFn = MONITOR_TYPE_LABELS[type as keyof typeof MONITOR_TYPE_LABELS]
+				const typeLabel = labelFn ? labelFn() : type
 				return (
 					<>
 						<span className="flex gap-2 items-center font-medium text-sm text-nowrap md:ps-1">
 							<IndicatorDot monitor={info.row.original} />
 							<Link href={linkUrl} tabIndex={-1} className="truncate">
-								<TypeIcon className="size-3.5 me-1 opacity-70 shrink-0" />
+								<Tooltip>
+									<TooltipTrigger asChild>
+											<TypeIcon className="size-3.5 me-1 opacity-70 shrink-0 inline-flex" />
+									</TooltipTrigger>
+									<TooltipContent>{typeLabel}</TooltipContent>
+								</Tooltip>
 								{name}
 							</Link>
 						</span>

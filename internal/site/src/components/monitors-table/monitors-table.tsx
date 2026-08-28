@@ -12,6 +12,7 @@ import {
 } from "@tanstack/react-table"
 import {
 	FilterIcon,
+	GlobeIcon,
 	LayoutGridIcon,
 	LayoutListIcon,
 	Settings2Icon,
@@ -31,11 +32,12 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
 import { TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { SystemStatus } from "@/lib/enums"
 import { $downMonitors, $monitors, $pausedMonitors, $upMonitors } from "@/lib/stores"
 import { cn, useBrowserStorage } from "@/lib/utils"
 import type { MonitorRecord } from "@/types"
-import { IndicatorDot, MonitorTableColumns } from "./monitors-table-columns"
+import { IndicatorDot, MonitorTableColumns, MONITOR_TYPE_ICONS, MONITOR_TYPE_LABELS } from "./monitors-table-columns"
 
 // biome-ignore lint/suspicious/noExplicitAny: column definitions carry custom `name` property
 type AnyColumnDef = any
@@ -329,10 +331,20 @@ export default memo(function MonitorsTable() {
 })
 
 function GridCard({ monitor, statusLabel, children }: { monitor: MonitorRecord; statusLabel: string; children: React.ReactNode }) {
+	const { t } = useLingui()
+	const TypeIcon = MONITOR_TYPE_ICONS[monitor.type as keyof typeof MONITOR_TYPE_ICONS] || GlobeIcon
+	const labelFn = MONITOR_TYPE_LABELS[monitor.type as keyof typeof MONITOR_TYPE_LABELS]
+	const typeLabel = labelFn ? labelFn() : monitor.type
 	return (
 		<div className="p-4 rounded-md border border-border/60 bg-card hover:bg-muted/30 transition-colors flex flex-col gap-2">
 			<div className="flex items-center gap-2 font-medium text-sm">
 				<IndicatorDot monitor={monitor} />
+				<Tooltip>
+					<TooltipTrigger asChild>
+						<TypeIcon className="size-3.5 opacity-70 shrink-0 inline-flex" />
+					</TooltipTrigger>
+					<TooltipContent>{typeLabel}</TooltipContent>
+				</Tooltip>
 				<span className="truncate">{monitor.name}</span>
 				<span className="ms-auto text-xs text-muted-foreground">{statusLabel}</span>
 			</div>
