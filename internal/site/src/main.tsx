@@ -70,9 +70,7 @@ const App = memo(() => {
 
 		// initialize uptime monitors
 		monitorsManager.init()
-		monitorsManager
-			.refresh()
-			.then(monitorsManager.subscribe)
+		monitorsManager.refresh().then(monitorsManager.subscribe)
 		return () => {
 			unsubscribeAuth()
 			alertManager.unsubscribe()

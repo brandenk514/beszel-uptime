@@ -108,7 +108,6 @@ export default function SettingsLayout() {
 
 	const page = useStore($router)
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: no dependencies
 	useEffect(() => {
 		document.title = `${t`Settings`} / Beszel`
 		// @ts-expect-error redirect to account page if no page is specified

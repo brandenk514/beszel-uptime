@@ -6,7 +6,6 @@ import type { ColumnDef, HeaderContext } from "@tanstack/react-table"
 import {
 	ArrowUpDownIcon,
 	CheckCheckIcon,
-	ContainerIcon,
 	GlobeIcon,
 	HourglassIcon,
 	NetworkIcon,
@@ -125,20 +124,18 @@ export function MonitorTableColumns(_viewMode: "table" | "grid"): ColumnDef<Moni
 				const labelFn = MONITOR_TYPE_LABELS[type as keyof typeof MONITOR_TYPE_LABELS]
 				const typeLabel = labelFn ? labelFn() : type
 				return (
-					<>
-						<span className="flex gap-2 items-center font-medium text-sm text-nowrap md:ps-1">
-							<IndicatorDot monitor={info.row.original} />
-							<Link href={linkUrl} tabIndex={-1} className="truncate">
-								<Tooltip>
-									<TooltipTrigger asChild>
-											<TypeIcon className="size-3.5 me-1 opacity-70 shrink-0 inline-flex" />
-									</TooltipTrigger>
-									<TooltipContent>{typeLabel}</TooltipContent>
-								</Tooltip>
-								{name}
-							</Link>
-						</span>
-					</>
+					<span className="flex gap-2 items-center font-medium text-sm text-nowrap md:ps-1">
+						<IndicatorDot monitor={info.row.original} />
+						<Link href={linkUrl} tabIndex={-1} className="truncate">
+							<Tooltip>
+								<TooltipTrigger asChild>
+									<TypeIcon className="size-3.5 me-1 opacity-70 shrink-0 inline-flex" />
+								</TooltipTrigger>
+								<TooltipContent>{typeLabel}</TooltipContent>
+							</Tooltip>
+							{name}
+						</Link>
+					</span>
 				)
 			},
 			header: sortableHeader,
@@ -229,7 +226,9 @@ export function ActionsButton({ monitor }: { monitor: MonitorRecord }) {
 	if (isReadOnlyUser()) return null
 
 	const togglePause = () => {
-		pb.collection("monitors").update(id, { status: status === SystemStatus.Paused ? SystemStatus.Pending : SystemStatus.Paused })
+		pb.collection("monitors").update(id, {
+			status: status === SystemStatus.Paused ? SystemStatus.Pending : SystemStatus.Paused,
+		})
 	}
 
 	return (
@@ -286,7 +285,11 @@ export function ActionsButton({ monitor }: { monitor: MonitorRecord }) {
 								togglePause()
 							}}
 						>
-							{status === SystemStatus.Paused ? <PlayCircleIcon className="size-4" /> : <PauseCircleIcon className="size-4" />}
+							{status === SystemStatus.Paused ? (
+								<PlayCircleIcon className="size-4" />
+							) : (
+								<PauseCircleIcon className="size-4" />
+							)}
 						</Button>
 					</TooltipTrigger>
 					<TooltipContent>
@@ -314,9 +317,9 @@ export function ActionsButton({ monitor }: { monitor: MonitorRecord }) {
 				</Tooltip>
 			</div>
 
-<Dialog open={editOpen} onOpenChange={setEditOpen}>
-		<MonitorDialog monitor={monitor} setOpen={setEditOpen} />
-	</Dialog>
+			<Dialog open={editOpen} onOpenChange={setEditOpen}>
+				<MonitorDialog monitor={monitor} setOpen={setEditOpen} />
+			</Dialog>
 
 			<AlertDialog open={deleteOpen} onOpenChange={setDeleteOpen}>
 				<AlertDialogContent>
@@ -326,7 +329,8 @@ export function ActionsButton({ monitor }: { monitor: MonitorRecord }) {
 						</AlertDialogTitle>
 						<AlertDialogDescription>
 							<Trans>
-								This action cannot be undone. This will permanently delete all current records for {name} from the database.
+								This action cannot be undone. This will permanently delete all current records for {name} from the
+								database.
 							</Trans>
 						</AlertDialogDescription>
 					</AlertDialogHeader>

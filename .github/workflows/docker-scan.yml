@@ -1,0 +1,62 @@
+name: Docker scan
+
+on:
+  pull_request:
+    paths:
+      - "internal/dockerfile_*"
+      - "**/*.go"
+      - "go.mod"
+      - "go.sum"
+      - "internal/site/**"
+      - ".github/workflows/docker-scan.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    name: Trivy image scan (${{ matrix.image }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Cover the variety of base images; these are the most common
+        # deployment targets.
+        include:
+          - image: beszel-hub
+            dockerfile: ./internal/dockerfile_hub
+          - image: beszel-agent-alpine
+            dockerfile: ./internal/dockerfile_agent_alpine
+          - image: beszel-agent
+            dockerfile: ./internal/dockerfile_agent
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install --no-save --cwd ./internal/site
+
+      - name: Build site
+        run: bun run --cwd ./internal/site build
+
+      - name: Build agent LHM (Windows-only; not needed in Linux images)
+        run: echo "Skipping .NET build - not required for Linux images"
+
+      - name: Build image
+        run: |
+          go mod download
+          docker build -t scan/${{ matrix.image }}:${{ github.sha }} \
+            -f ${{ matrix.dockerfile }} .
+
+      - name: Scan image with Trivy
+        uses: aquasecurity/trivy-action@0.29.0
+        with:
+          image-ref: scan/${{ matrix.image }}:${{ github.sha }}
+          format: table
+          exit-code: "1"
+          ignore-unfixed: true
+          severity: HIGH,CRITICAL
+          scanners: vuln

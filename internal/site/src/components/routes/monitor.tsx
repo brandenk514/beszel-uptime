@@ -1,6 +1,7 @@
 import { t } from "@lingui/core/macro"
 import { Trans } from "@lingui/react/macro"
 import { memo, useCallback, useEffect, useMemo, useState } from "react"
+
 import { timeTicks } from "d3-time"
 import { Link } from "../router"
 import {
@@ -33,7 +34,7 @@ import { Dialog } from "@/components/ui/dialog"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { MonitorDialog } from "@/components/add-monitor"
 
-const MONITOR_TYPE_ICONS: Record<string, typeof GlobeIcon> = {
+const MONITOR_TYPE_ICONS: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>> = {
 	http: GlobeIcon,
 	tcp: NetworkIcon,
 	ping: ZapIcon,
@@ -54,10 +55,26 @@ function formatMs(ms: number) {
 function StatusBadge({ status }: { status: string }) {
 	const config = {
 		[`${SystemStatus.Up}`]: { label: t`Up`, icon: CheckIcon, className: "bg-success text-white border-transparent" },
-		[`${SystemStatus.Down}`]: { label: t`Down`, icon: XIcon, className: "bg-destructive text-white border-transparent" },
-		[`${SystemStatus.Paused}`]: { label: t`Paused`, icon: PauseIcon, className: "bg-secondary text-secondary-foreground border-transparent" },
-		[`${SystemStatus.Pending}`]: { label: t`Pending`, icon: AlertCircleIcon, className: "bg-secondary text-secondary-foreground border-transparent" },
-	}[status] ?? { label: status, icon: AlertCircleIcon, className: "bg-secondary text-secondary-foreground border-transparent" }
+		[`${SystemStatus.Down}`]: {
+			label: t`Down`,
+			icon: XIcon,
+			className: "bg-destructive text-white border-transparent",
+		},
+		[`${SystemStatus.Paused}`]: {
+			label: t`Paused`,
+			icon: PauseIcon,
+			className: "bg-secondary text-secondary-foreground border-transparent",
+		},
+		[`${SystemStatus.Pending}`]: {
+			label: t`Pending`,
+			icon: AlertCircleIcon,
+			className: "bg-secondary text-secondary-foreground border-transparent",
+		},
+	}[status] ?? {
+		label: status,
+		icon: AlertCircleIcon,
+		className: "bg-secondary text-secondary-foreground border-transparent",
+	}
 
 	const Icon = config.icon
 	return (
@@ -92,10 +109,9 @@ function UptimeChart({ checks, range }: { checks: MonitorCheckRecord[]; range: C
 		return points
 	}, [checks, windowStart])
 
-	const now = new Date().getTime()
+	const now = Date.now()
 	const ticks = useMemo(
-		() =>
-			timeTicks(new Date(windowStart), new Date(now), chartTimeData[range].ticks ?? 12).map((d) => d.getTime()),
+		() => timeTicks(new Date(windowStart), new Date(now), chartTimeData[range].ticks ?? 12).map((d) => d.getTime()),
 		[range, windowStart, now]
 	)
 
@@ -139,13 +155,7 @@ function UptimeChart({ checks, range }: { checks: MonitorCheckRecord[]; range: C
 					labelFormatter={(val) => new Date(val as number).toLocaleString()}
 					formatter={(value) => [formatMs(value as number), "Response time"]}
 				/>
-				<Area
-					type="stepAfter"
-					dataKey="ms"
-					stroke="var(--chart-1)"
-					fill="url(#msGradient)"
-					name="Response time"
-				/>
+				<Area type="stepAfter" dataKey="ms" stroke="var(--chart-1)" fill="url(#msGradient)" name="Response time" />
 			</AreaChart>
 		</ResponsiveContainer>
 	)
@@ -169,19 +179,10 @@ function ChecksTable({ checks }: { checks: MonitorCheckRecord[] }) {
 			{visible.map((check) => (
 				<div key={check.id} className="py-3 flex items-start justify-between gap-4">
 					<div className="flex items-start gap-3 min-w-0">
-						<div
-							className={cn(
-								"mt-1 h-2 w-2 rounded-full shrink-0",
-								check.up ? "bg-success" : "bg-destructive"
-							)}
-						/>
+						<div className={cn("mt-1 h-2 w-2 rounded-full shrink-0", check.up ? "bg-success" : "bg-destructive")} />
 						<div className="min-w-0">
 							<div className="text-sm">
-								{check.up ? (
-									<Trans>Up</Trans>
-								) : (
-									<Trans>Down</Trans>
-								)}
+								{check.up ? <Trans>Up</Trans> : <Trans>Down</Trans>}
 								{check.msg ? <span className="text-muted-foreground"> — {check.msg}</span> : null}
 							</div>
 							<div className="text-xs text-muted-foreground">{new Date(check.created).toLocaleString()}</div>
@@ -252,8 +253,7 @@ export default memo(function MonitorDetail({ id }: { id: string }) {
 	useEffect(() => {
 		let cancelled = false
 
-		pb
-			.collection<MonitorCheckRecord>("monitor_checks")
+		pb.collection<MonitorCheckRecord>("monitor_checks")
 			.getFullList({
 				filter: pb.filter(`monitor = {:monitor} && created > {:created}`, {
 					monitor: id,
@@ -268,29 +268,28 @@ export default memo(function MonitorDetail({ id }: { id: string }) {
 			})
 			.catch(() => {})
 
-// poll for new checks every 15s (beszel realtime hub connection is agent-only)
-	const refresh = () => {
-		pb
-			.collection<MonitorCheckRecord>("monitor_checks")
-			.getFullList({
-				filter: pb.filter(`monitor = {:monitor} && created > {:created}`, {
-					monitor: id,
-					created: getPbTimestamp(range),
-				}),
-				sort: "-created",
-				totalItems: 0,
-				batch: 1000,
-			})
-			.then((recs) => {
-				if (!cancelled) setChecks(recs)
-			})
-			.catch(() => {})
-	}
-	const timer = window.setInterval(refresh, 15000)
+		// poll for new checks every 15s (beszel realtime hub connection is agent-only)
+		const refresh = () => {
+			pb.collection<MonitorCheckRecord>("monitor_checks")
+				.getFullList({
+					filter: pb.filter(`monitor = {:monitor} && created > {:created}`, {
+						monitor: id,
+						created: getPbTimestamp(range),
+					}),
+					sort: "-created",
+					totalItems: 0,
+					batch: 1000,
+				})
+				.then((recs) => {
+					if (!cancelled) setChecks(recs)
+				})
+				.catch(() => {})
+		}
+		const timer = window.setInterval(refresh, 15000)
 
-	return () => {
-		cancelled = true
-		window.clearInterval(timer)
+		return () => {
+			cancelled = true
+			window.clearInterval(timer)
 		}
 	}, [id, range])
 
@@ -349,13 +348,7 @@ export default memo(function MonitorDetail({ id }: { id: string }) {
 			<div className="flex flex-col gap-4">
 				<div className="flex items-start justify-between gap-4">
 					<div className="flex items-center gap-3 min-w-0">
-						<Button
-							variant="ghost"
-							size="icon"
-							aria-label="Back"
-							className="shrink-0"
-							asChild
-						>
+						<Button variant="ghost" size="icon" aria-label="Back" className="shrink-0" asChild>
 							<Link href="/monitors">
 								<ArrowLeftIcon className="h-4 w-4" />
 							</Link>
@@ -375,12 +368,7 @@ export default memo(function MonitorDetail({ id }: { id: string }) {
 					<div className="flex gap-2 shrink-0">
 						{!isReadOnlyUser() && (
 							<>
-								<Button
-									variant="outline"
-									onClick={handleCheckNow}
-									disabled={checking}
-									className="gap-1"
-								>
+								<Button variant="outline" onClick={handleCheckNow} disabled={checking} className="gap-1">
 									<ZapIcon className="h-4 w-4" />
 									<Trans>Check now</Trans>
 								</Button>
@@ -399,7 +387,9 @@ export default memo(function MonitorDetail({ id }: { id: string }) {
 								<Trans>Uptime</Trans>
 							</CardTitle>
 							<CardDescription>
-								<Trans>Across the {totalChecks} checks in the last {rangeLabel}</Trans>
+								<Trans>
+									Across the {totalChecks} checks in the last {rangeLabel}
+								</Trans>
 							</CardDescription>
 						</CardHeader>
 						<CardContent>
@@ -440,36 +430,36 @@ export default memo(function MonitorDetail({ id }: { id: string }) {
 
 				<Card>
 					<CardHeader>
-					<div className="flex items-center justify-between gap-4">
-						<div className="grid gap-1.5">
-							<CardTitle>
-								<Trans>Response time</Trans>
-							</CardTitle>
-							<CardDescription>
-								<Trans>Latency of each check over time</Trans>
-							</CardDescription>
+						<div className="flex items-center justify-between gap-4">
+							<div className="grid gap-1.5">
+								<CardTitle>
+									<Trans>Response time</Trans>
+								</CardTitle>
+								<CardDescription>
+									<Trans>Latency of each check over time</Trans>
+								</CardDescription>
+							</div>
+							<Select value={range} onValueChange={(value) => setRange(value as ChartTimes)}>
+								<SelectTrigger className="min-w-32 w-auto relative ps-10" aria-label={t`Time range`}>
+									<HistoryIcon className="h-4 w-4 absolute start-4 top-1/2 -translate-y-1/2 opacity-85" />
+									<SelectValue />
+								</SelectTrigger>
+								<SelectContent>
+									{MONITOR_RANGES.map((value) => (
+										<SelectItem key={value} value={value}>
+											{chartTimeData[value].label()}
+										</SelectItem>
+									))}
+								</SelectContent>
+							</Select>
 						</div>
-						<Select value={range} onValueChange={(value) => setRange(value as ChartTimes)}>
-							<SelectTrigger className="min-w-32 w-auto relative ps-10" aria-label={t`Time range`}>
-								<HistoryIcon className="h-4 w-4 absolute start-4 top-1/2 -translate-y-1/2 opacity-85" />
-								<SelectValue />
-							</SelectTrigger>
-							<SelectContent>
-								{MONITOR_RANGES.map((value) => (
-									<SelectItem key={value} value={value}>
-										{chartTimeData[value].label()}
-									</SelectItem>
-								))}
-							</SelectContent>
-						</Select>
-					</div>
-				</CardHeader>
-				<CardContent>
-					<UptimeChart checks={checks} range={range} />
-				</CardContent>
-			</Card>
+					</CardHeader>
+					<CardContent>
+						<UptimeChart checks={checks} range={range} />
+					</CardContent>
+				</Card>
 
-			<Card>
+				<Card>
 					<CardHeader>
 						<CardTitle>
 							<Trans>Recent checks</Trans>

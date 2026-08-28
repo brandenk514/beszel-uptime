@@ -48,7 +48,7 @@ function StatusDot({ status }: { status: string }) {
 
 export default memo(function StatusPage({ slug }: { slug: string }) {
 	const [info, setInfo] = useState<PageInfo | null>(null)
-	const [monitors, setMonitors] = useState<MonitorRecord[]>([])
+	const [monitors, setMonitors] = useState<PublicMonitor[]>([])
 	const [notFound, setNotFound] = useState(false)
 	const [loading, setLoading] = useState(true)
 
@@ -65,7 +65,7 @@ export default memo(function StatusPage({ slug }: { slug: string }) {
 		async function load() {
 			setLoading(true)
 			try {
-				const page = await pb.send<PageInfo>(`/api/beszel/status-page?slug=${encodeURIComponent(slug)}`)
+				const page = await pb.send<PageInfo>(`/api/beszel/status-page?slug=${encodeURIComponent(slug)}`, {})
 				if (!active) return
 				setInfo(page)
 				setMonitors(page.monitors ?? [])
@@ -80,6 +80,7 @@ export default memo(function StatusPage({ slug }: { slug: string }) {
 
 		// Public realtime subscriptions require auth, so poll for updates.
 		const interval = window.setInterval(() => {
+			// biome-ignore lint/complexity/noVoid: intentionally fire-and-forget poll
 			void load()
 		}, 15000)
 
@@ -142,10 +143,11 @@ export default memo(function StatusPage({ slug }: { slug: string }) {
 										m.status === SystemStatus.Up && "bg-emerald-500",
 										m.status === SystemStatus.Down && "bg-red-500",
 										m.status === SystemStatus.Paused && "bg-muted-foreground/50",
-										!(m.status === SystemStatus.Up ||
+										!(
+											m.status === SystemStatus.Up ||
 											m.status === SystemStatus.Down ||
-											m.status === SystemStatus.Paused) &&
-											"bg-amber-500 animate-pulse"
+											m.status === SystemStatus.Paused
+										) && "bg-amber-500 animate-pulse"
 									)}
 								/>
 								{info.show_monitors !== false ? (
@@ -164,7 +166,10 @@ export default memo(function StatusPage({ slug }: { slug: string }) {
 			)}
 
 			<footer className="mt-10 text-center text-xs text-muted-foreground">
-				<Trans>Powered by</Trans> <a href={getHubURL()} className="underline hover:text-foreground">Beszel</a>
+				<Trans>Powered by</Trans>{" "}
+				<a href={getHubURL()} className="underline hover:text-foreground">
+					Beszel
+				</a>
 			</footer>
 		</div>
 	)

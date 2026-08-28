@@ -238,6 +238,25 @@ export interface AlertRecord extends RecordModel {
 	// user: string
 }
 
+/** Alert history entry (alert_records collection with expand). */
+export interface AlertsHistoryRecord extends RecordModel {
+	id: string
+	user: string
+	system: string
+	name: string
+	value: number
+	state: string
+	resolved: string
+	created: string
+	updated: string
+	expand?: {
+		system?: {
+			id: string
+			name: string
+		}
+	}
+}
+
 /** All supported uptime monitor types (uptime-kuma parity) */
 export type MonitorType = "http" | "tcp" | "ping" | "dns" | "docker" | "websocket" | "steam" | "push"
 

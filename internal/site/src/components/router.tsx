@@ -46,6 +46,7 @@ export function Link(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
 	return (
 		<a
 			{...props}
+			href={props.href || "#"}
 			onClick={(e) => {
 				e.preventDefault()
 				const href = props.href || ""

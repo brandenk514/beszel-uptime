@@ -3,7 +3,14 @@ import { memo, useEffect, useState } from "react"
 import { GlobeIcon, PenBoxIcon, PlusIcon, Trash2Icon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+} from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
@@ -31,7 +38,7 @@ function slugify(value: string) {
 		.trim()
 		.replace(/[^a-z0-9]+/g, "-")
 		.replace(/^-+|-+$/g, "")
-	}
+}
 
 export default memo(() => {
 	const [pages, setPages] = useState<StatusPageRecord[]>([])
@@ -119,7 +126,9 @@ export default memo(() => {
 									<GlobeIcon className="h-5 w-5 shrink-0 text-muted-foreground" strokeWidth={1.5} />
 									<div className="min-w-0">
 										<p className="font-medium truncate">{page.name}</p>
-										<code className="text-xs text-muted-foreground">{getPagePath($router, "statusPage", { slug: page.slug })}</code>
+										<code className="text-xs text-muted-foreground">
+											{getPagePath($router, "statusPage", { slug: page.slug })}
+										</code>
 									</div>
 								</div>
 								<div className="flex items-center gap-2 shrink-0">
@@ -182,7 +191,9 @@ export default memo(() => {
 							<Trans>Delete status page?</Trans>
 						</AlertDialogTitle>
 						<AlertDialogDescription>
-							<Trans>This will permanently remove the status page. Monitors that reference it will be unaffected.</Trans>
+							<Trans>
+								This will permanently remove the status page. Monitors that reference it will be unaffected.
+							</Trans>
 						</AlertDialogDescription>
 					</AlertDialogHeader>
 					<AlertDialogFooter>
@@ -253,7 +264,7 @@ function StatusPageDialog({
 			if (page) {
 				await pb.collection("status_pages").update(page.id, data)
 			} else {
-				await pb.collection("status_pages").create({ ...data, user: pb.authStore.record!.id })
+				await pb.collection("status_pages").create({ ...data, user: pb.authStore.record?.id ?? "" })
 			}
 			setOpen(false)
 			onSaved()

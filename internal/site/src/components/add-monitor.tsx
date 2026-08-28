@@ -30,13 +30,13 @@ function buildMonitorData(state: MonitorFormState, type: MonitorType): Record<st
 	const data: Record<string, unknown> = {
 		name: state.name,
 		type,
-		interval: Math.max(5, parseInt(state.interval) || 60),
-		timeout: Math.max(1, parseInt(state.timeout) || 10),
+		interval: Math.max(5, parseInt(state.interval, 10) || 60),
+		timeout: Math.max(1, parseInt(state.timeout, 10) || 10),
 		retry: state.retry,
-		retry_delay: Math.max(0, parseInt(state.retryDelay) || 0),
-		num_retries: Math.max(1, parseInt(state.numRetries) || 1),
+		retry_delay: Math.max(0, parseInt(state.retryDelay, 10) || 0),
+		num_retries: Math.max(1, parseInt(state.numRetries, 10) || 1),
 		secure: state.secure,
-		user: pb.authStore.record!.id,
+		user: pb.authStore.record?.id ?? "",
 		// clear type-specific fields
 		url: "",
 		host: "",
@@ -64,7 +64,7 @@ function buildMonitorData(state: MonitorFormState, type: MonitorType): Record<st
 			break
 		case "tcp":
 			data.host = state.host
-			data.port = Math.max(1, parseInt(state.port) || 80)
+			data.port = Math.max(1, parseInt(state.port, 10) || 80)
 			break
 		case "ping":
 			data.host = state.host
@@ -171,8 +171,7 @@ export const MonitorDialog = memo(
 
 		useEffect(() => {
 			setState(stateFromMonitor(monitor))
-			pb
-				.collection<StatusPageRecord>("status_pages")
+			pb.collection<StatusPageRecord>("status_pages")
 				.getFullList({ sort: "+name", fields: "id,name,slug,enabled" })
 				.then(setStatusPages)
 				.catch(() => setStatusPages([]))
@@ -230,8 +229,8 @@ export const MonitorDialog = memo(
 					</DialogTitle>
 					<DialogDescription className="mb-3 leading-relaxed w-0 min-w-full">
 						<Trans>
-							Monitor a website, TCP port, host, DNS record, Docker container, WebSocket endpoint, Steam app,
-							or a push heartbeat. The type determines which fields are required.
+							Monitor a website, TCP port, host, DNS record, Docker container, WebSocket endpoint, Steam app, or a push
+							heartbeat. The type determines which fields are required.
 						</Trans>
 					</DialogDescription>
 				</DialogHeader>
@@ -264,9 +263,7 @@ export const MonitorDialog = memo(
 
 					{(type === "http" || type === "websocket") && (
 						<div className="grid gap-2">
-							<Label htmlFor="m-url">
-								{type === "http" ? <Trans>URL</Trans> : <Trans>WebSocket URL</Trans>}
-							</Label>
+							<Label htmlFor="m-url">{type === "http" ? <Trans>URL</Trans> : <Trans>WebSocket URL</Trans>}</Label>
 							<Input
 								id="m-url"
 								value={state.url}
@@ -403,8 +400,8 @@ export const MonitorDialog = memo(
 					{type === "steam" && (
 						<div className="grid gap-2">
 							<Label htmlFor="m-app-id">
-									<Trans>Steam App ID</Trans>
-								</Label>
+								<Trans>Steam App ID</Trans>
+							</Label>
 							<Input
 								id="m-app-id"
 								value={state.appId}
@@ -435,8 +432,8 @@ export const MonitorDialog = memo(
 								<div className="grid gap-2">
 									<p className="text-xs text-muted-foreground">
 										<Trans>
-											POST to this URL (curl, cron, or your service) to record a heartbeat. The monitor is down
-											if no heartbeat arrives within the check interval.
+											POST to this URL (curl, cron, or your service) to record a heartbeat. The monitor is down if no
+											heartbeat arrives within the check interval.
 										</Trans>
 									</p>
 									<code className="text-xs break-all bg-muted rounded px-2 py-1.5 select-all">{pushUrl}</code>
@@ -518,7 +515,9 @@ export const MonitorDialog = memo(
 								<Textarea
 									value={state.expectedBody}
 									onChange={(e) => set("expectedBody", e.target.value)}
-									placeholder={state.jsonQuery ? "Expected value at the JSON path" : "substring to search for in response"}
+									placeholder={
+										state.jsonQuery ? "Expected value at the JSON path" : "substring to search for in response"
+									}
 									rows={2}
 								/>
 							</div>
@@ -630,13 +629,7 @@ export const MonitorDialog = memo(
 
 					<DialogFooter className="mt-2 justify-end gap-2">
 						<Button type="submit" disabled={saving}>
-							{saving ? (
-								<Trans>Saving...</Trans>
-							) : monitor ? (
-								<Trans>Save Monitor</Trans>
-							) : (
-								<Trans>Add Monitor</Trans>
-							)}
+							{saving ? <Trans>Saving...</Trans> : monitor ? <Trans>Save Monitor</Trans> : <Trans>Add Monitor</Trans>}
 						</Button>
 					</DialogFooter>
 				</form>

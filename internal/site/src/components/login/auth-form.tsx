@@ -187,7 +187,7 @@ export function UserAuthForm({
 		if (code) {
 			const state = params.get("state")
 			const provider: AuthProviderInfo = JSON.parse(localStorage.getItem("provider") ?? "{}")
-		    localStorage.removeItem("provider")
+			localStorage.removeItem("provider")
 			window.history.replaceState({}, "", window.location.pathname)
 			if (!state || provider.state !== state) {
 				showLoginFaliedToast()

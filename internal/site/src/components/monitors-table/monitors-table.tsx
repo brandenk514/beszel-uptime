@@ -10,14 +10,7 @@ import {
 	useReactTable,
 	type VisibilityState,
 } from "@tanstack/react-table"
-import {
-	FilterIcon,
-	GlobeIcon,
-	LayoutGridIcon,
-	LayoutListIcon,
-	Settings2Icon,
-	XIcon,
-} from "lucide-react"
+import { FilterIcon, GlobeIcon, LayoutGridIcon, LayoutListIcon, Settings2Icon, XIcon } from "lucide-react"
 import { memo, useEffect, useMemo, useState } from "react"
 import { Button } from "@/components/ui/button"
 import {
@@ -60,7 +53,11 @@ export default memo(function MonitorsTable() {
 	const { t } = useLingui()
 	const [filter, setFilter] = useState<string>("")
 	const [statusFilter, setStatusFilter] = useState<StatusFilter>("all")
-	const [sorting, setSorting] = useBrowserStorage<SortingState>("monitor-sort", [{ id: "monitor", desc: false }], sessionStorage)
+	const [sorting, setSorting] = useBrowserStorage<SortingState>(
+		"monitor-sort",
+		[{ id: "monitor", desc: false }],
+		sessionStorage
+	)
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 	const [columnVisibility, setColumnVisibility] = useBrowserStorage<VisibilityState>("monitor-cols", {})
 
@@ -112,11 +109,7 @@ export default memo(function MonitorsTable() {
 	const columns = table.getAllColumns()
 
 	const [upMonitorsLength, downMonitorsLength, pausedMonitorsLength] = useMemo(() => {
-		return [
-			Object.values(upMonitors).length,
-			Object.values(downMonitors).length,
-			Object.values(pausedMonitors).length,
-		]
+		return [Object.values(upMonitors).length, Object.values(downMonitors).length, Object.values(pausedMonitors).length]
 	}, [upMonitors, downMonitors, pausedMonitors])
 
 	if (!data.length) {
@@ -181,7 +174,11 @@ export default memo(function MonitorsTable() {
 										<Trans>Layout</Trans>
 									</DropdownMenuLabel>
 									<DropdownMenuSeparator />
-									<DropdownMenuRadioGroup className="px-1 pb-1" value={viewMode} onValueChange={(view) => setViewMode(view as ViewMode)}>
+									<DropdownMenuRadioGroup
+										className="px-1 pb-1"
+										value={viewMode}
+										onValueChange={(view) => setViewMode(view as ViewMode)}
+									>
 										<DropdownMenuRadioItem value="table" onSelect={(e) => e.preventDefault()} className="gap-2">
 											<LayoutListIcon className="size-4" />
 											<Trans>Table</Trans>
@@ -200,18 +197,18 @@ export default memo(function MonitorsTable() {
 									</DropdownMenuLabel>
 									<DropdownMenuSeparator />
 									<div className="px-1.5">
-									{columns
-										.filter((column) => column.getCanHide() && column.id !== "actions")
-										.map((column) => (
-											<DropdownMenuCheckboxItem
-												key={column.id}
-												className="gap-2 py-2"
-												checked={column.getIsVisible()}
-												onCheckedChange={(value) => column.toggleVisibility(!!value)}
-											>
-												{columnName(column.columnDef)}
-											</DropdownMenuCheckboxItem>
-										))}
+										{columns
+											.filter((column) => column.getCanHide() && column.id !== "actions")
+											.map((column) => (
+												<DropdownMenuCheckboxItem
+													key={column.id}
+													className="gap-2 py-2"
+													checked={column.getIsVisible()}
+													onCheckedChange={(value) => column.toggleVisibility(!!value)}
+												>
+													{columnName(column.columnDef)}
+												</DropdownMenuCheckboxItem>
+											))}
 									</div>
 								</div>
 							</div>
@@ -314,12 +311,12 @@ export default memo(function MonitorsTable() {
 							<GridCard key={row.id} monitor={mon} statusLabel={statusLabel}>
 								{row.getVisibleCells().map((cell) => {
 									if (cell.column.id === "actions" || cell.column.id === "monitor") return null
-									return <div key={cell.id} className="text-sm">
-										<span className="text-muted-foreground me-2">
-											{columnName(cell.column.columnDef)}
-										</span>
-										{flexRender(cell.column.columnDef.cell, cell.getContext())}
-									</div>
+									return (
+										<div key={cell.id} className="text-sm">
+											<span className="text-muted-foreground me-2">{columnName(cell.column.columnDef)}</span>
+											{flexRender(cell.column.columnDef.cell, cell.getContext())}
+										</div>
+									)
 								})}
 							</GridCard>
 						)
@@ -330,8 +327,15 @@ export default memo(function MonitorsTable() {
 	)
 })
 
-function GridCard({ monitor, statusLabel, children }: { monitor: MonitorRecord; statusLabel: string; children: React.ReactNode }) {
-	const { t } = useLingui()
+function GridCard({
+	monitor,
+	statusLabel,
+	children,
+}: {
+	monitor: MonitorRecord
+	statusLabel: string
+	children: React.ReactNode
+}) {
 	const TypeIcon = MONITOR_TYPE_ICONS[monitor.type as keyof typeof MONITOR_TYPE_ICONS] || GlobeIcon
 	const labelFn = MONITOR_TYPE_LABELS[monitor.type as keyof typeof MONITOR_TYPE_LABELS]
 	const typeLabel = labelFn ? labelFn() : monitor.type
@@ -348,9 +352,7 @@ function GridCard({ monitor, statusLabel, children }: { monitor: MonitorRecord; 
 				<span className="truncate">{monitor.name}</span>
 				<span className="ms-auto text-xs text-muted-foreground">{statusLabel}</span>
 			</div>
-			<div className="flex flex-col gap-1">
-				{children}
-			</div>
+			<div className="flex flex-col gap-1">{children}</div>
 		</div>
 	)
 }

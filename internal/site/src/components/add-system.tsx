@@ -80,8 +80,9 @@ export const SystemDialog = ({ setOpen, system }: { setOpen: (open: boolean) => 
 				return setToken(nextSystemToken)
 			}
 			// if system exists,get the token from the fingerprint record
-			if (tokenMap.has(system.id)) {
-				return setToken(tokenMap.get(system.id)!)
+			const existingToken = tokenMap.get(system.id)
+			if (existingToken) {
+				return setToken(existingToken)
 			}
 			const { token } = await pb.collection("fingerprints").getFirstListItem(`system = "${system.id}"`, {
 				fields: "token",
@@ -95,7 +96,7 @@ export const SystemDialog = ({ setOpen, system }: { setOpen: (open: boolean) => 
 		e.preventDefault()
 		const formData = new FormData(e.target as HTMLFormElement)
 		const data = Object.fromEntries(formData) as Record<string, any>
-		data.users = pb.authStore.record!.id
+		data.users = pb.authStore.record?.id ?? ""
 		try {
 			setOpen(false)
 			if (system) {

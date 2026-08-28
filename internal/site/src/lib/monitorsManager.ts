@@ -112,4 +112,7 @@ export async function refresh() {
 }
 
 /** Unsubscribe from real-time monitor updates */
-export const unsubscribe = () => (unsub = unsub?.())
+export const unsubscribe = () => {
+	// biome-ignore lint/suspicious/noAssignInExpressions: concise reassignment of module-level unsub
+	return (unsub = unsub?.())
+}

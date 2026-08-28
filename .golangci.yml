@@ -1,0 +1,43 @@
+version: "2"
+
+run:
+  timeout: 5m
+  tests: true
+
+linters:
+  enable:
+    - gosec          # security patterns (TLS config, file perms, command injection, weak crypto)
+    - govet          # suspicious constructs
+    - staticcheck    # correctness, performance, idiomatic issues
+    - revive         # style + correctness (successor to golint)
+    - unparam        # unused function parameters
+    - usestdlibvars  # stdlib constants instead of magic values
+    - prealloc       # slice preallocation
+    - unconvert      # unnecessary type conversions
+    - misspell       # spelling in comments/strings
+  settings:
+    gosec:
+      excludes:
+        # Pocketbase/DB code uses file permissions that are intentional
+        - G306
+      config:
+        G404:
+          # math/rand is fine for non-security uses (shuffling, sampling)
+          blocklist:
+            - math/rand
+    depguard:
+      rules:
+        stdlib:
+          deny:
+            - pkg: "io/ioutil"
+              desc: "use io or os packages instead (io/ioutil is deprecated)"
+
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
+
+exclude-dirs:
+  - build
+  - internal/site/dist
+  - internal/site/node_modules
+  - agent/lhm/bin

@@ -112,20 +112,22 @@ export default function Navbar() {
 							<DropdownMenuItem onClick={() => navigate(getPagePath($router, "smart"))} className="flex items-center">
 								<HardDriveIcon className="h-4 w-4 me-2.5" strokeWidth={1.5} />
 								<span>S.M.A.R.T.</span>
-							</DropdownMenuItem>						<DropdownMenuItem
-							onClick={() => navigate(getPagePath($router, "monitors"))}
-							className="flex items-center"
-						>
-							<HeartPulseIcon className="h-4 w-4 me-2.5" strokeWidth={1.5} />
-							<Trans>Monitors</Trans>
-						</DropdownMenuItem>
-						<DropdownMenuItem
-							onClick={() => navigate(getPagePath($router, "statusPages"))}
-							className="flex items-center"
-						>
-							<GlobeIcon className="h-4 w-4 me-2.5" strokeWidth={1.5} />
-							<Trans>Status Pages</Trans>
-						</DropdownMenuItem>							<DropdownMenuItem
+							</DropdownMenuItem>{" "}
+							<DropdownMenuItem
+								onClick={() => navigate(getPagePath($router, "monitors"))}
+								className="flex items-center"
+							>
+								<HeartPulseIcon className="h-4 w-4 me-2.5" strokeWidth={1.5} />
+								<Trans>Monitors</Trans>
+							</DropdownMenuItem>
+							<DropdownMenuItem
+								onClick={() => navigate(getPagePath($router, "statusPages"))}
+								className="flex items-center"
+							>
+								<GlobeIcon className="h-4 w-4 me-2.5" strokeWidth={1.5} />
+								<Trans>Status Pages</Trans>
+							</DropdownMenuItem>{" "}
+							<DropdownMenuItem
 								onClick={() => navigate(getPagePath($router, "settings", { name: "general" }))}
 								className="flex items-center"
 							>
