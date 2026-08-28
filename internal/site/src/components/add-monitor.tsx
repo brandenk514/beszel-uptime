@@ -223,7 +223,7 @@ export const MonitorDialog = memo(
 		const type = state.type
 
 		return (
-			<DialogContent className="w-[90%] sm:w-auto sm:ns-dialog max-w-full rounded-lg">
+			<DialogContent className="w-[90%] sm:w-auto sm:ns-dialog max-w-full max-h-[90vh] flex flex-col overflow-hidden rounded-lg">
 				<DialogHeader>
 					<DialogTitle className="mb-1 pb-1 max-w-100 truncate pr-8">
 						{monitor ? <Trans>Edit Monitor</Trans> : <Trans>Add Monitor</Trans>}
@@ -236,7 +236,8 @@ export const MonitorDialog = memo(
 					</DialogDescription>
 				</DialogHeader>
 
-				<form onSubmit={handleSubmit} className="grid gap-4">
+				<form onSubmit={handleSubmit} className="grid flex-1 min-h-0 gap-4">
+					<div className="grid flex-1 min-h-0 gap-4 overflow-y-auto pe-1">
 					<div className="grid gap-2">
 						<Label htmlFor="m-type">
 							<Trans>Type</Trans>
@@ -627,8 +628,9 @@ export const MonitorDialog = memo(
 							</Select>
 						</div>
 					)}
+				</div>
 
-					<DialogFooter className="flex justify-end gap-2 mt-2">
+					<DialogFooter className="mt-2 flex shrink-0 justify-end gap-2">
 						<Button type="submit" disabled={saving}>
 							{saving ? (
 								<Trans>Saving...</Trans>
