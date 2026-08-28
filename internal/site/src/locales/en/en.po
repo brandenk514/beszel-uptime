@@ -2284,6 +2284,11 @@ msgstr "Value"
 msgid "View"
 msgstr "View"
 
+#: src/components/routes/monitor.tsx
+msgid "View less"
+msgstr "View less"
+
+#: src/components/routes/monitor.tsx
 #: src/components/routes/system/cpu-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/network-sheet.tsx
