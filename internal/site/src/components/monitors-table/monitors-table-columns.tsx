@@ -18,7 +18,7 @@ import {
 	SearchIcon,
 	Trash2Icon,
 } from "lucide-react"
-import { memo, useRef, useState } from "react"
+import { memo, useState } from "react"
 import { isReadOnlyUser, pb } from "@/lib/api"
 import { SystemStatus } from "@/lib/enums"
 import { cn } from "@/lib/utils"
@@ -126,12 +126,11 @@ export function MonitorTableColumns(_viewMode: "table" | "grid"): ColumnDef<Moni
 					<>
 						<span className="flex gap-2 items-center font-medium text-sm text-nowrap md:ps-1">
 							<IndicatorDot monitor={info.row.original} />
-							<Link href={linkUrl} tabIndex={-1} className="truncate z-10 relative">
+							<Link href={linkUrl} tabIndex={-1} className="truncate">
 								<TypeIcon className="size-3.5 me-1 -ms-1.5 opacity-70 shrink-0" />
 								{name}
 							</Link>
 						</span>
-						<Link href={linkUrl} className="inset-0 absolute size-full" aria-label={name}></Link>
 					</>
 				)
 			},
@@ -218,7 +217,6 @@ function sortableHeader(context: HeaderContext<MonitorRecord, unknown>) {
 export function ActionsButton({ monitor }: { monitor: MonitorRecord }) {
 	const [editOpen, setEditOpen] = useState(false)
 	const [deleteOpen, setDeleteOpen] = useState(false)
-	const editOpened = useRef(false)
 	const { status, id, name } = monitor
 
 	if (isReadOnlyUser()) return null
@@ -258,6 +256,7 @@ export function ActionsButton({ monitor }: { monitor: MonitorRecord }) {
 							onClick={(e) => {
 								e.preventDefault()
 								e.stopPropagation()
+
 								setEditOpen(true)
 							}}
 						>
@@ -308,9 +307,9 @@ export function ActionsButton({ monitor }: { monitor: MonitorRecord }) {
 				</Tooltip>
 			</div>
 
-			<Dialog open={editOpen} onOpenChange={(open) => { if (open) editOpened.current = true; setEditOpen(open) }}>
-				{editOpened.current && <MonitorDialog monitor={monitor} setOpen={setEditOpen} />}
-			</Dialog>
+<Dialog open={editOpen} onOpenChange={setEditOpen}>
+		<MonitorDialog monitor={monitor} setOpen={setEditOpen} />
+	</Dialog>
 
 			<AlertDialog open={deleteOpen} onOpenChange={setDeleteOpen}>
 				<AlertDialogContent>

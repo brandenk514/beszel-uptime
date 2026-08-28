@@ -90,10 +90,12 @@ func (m *MonitorManager) bindEventHooks() {
 		return e.Next()
 	})
 	m.hub.OnRecordAfterUpdateSuccess("monitors").BindFunc(func(e *core.RecordEvent) error {
-		// Restart monitor to pick up config/status changes.
-		m.stopMonitor(e.Record.Id)
-		if e.Record.GetString("status") != statusPaused {
-			go m.startMonitor(e.Record.Id)
+		if m.monitorConfigChanged(e.Record) {
+			// Restart monitor to pick up config/status changes.
+			m.stopMonitor(e.Record.Id)
+			if e.Record.GetString("status") != statusPaused {
+				go m.startMonitor(e.Record.Id)
+			}
 		}
 		return e.Next()
 	})
@@ -105,6 +107,41 @@ func (m *MonitorManager) bindEventHooks() {
 		m.cancel()
 		return e.Next()
 	})
+}
+
+// monitorConfigChanged reports whether a save of the monitor record actually
+// changed a field that affects its check loop (type, target, interval,
+// timeout, or status). The record's updated autodate field is updated on
+// every save, so it is excluded — without this guard, the manager's own
+// per-check status save would re-trigger the update hook and restart the
+// loop (collapsing a failing monitor's effective interval to the retry
+// delay).
+func (m *MonitorManager) monitorConfigChanged(record *core.Record) bool {
+	orig := record.Original()
+	changed := func(field string) bool {
+		return record.GetRaw(field) != orig.GetRaw(field)
+	}
+	// status changes: only pausing/resuming affects the loop. Up/down
+	// transitions are expected loop output — the ticker schedules the next
+	// check, so restarting on every transition would collapse the monitor's
+	// effective interval to the retry delay (a failing monitor probed ~every
+	// 5s instead of its configured interval).
+	if changed("status") {
+		return record.GetString("status") == statusPaused || orig.GetString("status") == statusPaused
+	}
+	return changed("type") ||
+		changed("url") ||
+		changed("host") ||
+		changed("port") ||
+		changed("interval") ||
+		changed("timeout") ||
+		changed("dns_type") ||
+		changed("dns_value") ||
+		changed("docker_url") ||
+		changed("app_id") ||
+		changed("retry") ||
+		changed("retry_delay") ||
+		changed("num_retries")
 }
 
 // startMonitor (re)starts the check loop for a monitor.

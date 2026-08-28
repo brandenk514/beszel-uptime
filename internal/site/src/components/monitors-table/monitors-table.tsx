@@ -283,7 +283,7 @@ export default memo(function MonitorsTable() {
 							{rows.map((row) => (
 								<TableRow key={row.id} className="h-11 cursor-pointer hover:bg-muted/40 transition-colors">
 									{row.getVisibleCells().map((cell) => (
-										<TableCell key={cell.id} className="p-0 align-middle h-full">
+										<TableCell key={cell.id} className="relative p-0 align-middle h-full">
 											<div className="h-full flex items-center px-3">
 												{flexRender(cell.column.columnDef.cell, cell.getContext())}
 											</div>
