@@ -127,7 +127,7 @@ export function MonitorTableColumns(_viewMode: "table" | "grid"): ColumnDef<Moni
 						<span className="flex gap-2 items-center font-medium text-sm text-nowrap md:ps-1">
 							<IndicatorDot monitor={info.row.original} />
 							<Link href={linkUrl} tabIndex={-1} className="truncate">
-								<TypeIcon className="size-3.5 me-1 -ms-1.5 opacity-70 shrink-0" />
+								<TypeIcon className="size-3.5 me-1 opacity-70 shrink-0" />
 								{name}
 							</Link>
 						</span>

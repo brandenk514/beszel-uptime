@@ -132,7 +132,7 @@ export default memo(function MonitorsTable() {
 	}
 
 	const CardHead = (
-		<div className="flex items-center justify-between p-4 mb-3 sm:mb-4">
+		<div className="flex flex-wrap items-center justify-between gap-3 p-4 mb-3 sm:mb-4">
 			<div className="grid md:flex gap-x-5 gap-y-3 w-full items-end">
 				<div className="px-2 sm:px-1">
 					<h2 className="text-xl font-semibold mb-1">
@@ -218,14 +218,14 @@ export default memo(function MonitorsTable() {
 				</div>
 			</div>
 
-			<div className="hidden sm:flex gap-4 text-sm text-muted-foreground">
-				<span>
+			<div className="hidden sm:flex gap-1 p-1 bg-muted rounded-lg text-xs text-muted-foreground">
+				<span className="px-2.5">
 					<Trans>Up</Trans>: <span className="font-medium text-green-500">{upMonitorsLength}</span>
 				</span>
-				<span>
+				<span className="px-2.5">
 					<Trans>Down</Trans>: <span className="font-medium text-red-500">{downMonitorsLength}</span>
 				</span>
-				<span>
+				<span className="px-2.5">
 					<Trans>Paused</Trans>: <span className="font-medium">{pausedMonitorsLength}</span>
 				</span>
 			</div>
