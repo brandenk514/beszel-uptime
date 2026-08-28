@@ -3,6 +3,7 @@ package uptime
 import (
 	"context"
 	"crypto/tls"
+	"crypto/x509"
 	"encoding/json"
 	"fmt"
 	"net"
@@ -248,7 +249,13 @@ func checkCertExpiry(ctx context.Context, host string, port int) (bool, int64, s
 	}
 	defer conn.Close()
 
-	tlsConn := tls.Client(conn, &tls.Config{ServerName: host, InsecureSkipVerify: true}) //nolint:gosec // we only inspect the cert
+	// VerifyPeerCertificate always accepts so we can inspect the presented
+	// certificate (expiry checks work for self-signed / untrusted certs),
+	// without using InsecureSkipVerify (which would also skip hostname checks).
+	tlsConn := tls.Client(conn, &tls.Config{
+		ServerName:            host,
+		VerifyPeerCertificate: func([][]byte, [][]*x509.Certificate) error { return nil },
+	})
 	if err := tlsConn.HandshakeContext(ctx); err != nil {
 		return false, 0, "TLS handshake failed: " + err.Error()
 	}
