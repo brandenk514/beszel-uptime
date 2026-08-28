@@ -28,6 +28,7 @@ import { Badge } from "@/components/ui/badge"
 import { DockerIcon, SteamIcon } from "@/components/ui/icons"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { useYAxisWidth } from "@/components/charts/hooks"
 import { Dialog } from "@/components/ui/dialog"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { MonitorDialog } from "@/components/add-monitor"
@@ -71,6 +72,7 @@ const MONITOR_RANGES: ChartTimes[] = ["1h", "12h", "24h", "1w", "30d"]
 
 function UptimeChart({ checks, range }: { checks: MonitorCheckRecord[]; range: ChartTimes }) {
 	const windowStart = useMemo(() => chartTimeData[range].getOffset(new Date()).getTime(), [range, checks])
+	const { yAxisWidth, updateYAxisWidth } = useYAxisWidth()
 
 	const data = useMemo(() => {
 		const points = checks
@@ -107,7 +109,7 @@ function UptimeChart({ checks, range }: { checks: MonitorCheckRecord[]; range: C
 
 	return (
 		<ResponsiveContainer width="100%" height={260}>
-			<AreaChart data={data} margin={{ top: 10, right: 10, bottom: 0, left: 0 }}>
+			<AreaChart data={data} margin={{ top: 10, right: 10, bottom: 0, left: 40 }}>
 				<defs>
 					<linearGradient id="msGradient" x1="0" y1="0" x2="0" y2="1">
 						<stop offset="5%" stopColor="var(--chart-1)" stopOpacity={0.4} />
@@ -128,10 +130,10 @@ function UptimeChart({ checks, range }: { checks: MonitorCheckRecord[]; range: C
 				/>
 				<YAxis
 					domain={[0, (dataMax: number) => dataMax * 1.1]}
-					tickFormatter={(val) => formatMs(val)}
+					tickFormatter={(val) => updateYAxisWidth(formatMs(val))}
 					tickLine={false}
 					axisLine={false}
-					width={70}
+					width={Math.max(yAxisWidth, 50)}
 				/>
 				<Tooltip
 					labelFormatter={(val) => new Date(val as number).toLocaleString()}
@@ -150,6 +152,8 @@ function UptimeChart({ checks, range }: { checks: MonitorCheckRecord[]; range: C
 }
 
 function ChecksTable({ checks }: { checks: MonitorCheckRecord[] }) {
+	const [showMore, setShowMore] = useState(false)
+
 	if (!checks.length) {
 		return (
 			<div className="py-8 text-center text-muted-foreground">
@@ -158,7 +162,7 @@ function ChecksTable({ checks }: { checks: MonitorCheckRecord[] }) {
 		)
 	}
 
-	const visible = checks.slice(0, 50)
+	const visible = showMore ? checks : checks.slice(0, 5)
 
 	return (
 		<div className="divide-y">
@@ -186,6 +190,19 @@ function ChecksTable({ checks }: { checks: MonitorCheckRecord[] }) {
 					<div className="text-sm tabular-nums shrink-0">{check.ms != null ? formatMs(check.ms) : "—"}</div>
 				</div>
 			))}
+			{checks.length > 5 && (
+				<div className="pt-3">
+					<Button variant="ghost" size="sm" className="h-7 w-full" onClick={() => setShowMore(!showMore)}>
+						{showMore ? (
+							<Trans>View less</Trans>
+						) : (
+							<>
+								<Trans>View more</Trans> ({checks.length - 5})
+							</>
+						)}
+					</Button>
+				</div>
+			)}
 		</div>
 	)
 }
