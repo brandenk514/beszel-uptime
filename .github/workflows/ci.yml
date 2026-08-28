@@ -48,6 +48,13 @@ jobs:
         uses: golangci/golangci-lint-action@v8
         with:
           version: latest
+          # only-new-issues: this PR enables linters (gosec, revive, ...) that are
+          # not configured upstream. Enabling them flags hundreds of findings in
+          # pre-existing beszel code (agent/, internal/hub, ...) that this PR does
+          # not touch. Restricting to new issues enforces the linters on all code
+          # added/changed by this PR (verified 0 findings) without blocking on
+          # pre-existing debt that the PR's scope doesn't cover.
+          only-new-issues: true
           args: --timeout=5m
 
       - name: Test (coverage)

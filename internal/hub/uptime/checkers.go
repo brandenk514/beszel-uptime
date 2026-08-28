@@ -1,3 +1,5 @@
+// Package uptime implements the uptime-monitoring checkers (http, tcp, dns,
+// ping, push) and the background monitor manager for the hub.
 package uptime
 
 import (
@@ -34,7 +36,7 @@ var (
 )
 
 func initHTTPClients() {
-	redirectLimit := func(req *http.Request, via []*http.Request) error {
+	redirectLimit := func(_ *http.Request, via []*http.Request) error {
 		if len(via) >= 10 {
 			return fmt.Errorf("stopped after 10 redirects")
 		}
@@ -71,7 +73,7 @@ func runCheck(ctx context.Context, rec *core.Record) (bool, int64, string) {
 	case "ping":
 		return checkPing(ctx, rec)
 	case "dns":
-		return checkDns(ctx, rec)
+		return checkDNS(ctx, rec)
 	case "docker":
 		return checkDocker(ctx, rec)
 	case "websocket":
@@ -87,7 +89,7 @@ func runCheck(ctx context.Context, rec *core.Record) (bool, int64, string) {
 
 // checkPush validates push monitors by comparing the recorded last_ping time
 // against the check interval (uptime-kuma style heartbeat monitors).
-func checkPush(ctx context.Context, rec *core.Record) (bool, int64, string) {
+func checkPush(_ context.Context, rec *core.Record) (bool, int64, string) {
 	raw := strings.TrimSpace(rec.GetString("last_ping"))
 	if raw == "" {
 		return false, 0, "No heartbeat received yet (waiting for first push)"
@@ -220,7 +222,7 @@ func checkTCP(ctx context.Context, rec *core.Record) (bool, int64, string) {
 	if err != nil {
 		return false, elapsed.Milliseconds(), err.Error()
 	}
-	conn.Close()
+	_ = conn.Close()
 	return true, elapsed.Milliseconds(), ""
 }
 
@@ -253,7 +255,7 @@ func checkPing(ctx context.Context, rec *core.Record) (bool, int64, string) {
 
 // pingConn opens an ICMP connection to the given IP. It prefers the unprivileged
 // UDP pseudo-socket (works in containers) and falls back to a raw socket.
-func pingConn(ctx context.Context, ip string) (net.PacketConn, error) {
+func pingConn(_ context.Context, ip string) (net.PacketConn, error) {
 	network := "udp4"
 	if strings.Contains(ip, ":") {
 		network = "udp6"

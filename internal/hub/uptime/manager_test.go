@@ -37,7 +37,7 @@ func testMonitorCollection(t *testing.T) *core.Collection {
 // testMonitorRecord builds a monitor record whose Original() state equals the
 // given "stored" values, then applies the "new" values on top — mirroring a
 // record loaded from the DB (stored) and then saved (new).
-func testMonitorRecord(t *testing.T, stored, new map[string]any) *core.Record {
+func testMonitorRecord(t *testing.T, stored, incoming map[string]any) *core.Record {
 	t.Helper()
 	c := testMonitorCollection(t)
 	rec := core.NewRecord(c)
@@ -46,7 +46,7 @@ func testMonitorRecord(t *testing.T, stored, new map[string]any) *core.Record {
 		rec.Set(k, v)
 	}
 	require.NoError(t, rec.PostScan(), "original state")
-	for k, v := range new {
+	for k, v := range incoming {
 		rec.Set(k, v)
 	}
 	return rec

@@ -17,8 +17,8 @@ import (
 	"github.com/pocketbase/pocketbase/core"
 )
 
-// checkDns performs a DNS record check. Returns success, elapsed ms, error msg.
-func checkDns(ctx context.Context, rec *core.Record) (bool, int64, string) {
+// checkDNS performs a DNS record check. Returns success, elapsed ms, error msg.
+func checkDNS(ctx context.Context, rec *core.Record) (bool, int64, string) {
 	host, _ := monitorTarget(rec)
 	name := strings.TrimSuffix(strings.TrimSpace(host), ".")
 	if name == "" {
@@ -252,8 +252,12 @@ func checkCertExpiry(ctx context.Context, host string, port int) (bool, int64, s
 	// VerifyPeerCertificate always accepts so we can inspect the presented
 	// certificate (expiry checks work for self-signed / untrusted certs),
 	// without using InsecureSkipVerify (which would also skip hostname checks).
-	tlsConn := tls.Client(conn, &tls.Config{
+	// Session tickets are disabled (G123): they could otherwise resume a session
+	// that bypasses the custom VerifyPeerCertificate accept-all callback above.
+	tlsConn := tls.Client(conn, &tls.Config{ //nolint:gosec // G123: session tickets disabled below; accept-all is intentional for cert-expiry inspection
 		ServerName:            host,
+		NextProtos:            nil,
+		SessionTicketsDisabled: true,
 		VerifyPeerCertificate: func([][]byte, [][]*x509.Certificate) error { return nil },
 	})
 	if err := tlsConn.HandshakeContext(ctx); err != nil {

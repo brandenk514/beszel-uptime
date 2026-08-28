@@ -452,7 +452,7 @@ func (h *Hub) getPublicStatusPage(e *core.RequestEvent) error {
 	}
 
 	type publicMonitor struct {
-		Id       string `json:"id"`
+		ID       string `json:"id"`
 		Name     string `json:"name"`
 		Type     string `json:"type"`
 		Status   string `json:"status"`
@@ -460,7 +460,7 @@ func (h *Hub) getPublicStatusPage(e *core.RequestEvent) error {
 	}
 
 	var rows []struct {
-		Id       string
+		ID       string
 		Name     string
 		Type     string
 		Status   string
@@ -475,7 +475,7 @@ func (h *Hub) getPublicStatusPage(e *core.RequestEvent) error {
 
 	monitors := make([]publicMonitor, 0, len(rows))
 	for _, row := range rows {
-		m := publicMonitor{Id: row.Id, Name: row.Name, Type: row.Type, Status: row.Status, LastPing: row.LastPing.String}
+		m := publicMonitor{ID: row.ID, Name: row.Name, Type: row.Type, Status: row.Status, LastPing: row.LastPing.String}
 		monitors = append(monitors, m)
 	}
 

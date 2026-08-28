@@ -64,7 +64,7 @@ func (m *MonitorManager) Initialize() error {
 	m.bindEventHooks()
 
 	var ids []struct {
-		Id string
+		ID string
 	}
 	if err := m.hub.DB().NewQuery("SELECT id FROM monitors").All(&ids); err != nil {
 		return err
@@ -76,8 +76,8 @@ func (m *MonitorManager) Initialize() error {
 			if !m.waitForContext(time.Duration(i)*time.Second) {
 				return
 			}
-			if err := m.startMonitor(monitor.Id); err != nil {
-				m.hub.Logger().Error("Failed to start monitor", "id", monitor.Id, "err", err)
+			if err := m.startMonitor(monitor.ID); err != nil {
+				m.hub.Logger().Error("Failed to start monitor", "id", monitor.ID, "err", err)
 			}
 		}
 	}()
@@ -422,7 +422,7 @@ func (m *MonitorManager) broadcast(record *core.Record) {
 				continue
 			}
 			// filter by monitor id query param, if provided
-			if monitorId := client.Subscriptions()[subscription].Query["monitor"]; monitorId != "" && monitorId != record.Id {
+			if monitorID := client.Subscriptions()[subscription].Query["monitor"]; monitorID != "" && monitorID != record.Id {
 				continue
 			}
 			client.Send(subscriptions.Message{Name: subscription, Data: data})
