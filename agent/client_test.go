@@ -395,11 +395,11 @@ func TestGetToken(t *testing.T) {
 		expectedToken := "test-token-from-file"
 		tokenFile, err := os.CreateTemp("", "token-test-*.txt")
 		require.NoError(t, err)
-		defer os.Remove(tokenFile.Name())
+		defer func() { _ = os.Remove(tokenFile.Name()) }()
 
 		_, err = tokenFile.WriteString(expectedToken)
 		require.NoError(t, err)
-		tokenFile.Close()
+		_ = tokenFile.Close()
 
 		// Set TOKEN_FILE env var
 		t.Setenv("TOKEN_FILE", tokenFile.Name())
@@ -414,11 +414,11 @@ func TestGetToken(t *testing.T) {
 		expectedToken := "test-token-from-beszel-file"
 		tokenFile, err := os.CreateTemp("", "token-test-*.txt")
 		require.NoError(t, err)
-		defer os.Remove(tokenFile.Name())
+		defer func() { _ = os.Remove(tokenFile.Name()) }()
 
 		_, err = tokenFile.WriteString(expectedToken)
 		require.NoError(t, err)
-		tokenFile.Close()
+		_ = tokenFile.Close()
 
 		// Set BESZEL_AGENT_TOKEN_FILE env var (should take precedence)
 		t.Setenv("BESZEL_AGENT_TOKEN_FILE", tokenFile.Name())
