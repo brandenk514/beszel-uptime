@@ -450,7 +450,7 @@ export default memo(function MonitorDetail({ id }: { id: string }) {
 							</CardDescription>
 						</div>
 						<Select value={range} onValueChange={(value) => setRange(value as ChartTimes)}>
-							<SelectTrigger className="w-32 relative ps-10" aria-label={t`Time range`}>
+							<SelectTrigger className="min-w-32 w-auto relative ps-10" aria-label={t`Time range`}>
 								<HistoryIcon className="h-4 w-4 absolute start-4 top-1/2 -translate-y-1/2 opacity-85" />
 								<SelectValue />
 							</SelectTrigger>
