@@ -133,7 +133,6 @@ msgstr "Voeg {foo} toe"
 #: src/components/add-monitor.tsx
 #: src/components/add-monitor.tsx
 #: src/components/navbar.tsx
-#: src/components/routes/monitors.tsx
 msgid "Add Monitor"
 msgstr ""
 
