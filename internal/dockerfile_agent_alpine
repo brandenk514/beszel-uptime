@@ -23,9 +23,9 @@ COPY --from=builder /agent /agent
 # AMD GPU name lookup (used by agent on Linux when /usr/share/libdrm/amdgpu.ids is read)
 COPY --from=builder /app/agent/test-data/amdgpu.ids /usr/share/libdrm/amdgpu.ids
 
-# smartmontools pulls in libssl3/libcrypto3; built fresh on each scan so
-# the latest openssl versions from the alpine repo are used
-RUN apk add --no-cache smartmontools
+# smartmontools pulls in libssl3/libcrypto3; upgrade to the latest
+# openssl versions from the alpine repo (fixes known CVEs)
+RUN apk add --no-cache smartmontools && apk upgrade --quiet
 
 # Ensure data persistence across container recreations
 VOLUME ["/var/lib/beszel-agent"]

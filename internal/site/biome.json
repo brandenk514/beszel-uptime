@@ -58,7 +58,8 @@
 			"suspicious": {
 				"useAwait": "error",
 				"noEvolvingTypes": "error",
-				"noArrayIndexKey": "off"
+				"noArrayIndexKey": "off",
+				"noExplicitAny": "warn"
 			}
 		}
 	},
