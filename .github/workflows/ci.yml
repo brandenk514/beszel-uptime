@@ -20,6 +20,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          # fetch-depth: 0 — full history so --new-from-rev=origin/main (used by
+          # the lint step) can resolve the base commit. The default fetch-depth: 1
+          # shallow clone omits the base commit, causing golangci-lint to silently
+          # fall back to an unscoped (full) lint.
+          fetch-depth: 0
 
       - name: Set up Go
         uses: actions/setup-go@v7
