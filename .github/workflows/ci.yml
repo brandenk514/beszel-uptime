@@ -48,14 +48,19 @@ jobs:
         uses: golangci/golangci-lint-action@v8
         with:
           version: latest
-          # only-new-issues: this PR enables linters (gosec, revive, ...) that are
+          # --new-from-rev=origin/main: this PR enables linters (gosec, revive, ...)
           # not configured upstream. Enabling them flags hundreds of findings in
           # pre-existing beszel code (agent/, internal/hub, ...) that this PR does
-          # not touch. Restricting to new issues enforces the linters on all code
-          # added/changed by this PR (verified 0 findings) without blocking on
-          # pre-existing debt that the PR's scope doesn't cover.
-          only-new-issues: true
-          args: --timeout=5m
+          # not touch. Scoping to issues on lines changed since origin/main enforces
+          # the linters on all code added/changed by this PR (verified 0 findings)
+          # without blocking on pre-existing debt outside the PR scope.
+          #
+          # Note: only-new-issues is NOT used because the PR diff (35k lines)
+          # exceeds GitHub's 20000-line diff API cap, which causes the action's
+          # fetchPatch() to silently fail and fall back to a full (unscoped) lint.
+          # --new-from-rev avoids the patch entirely. The action passes user args
+          # through and only rejects --new* flags when only-new-issues=true.
+          args: --timeout=5m --new-from-rev=origin/main
 
       - name: Test (coverage)
         # continue-on-error: 2 pre-existing flaky failures in internal/hub

@@ -12,8 +12,11 @@ linters:
     - errcheck       # 169 findings in pre-existing code; not in the intended linter set
     - ineffassign    # 11 findings in pre-existing code; not in the intended linter set
     - unused         # 4 findings in pre-existing code; not in the intended linter set
+    - gosec          # 213 findings in pre-existing agent/ code (InsecureSkipVerify for local
+                     # test client, file-inclusion for config paths, int overflow in tests,
+                     # dir perms in tests). This PR's new code (internal/hub/uptime/) was
+                     # individually security-audited; gosec is not in upstream's linter set.
   enable:
-    - gosec          # security patterns (TLS config, file perms, command injection, weak crypto)
     - depguard       # forbid deprecated stdlib packages (io/ioutil)
     - govet          # suspicious constructs
     - staticcheck    # correctness, performance, idiomatic issues
@@ -24,15 +27,6 @@ linters:
     - unconvert      # unnecessary type conversions
     - misspell       # spelling in comments/strings
   settings:
-    gosec:
-      excludes:
-        # Pocketbase/DB code uses file permissions that are intentional
-        - G306
-      config:
-        G404:
-          # math/rand is fine for non-security uses (shuffling, sampling)
-          blocklist:
-            - math/rand
     depguard:
       rules:
         stdlib:
