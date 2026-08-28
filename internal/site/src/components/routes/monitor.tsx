@@ -1,12 +1,14 @@
 import { t } from "@lingui/core/macro"
 import { Trans } from "@lingui/react/macro"
 import { memo, useCallback, useEffect, useMemo, useState } from "react"
+import { timeTicks } from "d3-time"
 import { Link } from "../router"
 import {
 	AlertCircleIcon,
 	ArrowLeftIcon,
 	CheckIcon,
 	GlobeIcon,
+	HistoryIcon,
 	NetworkIcon,
 	PauseIcon,
 	RadioIcon,
@@ -17,16 +19,17 @@ import {
 } from "lucide-react"
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 import { pb } from "@/lib/api"
-import { isReadOnlyUser } from "@/lib/api"
+import { getPbTimestamp, isReadOnlyUser } from "@/lib/api"
 import { $allMonitorsById } from "@/lib/stores"
 import { SystemStatus } from "@/lib/enums"
-import { cn, decimalString, formatShortDate, getHubURL, toFixedFloat } from "@/lib/utils"
-import type { MonitorCheckRecord, MonitorRecord } from "@/types"
+import { chartTimeData, cn, decimalString, getHubURL, toFixedFloat } from "@/lib/utils"
+import type { ChartTimes, MonitorCheckRecord, MonitorRecord } from "@/types"
 import { Badge } from "@/components/ui/badge"
 import { DockerIcon, SteamIcon } from "@/components/ui/icons"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Dialog } from "@/components/ui/dialog"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { MonitorDialog } from "@/components/add-monitor"
 
 const MONITOR_TYPE_ICONS: Record<string, typeof GlobeIcon> = {
@@ -64,17 +67,35 @@ function StatusBadge({ status }: { status: string }) {
 	)
 }
 
-function UptimeChart({ checks }: { checks: MonitorCheckRecord[] }) {
+const MONITOR_RANGES: ChartTimes[] = ["1h", "12h", "24h", "1w", "30d"]
+
+function UptimeChart({ checks, range }: { checks: MonitorCheckRecord[]; range: ChartTimes }) {
+	const windowStart = useMemo(() => chartTimeData[range].getOffset(new Date()).getTime(), [range, checks])
+
 	const data = useMemo(() => {
-		return checks
+		const points = checks
 			.slice()
 			.reverse()
 			.map((c) => ({
 				time: new Date(c.created).getTime(),
 				ms: c.ms ?? null,
-				up: c.up ? 1 : 0,
 			}))
-	}, [checks])
+			.filter((d) => d.time >= windowStart)
+		// downsample to keep the SVG light on long ranges
+		const maxPoints = 1000
+		if (points.length > maxPoints) {
+			const step = Math.ceil(points.length / maxPoints)
+			return points.filter((_, i) => i % step === 0)
+		}
+		return points
+	}, [checks, windowStart])
+
+	const now = new Date().getTime()
+	const ticks = useMemo(
+		() =>
+			timeTicks(new Date(windowStart), new Date(now), chartTimeData[range].ticks ?? 12).map((d) => d.getTime()),
+		[range, windowStart, now]
+	)
 
 	if (!data.length) {
 		return (
@@ -98,16 +119,19 @@ function UptimeChart({ checks }: { checks: MonitorCheckRecord[] }) {
 					dataKey="time"
 					type="number"
 					scale="time"
-					domain={["dataMin", "dataMax"]}
-					tickFormatter={(val) => formatShortDate(new Date(Number(val)).toISOString())}
+					domain={[windowStart, now]}
+					ticks={ticks}
+					minTickGap={16}
+					tickFormatter={chartTimeData[range].format}
 					tickLine={false}
 					axisLine={false}
 				/>
 				<YAxis
+					domain={[0, (dataMax: number) => dataMax * 1.1]}
 					tickFormatter={(val) => formatMs(val)}
 					tickLine={false}
 					axisLine={false}
-					width={60}
+					width={70}
 				/>
 				<Tooltip
 					labelFormatter={(val) => new Date(val as number).toLocaleString()}
@@ -134,9 +158,11 @@ function ChecksTable({ checks }: { checks: MonitorCheckRecord[] }) {
 		)
 	}
 
+	const visible = checks.slice(0, 50)
+
 	return (
 		<div className="divide-y">
-			{checks.map((check) => (
+			{visible.map((check) => (
 				<div key={check.id} className="py-3 flex items-start justify-between gap-4">
 					<div className="flex items-start gap-3 min-w-0">
 						<div
@@ -169,6 +195,7 @@ export default memo(function MonitorDetail({ id }: { id: string }) {
 	const [checks, setChecks] = useState<MonitorCheckRecord[]>([])
 	const [editOpen, setEditOpen] = useState(false)
 	const [checking, setChecking] = useState(false)
+	const [range, setRange] = useState<ChartTimes>("1h")
 
 	useEffect(() => {
 		return () => {
@@ -211,14 +238,16 @@ export default memo(function MonitorDetail({ id }: { id: string }) {
 		pb
 			.collection<MonitorCheckRecord>("monitor_checks")
 			.getFullList({
-				filter: `monitor = "${encodeURIComponent(id)}"`,
+				filter: pb.filter(`monitor = {:monitor} && created > {:created}`, {
+					monitor: id,
+					created: getPbTimestamp(range),
+				}),
 				sort: "-created",
 				totalItems: 0,
 				batch: 1000,
 			})
 			.then((recs) => {
-				if (cancelled) return
-				setChecks(recs.slice(0, 500))
+				if (!cancelled) setChecks(recs)
 			})
 			.catch(() => {})
 
@@ -227,13 +256,16 @@ export default memo(function MonitorDetail({ id }: { id: string }) {
 		pb
 			.collection<MonitorCheckRecord>("monitor_checks")
 			.getFullList({
-				filter: `monitor = "${encodeURIComponent(id)}"`,
+				filter: pb.filter(`monitor = {:monitor} && created > {:created}`, {
+					monitor: id,
+					created: getPbTimestamp(range),
+				}),
 				sort: "-created",
 				totalItems: 0,
 				batch: 1000,
 			})
 			.then((recs) => {
-				if (!cancelled) setChecks(recs.slice(0, 500))
+				if (!cancelled) setChecks(recs)
 			})
 			.catch(() => {})
 	}
@@ -243,7 +275,7 @@ export default memo(function MonitorDetail({ id }: { id: string }) {
 		cancelled = true
 		window.clearInterval(timer)
 		}
-	}, [id])
+	}, [id, range])
 
 	const handleCheckNow = useCallback(async () => {
 		if (!monitor) {
@@ -285,6 +317,7 @@ export default memo(function MonitorDetail({ id }: { id: string }) {
 		}
 	})()
 
+	const rangeLabel = chartTimeData[range].label()
 	const upChecks = checks.filter((c) => c.up).length
 	const totalChecks = checks.length
 	const uptimePct = totalChecks ? (upChecks / totalChecks) * 100 : null
@@ -349,7 +382,7 @@ export default memo(function MonitorDetail({ id }: { id: string }) {
 								<Trans>Uptime</Trans>
 							</CardTitle>
 							<CardDescription>
-								<Trans>Across the {totalChecks} most recent checks</Trans>
+								<Trans>Across the {totalChecks} checks in the last {rangeLabel}</Trans>
 							</CardDescription>
 						</CardHeader>
 						<CardContent>
@@ -390,19 +423,36 @@ export default memo(function MonitorDetail({ id }: { id: string }) {
 
 				<Card>
 					<CardHeader>
-						<CardTitle>
-							<Trans>Response time</Trans>
-						</CardTitle>
-						<CardDescription>
-							<Trans>Latency of each check over time</Trans>
-						</CardDescription>
-					</CardHeader>
-					<CardContent>
-						<UptimeChart checks={checks} />
-					</CardContent>
-				</Card>
+					<div className="flex items-center justify-between gap-4">
+						<div className="grid gap-1.5">
+							<CardTitle>
+								<Trans>Response time</Trans>
+							</CardTitle>
+							<CardDescription>
+								<Trans>Latency of each check over time</Trans>
+							</CardDescription>
+						</div>
+						<Select value={range} onValueChange={(value) => setRange(value as ChartTimes)}>
+							<SelectTrigger className="w-32 relative ps-10" aria-label={t`Time range`}>
+								<HistoryIcon className="h-4 w-4 absolute start-4 top-1/2 -translate-y-1/2 opacity-85" />
+								<SelectValue />
+							</SelectTrigger>
+							<SelectContent>
+								{MONITOR_RANGES.map((value) => (
+									<SelectItem key={value} value={value}>
+										{chartTimeData[value].label()}
+									</SelectItem>
+								))}
+							</SelectContent>
+						</Select>
+					</div>
+				</CardHeader>
+				<CardContent>
+					<UptimeChart checks={checks} range={range} />
+				</CardContent>
+			</Card>
 
-				<Card>
+			<Card>
 					<CardHeader>
 						<CardTitle>
 							<Trans>Recent checks</Trans>

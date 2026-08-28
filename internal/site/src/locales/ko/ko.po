@@ -95,8 +95,12 @@ msgid "5 min"
 msgstr "5분"
 
 #: src/components/routes/monitor.tsx
-msgid "Across the {totalChecks} most recent checks"
+msgid "Across the {totalChecks} checks in the last {rangeLabel}"
 msgstr ""
+
+#: src/components/routes/monitor.tsx
+#~ msgid "Across the {totalChecks} most recent checks"
+#~ msgstr ""
 
 #. Table column
 #: src/components/routes/settings/quiet-hours.tsx
@@ -2060,6 +2064,10 @@ msgstr "루트 파일 시스템의 처리량"
 #: src/components/routes/settings/general.tsx
 msgid "Time format"
 msgstr "시간 형식"
+
+#: src/components/routes/monitor.tsx
+msgid "Time range"
+msgstr ""
 
 #: src/components/add-monitor.tsx
 msgid "Timeout (sec)"

@@ -95,8 +95,12 @@ msgid "5 min"
 msgstr "5 min"
 
 #: src/components/routes/monitor.tsx
-msgid "Across the {totalChecks} most recent checks"
+msgid "Across the {totalChecks} checks in the last {rangeLabel}"
 msgstr ""
+
+#: src/components/routes/monitor.tsx
+#~ msgid "Across the {totalChecks} most recent checks"
+#~ msgstr ""
 
 #. Table column
 #: src/components/routes/settings/quiet-hours.tsx
@@ -2060,6 +2064,10 @@ msgstr "Genomströmning av rotfilsystemet"
 #: src/components/routes/settings/general.tsx
 msgid "Time format"
 msgstr "Tidsformat"
+
+#: src/components/routes/monitor.tsx
+msgid "Time range"
+msgstr ""
 
 #: src/components/add-monitor.tsx
 msgid "Timeout (sec)"
