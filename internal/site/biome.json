@@ -104,6 +104,7 @@
 		}
 	],
 	"files": {
-		"experimentalScannerIgnores": ["**/*.css"]
+		"experimentalScannerIgnores": ["**/*.css"],
+		"includes": ["**", "!src/locales/**/*.ts"]
 	}
 }
