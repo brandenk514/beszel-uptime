@@ -50,6 +50,11 @@ msgstr "{count, plural, one {{countString} 분} few {{countString} 분} many {{c
 msgid "{threads, plural, one {# thread} other {# threads}}"
 msgstr "{threads, plural, one {# 스레드} other {# 스레드}}"
 
+#. placeholder {0}: monitors.length
+#: src/components/routes/status-page.tsx
+msgid "{upCount} of {0} monitors operational"
+msgstr ""
+
 #: src/lib/utils.ts
 msgid "1 hour"
 msgstr "1시간"
@@ -89,6 +94,14 @@ msgstr "30일"
 msgid "5 min"
 msgstr "5분"
 
+#: src/components/routes/monitor.tsx
+msgid "Across the {totalChecks} checks in the last {rangeLabel}"
+msgstr ""
+
+#: src/components/routes/monitor.tsx
+#~ msgid "Across the {totalChecks} most recent checks"
+#~ msgstr ""
+
 #. Table column
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/tokens-fingerprints.tsx
@@ -120,6 +133,12 @@ msgstr "활성 상태"
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Add {foo}"
 msgstr "{foo} 추가"
+
+#: src/components/add-monitor.tsx
+#: src/components/add-monitor.tsx
+#: src/components/navbar.tsx
+msgid "Add Monitor"
+msgstr ""
 
 #: src/components/routes/settings/notifications.tsx
 msgid "Add URL"
@@ -162,6 +181,10 @@ msgstr "알림 기록"
 msgid "Alerts"
 msgstr "알림"
 
+#: src/components/monitors-table/monitors-table.tsx
+msgid "All"
+msgstr ""
+
 #: src/components/command-palette.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/navbar.tsx
@@ -179,6 +202,11 @@ msgstr "모든 컨테이너"
 msgid "All Systems"
 msgstr "모든 시스템"
 
+#: src/components/add-monitor.tsx
+msgid "Allow self-signed or invalid certificates"
+msgstr ""
+
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Are you sure you want to delete {name}?"
 msgstr "{name}을(를) 삭제하시겠습니까?"
@@ -317,8 +345,10 @@ msgstr "시작 가능"
 msgid "Can stop"
 msgstr "중지 가능"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/settings/quiet-hours.tsx
+#: src/components/routes/status-pages.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Cancel"
 msgstr "취소"
@@ -368,9 +398,22 @@ msgstr "차트 너비"
 msgid "Check {email} for a reset link."
 msgstr "{email}에서 재설정 링크를 확인하세요."
 
+#: src/components/add-monitor.tsx
+msgid "Check certificate expiry"
+msgstr ""
+
+#: src/components/routes/monitor.tsx
+msgid "Check frequency"
+msgstr ""
+
 #: src/components/routes/settings/layout.tsx
 msgid "Check logs for more details."
 msgstr "자세한 내용은 로그를 확인하세요."
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/routes/monitor.tsx
+msgid "Check now"
+msgstr ""
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Check your monitoring service"
@@ -381,6 +424,7 @@ msgid "Check your notification service"
 msgstr "알림 서비스를 확인하세요."
 
 #: src/components/containers-table/containers-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
 #: src/components/routes/system/smart-table.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "Clear"
@@ -394,6 +438,10 @@ msgstr "더 많은 정보를 보려면 컨테이너를 클릭하세요."
 msgid "Click on a device to view more information."
 msgstr "더 많은 정보를 보려면 장치를 클릭하세요."
 
+#: src/components/monitors-table/monitors-table.tsx
+msgid "Click on a monitor to view more information."
+msgstr ""
+
 #: src/components/systems-table/systems-table.tsx
 msgid "Click on a system to view more information."
 msgstr "더 많은 정보를 보려면 시스템을 클릭하세요."
@@ -402,10 +450,18 @@ msgstr "더 많은 정보를 보려면 시스템을 클릭하세요."
 msgid "Click to copy"
 msgstr "클릭하여 복사"
 
+#: src/components/monitors-table/monitors-table.tsx
+msgid "Columns"
+msgstr ""
+
 #: src/components/login/forgot-pass-form.tsx
 #: src/components/login/forgot-pass-form.tsx
 msgid "Command line instructions"
 msgstr "명령어 사용 지침"
+
+#: src/components/add-monitor.tsx
+#~ msgid "Configure an uptime monitor. The type determines which fields are required."
+#~ msgstr ""
 
 #: src/components/routes/settings/notifications.tsx
 msgid "Configure how you receive alert notifications."
@@ -424,10 +480,15 @@ msgstr "충돌"
 msgid "Connection is down"
 msgstr "연결이 끊겼습니다"
 
+#: src/components/add-monitor.tsx
+msgid "Container name or ID"
+msgstr ""
+
 #: src/components/routes/system.tsx
 msgid "Containers"
 msgstr "컨테이너"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Continue"
@@ -474,6 +535,10 @@ msgstr "이름 복사"
 
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "Copy public key"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Copy push URL"
 msgstr ""
 
 #: src/components/copy-to-clipboard.tsx
@@ -527,8 +592,13 @@ msgid "CPU Usage"
 msgstr "CPU 사용량"
 
 #: src/components/routes/settings/quiet-hours.tsx
+#: src/components/routes/status-pages.tsx
 msgid "Create"
 msgstr "생성"
+
+#: src/components/routes/status-pages.tsx
+msgid "Create a public status page that lists your monitors and their current status."
+msgstr ""
 
 #: src/components/login/auth-form.tsx
 msgid "Create account"
@@ -577,8 +647,14 @@ msgstr "기본값"
 msgid "Default time period"
 msgstr "기본 기간"
 
+#: src/components/add-monitor.tsx
+msgid "Delay (sec)"
+msgstr ""
+
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/settings/quiet-hours.tsx
+#: src/components/routes/status-pages.tsx
 #: src/components/routes/system/smart-table.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Delete"
@@ -588,9 +664,17 @@ msgstr "삭제"
 msgid "Delete fingerprint"
 msgstr "지문 삭제"
 
+#: src/components/routes/status-pages.tsx
+msgid "Delete status page?"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Description"
 msgstr "설명"
+
+#: src/components/routes/status-pages.tsx
+msgid "Description (optional)"
+msgstr ""
 
 #: src/components/containers-table/containers-table.tsx
 msgid "Detail"
@@ -599,6 +683,10 @@ msgstr "세부사항"
 #: src/components/routes/system/smart-table.tsx
 msgid "Device"
 msgstr "장치"
+
+#: src/components/routes/status-pages.tsx
+msgid "Disabled pages are not publicly accessible."
+msgstr ""
 
 #. Context: Battery state
 #: src/lib/i18n.ts
@@ -633,6 +721,14 @@ msgctxt "Layout display options"
 msgid "Display"
 msgstr "표시"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "DNS"
+msgstr ""
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "Docker"
+msgstr ""
+
 #: src/components/routes/system/charts/cpu-charts.tsx
 msgid "Docker CPU Usage"
 msgstr "Docker CPU 사용량"
@@ -645,13 +741,28 @@ msgstr "Docker 메모리 사용량"
 msgid "Docker Network I/O"
 msgstr "Docker 네트워크 I/O"
 
+#: src/components/add-monitor.tsx
+msgid "Docker socket / API"
+msgstr ""
+
 #: src/components/command-palette.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Documentation"
 msgstr "문서"
 
+#: src/components/add-monitor.tsx
+msgid "Domain"
+msgstr ""
+
 #. Context: System is down
 #: src/components/alerts-history-columns.tsx
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/routes/monitor.tsx
+#: src/components/routes/monitor.tsx
 #: src/components/routes/system/info-bar.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 #: src/lib/alerts.ts
@@ -670,6 +781,8 @@ msgstr "다운로드"
 msgid "Duration"
 msgstr "기간"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/routes/monitor.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Edit"
@@ -679,6 +792,14 @@ msgstr "수정"
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Edit {foo}"
 msgstr "{foo} 수정"
+
+#: src/components/add-monitor.tsx
+msgid "Edit Monitor"
+msgstr ""
+
+#: src/components/routes/status-pages.tsx
+msgid "Edit Status Page"
+msgstr ""
 
 #: src/components/login/auth-form.tsx
 #: src/components/login/forgot-pass-form.tsx
@@ -694,6 +815,11 @@ msgstr "이메일 알림"
 #: src/lib/i18n.ts
 msgid "Empty"
 msgstr "빔"
+
+#: src/components/routes/status-pages.tsx
+#: src/components/routes/status-pages.tsx
+msgid "Enabled"
+msgstr ""
 
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
@@ -760,6 +886,26 @@ msgstr "<0>config.yml</0>에 정의되지 않은 기존 시스템은 삭제됩�
 msgid "Exited active"
 msgstr "활성 종료됨"
 
+#: src/components/add-monitor.tsx
+msgid "Expected body"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+#~ msgid "Expected Body"
+#~ msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Expected status"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+#~ msgid "Expected Status"
+#~ msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Expected value"
+msgstr ""
+
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "Expires after one hour or on hub restart."
 msgstr "한 시간 후 또는 허브 재시작 시 만료됩니다."
@@ -776,9 +922,17 @@ msgstr "구성 내보내기"
 msgid "Export your current systems configuration."
 msgstr "현재 시스템 구성 내보내기"
 
+#: src/components/add-monitor.tsx
+msgid "Extra attempts before marking as down"
+msgstr ""
+
 #: src/components/routes/settings/general.tsx
 msgid "Fahrenheit (°F)"
 msgstr "화씨 (°F)"
+
+#: src/components/add-monitor.tsx
+msgid "Fail if the TLS certificate expires within 14 days"
+msgstr ""
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Failed"
@@ -820,6 +974,7 @@ msgid "Fans"
 msgstr ""
 
 #: src/components/containers-table/containers-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/system/chart-card.tsx
 #: src/components/routes/system/smart-table.tsx
@@ -862,6 +1017,10 @@ msgstr "가득"
 msgid "General"
 msgstr "일반"
 
+#: src/components/add-monitor.tsx
+msgid "Generate"
+msgstr ""
+
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Global"
 msgstr "전역"
@@ -882,6 +1041,7 @@ msgstr "GPU 전원 사용량"
 msgid "GPU Usage"
 msgstr "GPU 사용량"
 
+#: src/components/monitors-table/monitors-table.tsx
 #: src/components/routes/system/info-bar.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "Grid"
@@ -909,9 +1069,18 @@ msgctxt "Button to copy install command"
 msgid "Homebrew command"
 msgstr "Homebrew 명령어"
 
+#: src/components/add-monitor.tsx
+msgid "Host"
+msgstr ""
+
+#: src/components/add-monitor.tsx
 #: src/components/add-system.tsx
 msgid "Host / IP"
 msgstr "호스트 / IP"
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "HTTP"
+msgstr ""
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "HTTP Method"
@@ -920,6 +1089,10 @@ msgstr "HTTP 메서드"
 #: src/components/routes/settings/heartbeat.tsx
 msgid "HTTP method: POST, GET, or HEAD (default: POST)"
 msgstr "HTTP 메서드: POST, GET 또는 HEAD (기본값: POST)"
+
+#: src/components/add-monitor.tsx
+#~ msgid "HTTP(S)"
+#~ msgstr ""
 
 #: src/components/routes/system/disk-io-sheet.tsx
 msgctxt "Disk I/O average operation time (iostat await)"
@@ -941,6 +1114,10 @@ msgstr "I/O 사용률"
 msgid "Idle"
 msgstr "대기"
 
+#: src/components/routes/status-pages.tsx
+msgid "If off, only status dots are shown."
+msgstr ""
+
 #: src/components/login/forgot-pass-form.tsx
 msgid "If you've lost the password to your admin account, you may reset it using the following command."
 msgstr "관리자 계정의 비밀번호를 잃어버린 경우, 다음 명령어를 사용하여 재설정할 수 있습니다."
@@ -954,18 +1131,33 @@ msgstr "이미지"
 msgid "Inactive"
 msgstr "비활성"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/routes/monitor.tsx
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Interval"
 msgstr "간격"
+
+#: src/components/add-monitor.tsx
+msgid "Interval (sec)"
+msgstr ""
 
 #: src/components/login/auth-form.tsx
 msgid "Invalid email address."
 msgstr "잘못된 이메일 주소입니다."
 
+#: src/components/add-monitor.tsx
+msgid "JSON query (optional)"
+msgstr ""
+
 #: src/components/routes/settings/general.tsx
 msgid "Language"
 msgstr "언어"
 
+#: src/components/routes/monitor.tsx
+msgid "Latency of each check over time"
+msgstr ""
+
+#: src/components/monitors-table/monitors-table.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "Layout"
 msgstr "레이아웃"
@@ -1008,6 +1200,10 @@ msgstr "부하 평균"
 msgid "Load state"
 msgstr "로드 상태"
 
+#: src/components/routes/status-pages.tsx
+msgid "Loading status pages..."
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Loading..."
 msgstr "로딩 중..."
@@ -1018,8 +1214,8 @@ msgid "Log Out"
 msgstr "로그아웃"
 
 #: src/components/login/login.tsx
-msgid "Login"
-msgstr "로그인"
+#~ msgid "Login"
+#~ msgstr "로그인"
 
 #: src/components/login/auth-form.tsx
 #: src/components/login/forgot-pass-form.tsx
@@ -1035,6 +1231,10 @@ msgstr "로그"
 #: src/components/routes/settings/notifications.tsx
 msgid "Looking instead for where to create alerts? Click the bell <0/> icons in the systems table."
 msgstr "알림을 생성하려 하시나요? 시스템 테이블의 종 <0/> 아이콘을 클릭하세요."
+
+#: src/components/routes/status-pages.tsx
+msgid "Lowercase letters, numbers, and dashes. Used in the public URL."
+msgstr ""
 
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Main PID"
@@ -1080,14 +1280,43 @@ msgstr "메모리 사용량"
 msgid "Memory usage of docker containers"
 msgstr "Docker 컨테이너의 메모리 사용량"
 
+#: src/components/add-monitor.tsx
+msgid "Method"
+msgstr ""
+
 #. Device model
 #: src/components/routes/system/smart-table.tsx
 msgid "Model"
 msgstr "모델"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "Monitor"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Monitor a website, TCP port, host, DNS record, Docker container, WebSocket endpoint, Steam app, or a push heartbeat. The type determines which fields are required."
+msgstr ""
+
+#: src/components/routes/monitor.tsx
+msgid "Monitor type"
+msgstr ""
+
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/navbar.tsx
+#: src/components/navbar.tsx
+#: src/components/routes/monitors.tsx
+msgid "Monitors"
+msgstr ""
+
+#: src/components/routes/monitor.tsx
+msgid "Most recent first"
+msgstr ""
+
+#: src/components/add-monitor.tsx
 #: src/components/add-system.tsx
 #: src/components/alerts-history-columns.tsx
 #: src/components/containers-table/containers-table-columns.tsx
+#: src/components/routes/status-pages.tsx
 #: src/components/systemd-table/systemd-table-columns.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Name"
@@ -1114,11 +1343,32 @@ msgstr "공용 인터페이스의 네트워크 트래픽"
 msgid "Network unit"
 msgstr "네트워크 단위"
 
+#: src/components/routes/status-pages.tsx
+#: src/components/routes/status-pages.tsx
+msgid "New Status Page"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "No"
 msgstr "아니오"
+
+#: src/components/routes/monitor.tsx
+msgid "No check data available yet"
+msgstr ""
+
+#: src/components/routes/monitor.tsx
+msgid "No checks yet"
+msgstr ""
+
+#: src/components/routes/status-page.tsx
+msgid "No monitors are assigned to this status page yet."
+msgstr ""
+
+#: src/components/monitors-table/monitors-table.tsx
+msgid "No monitors configured yet."
+msgstr ""
 
 #: src/components/command-palette.tsx
 #: src/components/systemd-table/systemd-table.tsx
@@ -1138,10 +1388,18 @@ msgstr "결과 없음."
 msgid "No S.M.A.R.T. attributes available for this device."
 msgstr "이 장치에 사용할 수 있는 S.M.A.R.T. 속성이 없습니다."
 
+#: src/components/routes/status-pages.tsx
+msgid "No status pages yet"
+msgstr ""
+
 #: src/components/systems-table/systems-table.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "No systems found."
 msgstr "시스템을 찾을 수 없습니다."
+
+#: src/components/add-monitor.tsx
+msgid "None"
+msgstr ""
 
 #: src/components/command-palette.tsx
 #: src/components/routes/settings/layout.tsx
@@ -1165,6 +1423,10 @@ msgstr "일회성"
 #: src/components/login/auth-form.tsx
 msgid "One-time password"
 msgstr "OTP"
+
+#: src/components/add-monitor.tsx
+msgid "Only required if the hub runs in a container or reaches Docker over the network."
+msgstr ""
 
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/tokens-fingerprints.tsx
@@ -1223,10 +1485,17 @@ msgstr "비밀번호 재설정 요청이 접수되었습니다"
 msgid "Past"
 msgstr "과거"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Pause"
 msgstr "일시 중지"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/routes/monitor.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Paused"
 msgstr "일시 정지됨"
@@ -1238,6 +1507,12 @@ msgstr "일시 정지됨 ({pausedSystemsLength})"
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Payload format"
 msgstr "페이로드 형식"
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/routes/monitor.tsx
+msgid "Pending"
+msgstr ""
 
 #: src/components/routes/system/cpu-sheet.tsx
 #: src/components/routes/system/cpu-sheet.tsx
@@ -1259,6 +1534,10 @@ msgstr "영구적"
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "Persistence"
 msgstr "지속성"
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "Ping"
+msgstr ""
 
 #: src/components/routes/settings/notifications.tsx
 msgid "Please <0>configure an SMTP server</0> to ensure alerts are delivered."
@@ -1293,6 +1572,7 @@ msgstr "사용법은 <0>문서</0>를 참조하세요."
 msgid "Please sign in to your account"
 msgstr "계정에 로그인하세요."
 
+#: src/components/add-monitor.tsx
 #: src/components/add-system.tsx
 msgid "Port"
 msgstr "포트"
@@ -1302,10 +1582,18 @@ msgctxt "Container ports"
 msgid "Ports"
 msgstr "포트"
 
+#: src/components/add-monitor.tsx
+msgid "POST to this URL (curl, cron, or your service) to record a heartbeat. The monitor is down if no heartbeat arrives within the check interval."
+msgstr ""
+
 #. Power On Time
 #: src/components/routes/system/smart-table.tsx
 msgid "Power On"
 msgstr "전원 켜기"
+
+#: src/components/routes/status-page.tsx
+msgid "Powered by"
+msgstr ""
 
 #: src/components/routes/system/charts/gpu-charts.tsx
 #: src/components/routes/system/charts/memory-charts.tsx
@@ -1329,6 +1617,22 @@ msgstr ""
 msgid "Public Key"
 msgstr "공개 키"
 
+#: src/components/routes/status-pages.tsx
+msgid "Public status page that shows the status of your assigned monitors."
+msgstr ""
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "Push"
+msgstr ""
+
+#: src/components/routes/monitor.tsx
+msgid "Push heartbeat"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Push token"
+msgstr ""
+
 #: src/components/routes/system/disk-io-sheet.tsx
 msgctxt "Disk I/O average queue depth"
 msgid "Queue Depth"
@@ -1349,6 +1653,14 @@ msgstr "읽기"
 #: src/components/routes/system/charts/network-charts.tsx
 msgid "Received"
 msgstr "수신됨"
+
+#: src/components/routes/monitor.tsx
+msgid "Recent checks"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Record type"
+msgstr ""
 
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
@@ -1386,13 +1698,30 @@ msgstr "비밀번호 재설정"
 msgid "Resolved"
 msgstr "해결됨"
 
+#: src/components/routes/monitor.tsx
+msgid "Response time"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Restarts"
 msgstr "재시작 횟수"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Resume"
 msgstr "재개"
+
+#: src/components/add-monitor.tsx
+msgid "Retries"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Retry on failure"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+#~ msgid "Retry the check a few times before marking as down"
+#~ msgstr ""
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgctxt "Root disk label"
@@ -1419,6 +1748,10 @@ msgstr "S.M.A.R.T. 세부 정보"
 msgid "S.M.A.R.T. Self-Test"
 msgstr "S.M.A.R.T. 자체 테스트"
 
+#: src/components/routes/status-pages.tsx
+msgid "Save"
+msgstr ""
+
 #: src/components/add-system.tsx
 msgid "Save {foo}"
 msgstr "{foo} 저장"
@@ -1426,6 +1759,10 @@ msgstr "{foo} 저장"
 #: src/components/routes/settings/notifications.tsx
 msgid "Save address using enter key or comma. Leave blank to disable email notifications."
 msgstr "Enter 키 또는 쉼표를 사용하여 주소를 저장하세요. 이메일 알림을 비활성화하려면 비워 두세요."
+
+#: src/components/add-monitor.tsx
+msgid "Save Monitor"
+msgstr ""
 
 #: src/components/routes/settings/general.tsx
 #: src/components/routes/settings/notifications.tsx
@@ -1435,6 +1772,11 @@ msgstr "설정 저장"
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "Saved in the database and does not expire until you disable it."
 msgstr "데이터베이스에 저장되며 비활성화할 때까지 만료되지 않습니다."
+
+#: src/components/add-monitor.tsx
+#: src/components/routes/status-pages.tsx
+msgid "Saving..."
+msgstr ""
 
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Schedule"
@@ -1459,6 +1801,10 @@ msgstr "시스템 또는 설정 검색..."
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Seconds between pings (default: 60)"
 msgstr "핑 사이 시간(초) (기본값: 60)"
+
+#: src/components/add-monitor.tsx
+msgid "Secure (skip TLS verify)"
+msgstr ""
 
 #: src/components/alerts/alerts-sheet.tsx
 msgid "See <0>notification settings</0> to configure how you receive alerts."
@@ -1519,9 +1865,17 @@ msgstr "설정"
 msgid "Settings saved"
 msgstr "설정이 저장되었습니다."
 
+#: src/components/routes/status-pages.tsx
+msgid "Show monitor names"
+msgstr ""
+
 #: src/components/login/auth-form.tsx
 msgid "Sign in"
 msgstr "로그인"
+
+#: src/components/routes/status-pages.tsx
+msgid "Slug"
+msgstr ""
 
 #: src/components/command-palette.tsx
 msgid "SMTP settings"
@@ -1544,12 +1898,34 @@ msgid "State"
 msgstr "상태"
 
 #: src/components/containers-table/containers-table-columns.tsx
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/routes/system/smart-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 #: src/components/systems-table/systems-table.tsx
 #: src/lib/alerts.ts
 msgid "Status"
 msgstr "상태"
+
+#: src/components/add-monitor.tsx
+msgid "Status page (optional)"
+msgstr ""
+
+#: src/components/routes/status-page.tsx
+msgid "Status page not found"
+msgstr ""
+
+#: src/components/navbar.tsx
+#: src/components/navbar.tsx
+msgid "Status Pages"
+msgstr ""
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "Steam"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Steam App ID"
+msgstr ""
 
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
@@ -1603,6 +1979,7 @@ msgstr "시스템"
 msgid "Systems may be managed in a <0>config.yml</0> file inside your data directory."
 msgstr "시스템은 데이터 디렉토리 내의 <0>config.yml</0> 파일에서 관리할 수 있습니다."
 
+#: src/components/monitors-table/monitors-table.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "Table"
 msgstr "표"
@@ -1615,6 +1992,10 @@ msgstr "탭"
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Tasks"
 msgstr "작업"
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "TCP"
+msgstr ""
 
 #. Temperature label in systems table
 #: src/components/routes/system/smart-table.tsx
@@ -1655,13 +2036,22 @@ msgstr "모든 시스템이 정상이면 <0>ok</0>, 알림이 트리거되면 <1
 msgid "Then log into the backend and reset your user account password in the users table."
 msgstr "그런 다음 백엔드에 로그인하여 사용자 테이블에서 사용자 계정 비밀번호를 재설정하세요."
 
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "This action cannot be undone. This will permanently delete all current records for {name} from the database."
 msgstr "이 작업은 되돌릴 수 없습니다. 데이터베이스에서 {name}에 대한 모든 현재 기록이 영구적으로 삭제됩니다."
 
+#: src/components/routes/status-page.tsx
+msgid "This status page does not exist or is disabled."
+msgstr ""
+
 #: src/components/routes/settings/alerts-history-data-table.tsx
 msgid "This will permanently delete all selected records from the database."
 msgstr "선택한 모든 레코드를 데이터베이스에서 영구적으로 삭제합니다."
+
+#: src/components/routes/status-pages.tsx
+msgid "This will permanently remove the status page. Monitors that reference it will be unaffected."
+msgstr ""
 
 #: src/components/routes/system/charts/disk-charts.tsx
 msgid "Throughput of {extraFsName}"
@@ -1674,6 +2064,14 @@ msgstr "루트 파일 시스템의 처리량"
 #: src/components/routes/settings/general.tsx
 msgid "Time format"
 msgstr "시간 형식"
+
+#: src/components/routes/monitor.tsx
+msgid "Time range"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Timeout (sec)"
+msgstr ""
 
 #: src/components/routes/settings/notifications.tsx
 msgid "To email(s)"
@@ -1773,6 +2171,9 @@ msgstr "시스템의 전원이 켜지거나 꺼질때 트리거됩니다."
 msgid "Triggers when usage of any disk exceeds a threshold"
 msgstr "디스크 사용량이 임계값을 초과할 때 트리거됩니다."
 
+#: src/components/add-monitor.tsx
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/routes/monitor.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/system/smart-table.tsx
@@ -1804,6 +2205,13 @@ msgid "Unlimited"
 msgstr "무제한"
 
 #. Context: System is up
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/routes/monitor.tsx
+#: src/components/routes/monitor.tsx
 #: src/components/routes/system/info-bar.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Up"
@@ -1831,10 +2239,15 @@ msgstr "10분마다 업데이트됩니다."
 msgid "Upload"
 msgstr "업로드"
 
+#: src/components/routes/monitor.tsx
 #: src/components/routes/system/info-bar.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Uptime"
 msgstr "가동시간"
+
+#: src/components/add-monitor.tsx
+msgid "URL"
+msgstr ""
 
 #: src/components/routes/system/charts/disk-charts.tsx
 #: src/components/routes/system/charts/gpu-charts.tsx
@@ -1847,6 +2260,10 @@ msgstr "사용량"
 #: src/components/routes/system/charts/disk-charts.tsx
 msgid "Usage of root partition"
 msgstr "루트 파티션의 사용량"
+
+#: src/components/monitors-table/monitors-table.tsx
+msgid "Use the Add Monitor button to get started."
+msgstr ""
 
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/charts/memory-charts.tsx
@@ -1867,10 +2284,16 @@ msgstr "사용률"
 msgid "Value"
 msgstr "값"
 
+#: src/components/monitors-table/monitors-table.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "View"
 msgstr "보기"
 
+#: src/components/routes/monitor.tsx
+msgid "View less"
+msgstr ""
+
+#: src/components/routes/monitor.tsx
 #: src/components/routes/system/cpu-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/network-sheet.tsx
@@ -1908,6 +2331,14 @@ msgstr "경고 임계값"
 #: src/components/routes/settings/notifications.tsx
 msgid "Webhook / Push notifications"
 msgstr "Webhook / 푸시 알림"
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "WebSocket"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "WebSocket URL"
+msgstr ""
 
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "When enabled, this token allows agents to self-register without prior system creation."

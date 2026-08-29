@@ -238,14 +238,105 @@ export interface AlertRecord extends RecordModel {
 	// user: string
 }
 
+/** Alert history entry (alert_records collection with expand). */
 export interface AlertsHistoryRecord extends RecordModel {
-	alert: string
+	id: string
 	user: string
 	system: string
 	name: string
-	val: number
+	value: number
+	state: string
+	resolved: string
 	created: string
-	resolved?: string | null
+	updated: string
+	expand?: {
+		system?: {
+			id: string
+			name: string
+		}
+	}
+}
+
+/** All supported uptime monitor types (uptime-kuma parity) */
+export type MonitorType = "http" | "tcp" | "ping" | "dns" | "docker" | "websocket" | "steam" | "push"
+
+export interface MonitorRecord extends RecordModel {
+	user: string
+	name: string
+	/** Monitor type */
+	type: MonitorType
+	/** URL to monitor for http/websocket types */
+	url?: string
+	/** Host to monitor for tcp/ping/dns types */
+	host?: string
+	/** Port to monitor for tcp type */
+	port?: number
+	/** Interval in seconds */
+	interval?: number
+	/** Timeout in seconds */
+	timeout?: number
+	/** Enable retry on failure */
+	retry?: boolean
+	/** Allow insecure TLS */
+	secure?: boolean
+	/** HTTP method */
+	method?: string
+	/** Expected HTTP status code */
+	expected_status?: string
+	/** Expected substring in response body (or expected JSON value when json_query is set) */
+	expected_body?: string
+	/** Custom headers as JSON */
+	headers?: Record<string, string> | null
+	/** Current status: "up" | "down" | "paused" | "pending" */
+	status: string
+	/** Number of consecutive retries */
+	num_retries?: number
+	/** Delay between retries in seconds */
+	retry_delay?: number
+	/** JSON query path to validate (e.g. .status) */
+	json_query?: string
+	/** DNS record type to check */
+	dns_type?: string
+	/** Expected DNS record value */
+	dns_value?: string
+	/** Steam application id */
+	app_id?: string
+	/** Docker daemon URL (e.g. unix:///var/run/docker.sock or http://host:2375) */
+	docker_url?: string
+	/** Push monitor heartbeat token */
+	push_token?: string
+	/** Last push heartbeat (RFC3339) */
+	last_ping?: string
+	/** Check TLS certificate expiry (https monitors) */
+	check_cert?: boolean
+	/** Optional status page this monitor belongs to */
+	status_page?: string
+	created: string
+	updated: string
+}
+
+export interface StatusPageRecord extends RecordModel {
+	user: string
+	name: string
+	slug: string
+	description?: string
+	/** Show monitor names on the public page */
+	show_monitors?: boolean
+	/** Public page is enabled */
+	enabled?: boolean
+	created: string
+	updated: string
+}
+
+export interface MonitorCheckRecord extends RecordModel {
+	monitor: string
+	/** Was the check successful */
+	up: boolean
+	/** Response time in ms */
+	ms: number
+	/** Error message if any */
+	msg?: string
+	created: string
 }
 
 export interface QuietHoursRecord extends RecordModel {

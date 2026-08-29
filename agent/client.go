@@ -107,7 +107,7 @@ func (client *WebSocketClient) getOptions() *gws.ClientOption {
 
 	// make sure BESZEL_AGENT_ALL_PROXY works (GWS only checks ALL_PROXY)
 	if val := os.Getenv("BESZEL_AGENT_ALL_PROXY"); val != "" {
-		os.Setenv("ALL_PROXY", val)
+		_ = os.Setenv("ALL_PROXY", val)
 	}
 
 	client.options = &gws.ClientOption{
@@ -146,7 +146,7 @@ func (client *WebSocketClient) Connect() (err error) {
 // OnOpen handles WebSocket connection establishment.
 // It sets a deadline for the connection to prevent hanging.
 func (client *WebSocketClient) OnOpen(conn *gws.Conn) {
-	conn.SetDeadline(time.Now().Add(wsDeadline))
+	_ = conn.SetDeadline(time.Now().Add(wsDeadline))
 }
 
 // OnClose handles WebSocket connection closure.
@@ -161,8 +161,8 @@ func (client *WebSocketClient) OnClose(conn *gws.Conn, err error) {
 // OnMessage handles incoming WebSocket messages from the hub.
 // It decodes CBOR messages and routes them to appropriate handlers.
 func (client *WebSocketClient) OnMessage(conn *gws.Conn, message *gws.Message) {
-	defer message.Close()
-	conn.SetDeadline(time.Now().Add(wsDeadline))
+	defer func() { _ = message.Close() }()
+	_ = conn.SetDeadline(time.Now().Add(wsDeadline))
 
 	if message.Opcode != gws.OpcodeBinary {
 		return
@@ -184,8 +184,8 @@ func (client *WebSocketClient) OnMessage(conn *gws.Conn, message *gws.Message) {
 // OnPing handles WebSocket ping frames.
 // It responds with a pong and updates the connection deadline.
 func (client *WebSocketClient) OnPing(conn *gws.Conn, message []byte) {
-	conn.SetDeadline(time.Now().Add(wsDeadline))
-	conn.WritePong(message)
+	_ = conn.SetDeadline(time.Now().Add(wsDeadline))
+	_ = conn.WritePong(message)
 }
 
 // handleAuthChallenge verifies the authenticity of the hub and returns the system's fingerprint.

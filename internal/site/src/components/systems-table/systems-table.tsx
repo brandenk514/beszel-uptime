@@ -386,7 +386,6 @@ const AllSystemsTable = memo(
 )
 
 function SystemsTableHead({ table }: { table: TableType<SystemRecord> }) {
-	const { t } = useLingui()
 	return (
 		<TableHeader className="sticky top-0 z-50 w-full border-b-2">
 			{table.getHeaderGroups().map((headerGroup) => (
@@ -477,7 +476,10 @@ const SystemCard = memo(
 						</div>
 					</CardHeader>
 					<CardContent className="text-sm px-5 pt-3.5 pb-4">
-						<div className="grid gap-2.5" style={{ gridTemplateColumns: "24px minmax(80px, max-content) minmax(0, 1fr)" }}>
+						<div
+							className="grid gap-2.5"
+							style={{ gridTemplateColumns: "24px minmax(80px, max-content) minmax(0, 1fr)" }}
+						>
 							{table.getAllColumns().map((column) => {
 								if (!column.getIsVisible() || column.id === "system" || column.id === "actions") return null
 								const cell = row.getAllCells().find((cell) => cell.column.id === column.id)

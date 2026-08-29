@@ -50,6 +50,11 @@ msgstr "{count, plural, one {{countString} 分钟} few {{countString} 分钟} ma
 msgid "{threads, plural, one {# thread} other {# threads}}"
 msgstr "{threads, plural, one {# 线程} other {# 线程}}"
 
+#. placeholder {0}: monitors.length
+#: src/components/routes/status-page.tsx
+msgid "{upCount} of {0} monitors operational"
+msgstr ""
+
 #: src/lib/utils.ts
 msgid "1 hour"
 msgstr "1 小时"
@@ -89,6 +94,14 @@ msgstr "30 天"
 msgid "5 min"
 msgstr "5 分钟"
 
+#: src/components/routes/monitor.tsx
+msgid "Across the {totalChecks} checks in the last {rangeLabel}"
+msgstr ""
+
+#: src/components/routes/monitor.tsx
+#~ msgid "Across the {totalChecks} most recent checks"
+#~ msgstr ""
+
 #. Table column
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/tokens-fingerprints.tsx
@@ -120,6 +133,12 @@ msgstr "活动状态"
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Add {foo}"
 msgstr "添加 {foo}"
+
+#: src/components/add-monitor.tsx
+#: src/components/add-monitor.tsx
+#: src/components/navbar.tsx
+msgid "Add Monitor"
+msgstr ""
 
 #: src/components/routes/settings/notifications.tsx
 msgid "Add URL"
@@ -162,6 +181,10 @@ msgstr "警报历史"
 msgid "Alerts"
 msgstr "警报"
 
+#: src/components/monitors-table/monitors-table.tsx
+msgid "All"
+msgstr ""
+
 #: src/components/command-palette.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/navbar.tsx
@@ -179,6 +202,11 @@ msgstr "所有容器"
 msgid "All Systems"
 msgstr "所有客户端"
 
+#: src/components/add-monitor.tsx
+msgid "Allow self-signed or invalid certificates"
+msgstr ""
+
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Are you sure you want to delete {name}?"
 msgstr "您确定要删除 {name} 吗？"
@@ -317,8 +345,10 @@ msgstr "可启动"
 msgid "Can stop"
 msgstr "可停止"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/settings/quiet-hours.tsx
+#: src/components/routes/status-pages.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Cancel"
 msgstr "取消"
@@ -368,9 +398,22 @@ msgstr "图表宽度"
 msgid "Check {email} for a reset link."
 msgstr "检查 {email} 以获取重置链接。"
 
+#: src/components/add-monitor.tsx
+msgid "Check certificate expiry"
+msgstr ""
+
+#: src/components/routes/monitor.tsx
+msgid "Check frequency"
+msgstr ""
+
 #: src/components/routes/settings/layout.tsx
 msgid "Check logs for more details."
 msgstr "检查日志以获取更多详细信息。"
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/routes/monitor.tsx
+msgid "Check now"
+msgstr ""
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Check your monitoring service"
@@ -381,6 +424,7 @@ msgid "Check your notification service"
 msgstr "检查您的通知服务"
 
 #: src/components/containers-table/containers-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
 #: src/components/routes/system/smart-table.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "Clear"
@@ -394,6 +438,10 @@ msgstr "点击容器查看更多信息。"
 msgid "Click on a device to view more information."
 msgstr "点击设备查看更多信息。"
 
+#: src/components/monitors-table/monitors-table.tsx
+msgid "Click on a monitor to view more information."
+msgstr ""
+
 #: src/components/systems-table/systems-table.tsx
 msgid "Click on a system to view more information."
 msgstr "点击系统查看更多信息。"
@@ -402,10 +450,18 @@ msgstr "点击系统查看更多信息。"
 msgid "Click to copy"
 msgstr "点击复制"
 
+#: src/components/monitors-table/monitors-table.tsx
+msgid "Columns"
+msgstr ""
+
 #: src/components/login/forgot-pass-form.tsx
 #: src/components/login/forgot-pass-form.tsx
 msgid "Command line instructions"
 msgstr "命令行说明"
+
+#: src/components/add-monitor.tsx
+#~ msgid "Configure an uptime monitor. The type determines which fields are required."
+#~ msgstr ""
 
 #: src/components/routes/settings/notifications.tsx
 msgid "Configure how you receive alert notifications."
@@ -424,10 +480,15 @@ msgstr "冲突"
 msgid "Connection is down"
 msgstr "连接已断开"
 
+#: src/components/add-monitor.tsx
+msgid "Container name or ID"
+msgstr ""
+
 #: src/components/routes/system.tsx
 msgid "Containers"
 msgstr "容器"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Continue"
@@ -474,6 +535,10 @@ msgstr "复制名称"
 
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "Copy public key"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Copy push URL"
 msgstr ""
 
 #: src/components/copy-to-clipboard.tsx
@@ -527,8 +592,13 @@ msgid "CPU Usage"
 msgstr "CPU 使用率"
 
 #: src/components/routes/settings/quiet-hours.tsx
+#: src/components/routes/status-pages.tsx
 msgid "Create"
 msgstr "创建"
+
+#: src/components/routes/status-pages.tsx
+msgid "Create a public status page that lists your monitors and their current status."
+msgstr ""
 
 #: src/components/login/auth-form.tsx
 msgid "Create account"
@@ -577,8 +647,14 @@ msgstr "默认"
 msgid "Default time period"
 msgstr "默认时间段"
 
+#: src/components/add-monitor.tsx
+msgid "Delay (sec)"
+msgstr ""
+
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/settings/quiet-hours.tsx
+#: src/components/routes/status-pages.tsx
 #: src/components/routes/system/smart-table.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Delete"
@@ -588,9 +664,17 @@ msgstr "删除"
 msgid "Delete fingerprint"
 msgstr "删除指纹"
 
+#: src/components/routes/status-pages.tsx
+msgid "Delete status page?"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Description"
 msgstr "描述"
+
+#: src/components/routes/status-pages.tsx
+msgid "Description (optional)"
+msgstr ""
 
 #: src/components/containers-table/containers-table.tsx
 msgid "Detail"
@@ -599,6 +683,10 @@ msgstr "详情"
 #: src/components/routes/system/smart-table.tsx
 msgid "Device"
 msgstr "设备"
+
+#: src/components/routes/status-pages.tsx
+msgid "Disabled pages are not publicly accessible."
+msgstr ""
 
 #. Context: Battery state
 #: src/lib/i18n.ts
@@ -633,6 +721,14 @@ msgctxt "Layout display options"
 msgid "Display"
 msgstr "显示"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "DNS"
+msgstr ""
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "Docker"
+msgstr ""
+
 #: src/components/routes/system/charts/cpu-charts.tsx
 msgid "Docker CPU Usage"
 msgstr "Docker CPU 使用"
@@ -645,13 +741,28 @@ msgstr "Docker 内存使用"
 msgid "Docker Network I/O"
 msgstr "Docker 网络 I/O"
 
+#: src/components/add-monitor.tsx
+msgid "Docker socket / API"
+msgstr ""
+
 #: src/components/command-palette.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Documentation"
 msgstr "文档"
 
+#: src/components/add-monitor.tsx
+msgid "Domain"
+msgstr ""
+
 #. Context: System is down
 #: src/components/alerts-history-columns.tsx
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/routes/monitor.tsx
+#: src/components/routes/monitor.tsx
 #: src/components/routes/system/info-bar.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 #: src/lib/alerts.ts
@@ -670,6 +781,8 @@ msgstr "下载"
 msgid "Duration"
 msgstr "持续时间"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/routes/monitor.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Edit"
@@ -679,6 +792,14 @@ msgstr "编辑"
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Edit {foo}"
 msgstr "编辑 {foo}"
+
+#: src/components/add-monitor.tsx
+msgid "Edit Monitor"
+msgstr ""
+
+#: src/components/routes/status-pages.tsx
+msgid "Edit Status Page"
+msgstr ""
 
 #: src/components/login/auth-form.tsx
 #: src/components/login/forgot-pass-form.tsx
@@ -694,6 +815,11 @@ msgstr "电子邮件通知"
 #: src/lib/i18n.ts
 msgid "Empty"
 msgstr "空电"
+
+#: src/components/routes/status-pages.tsx
+#: src/components/routes/status-pages.tsx
+msgid "Enabled"
+msgstr ""
 
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
@@ -760,6 +886,26 @@ msgstr "未在<0>config.yml</0>中定义的客户端将被删除。请定期备�
 msgid "Exited active"
 msgstr "退出活动状态"
 
+#: src/components/add-monitor.tsx
+msgid "Expected body"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+#~ msgid "Expected Body"
+#~ msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Expected status"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+#~ msgid "Expected Status"
+#~ msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Expected value"
+msgstr ""
+
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "Expires after one hour or on hub restart."
 msgstr "将在一小时后，或Hub重启时失效。"
@@ -776,9 +922,17 @@ msgstr "导出配置"
 msgid "Export your current systems configuration."
 msgstr "导出您当前的系统配置。"
 
+#: src/components/add-monitor.tsx
+msgid "Extra attempts before marking as down"
+msgstr ""
+
 #: src/components/routes/settings/general.tsx
 msgid "Fahrenheit (°F)"
 msgstr "华氏度 (°F)"
+
+#: src/components/add-monitor.tsx
+msgid "Fail if the TLS certificate expires within 14 days"
+msgstr ""
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Failed"
@@ -820,6 +974,7 @@ msgid "Fans"
 msgstr ""
 
 #: src/components/containers-table/containers-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/system/chart-card.tsx
 #: src/components/routes/system/smart-table.tsx
@@ -862,6 +1017,10 @@ msgstr "满电"
 msgid "General"
 msgstr "常规"
 
+#: src/components/add-monitor.tsx
+msgid "Generate"
+msgstr ""
+
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Global"
 msgstr "全局"
@@ -882,6 +1041,7 @@ msgstr "GPU 功耗"
 msgid "GPU Usage"
 msgstr "GPU 使用率"
 
+#: src/components/monitors-table/monitors-table.tsx
 #: src/components/routes/system/info-bar.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "Grid"
@@ -909,9 +1069,18 @@ msgctxt "Button to copy install command"
 msgid "Homebrew command"
 msgstr "Homebrew 安装命令"
 
+#: src/components/add-monitor.tsx
+msgid "Host"
+msgstr ""
+
+#: src/components/add-monitor.tsx
 #: src/components/add-system.tsx
 msgid "Host / IP"
 msgstr "主机/IP"
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "HTTP"
+msgstr ""
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "HTTP Method"
@@ -920,6 +1089,10 @@ msgstr "HTTP 方法"
 #: src/components/routes/settings/heartbeat.tsx
 msgid "HTTP method: POST, GET, or HEAD (default: POST)"
 msgstr "HTTP 方法：POST、GET 或 HEAD (默认：POST)"
+
+#: src/components/add-monitor.tsx
+#~ msgid "HTTP(S)"
+#~ msgstr ""
 
 #: src/components/routes/system/disk-io-sheet.tsx
 msgctxt "Disk I/O average operation time (iostat await)"
@@ -941,6 +1114,10 @@ msgstr "I/O 利用率"
 msgid "Idle"
 msgstr "闲置"
 
+#: src/components/routes/status-pages.tsx
+msgid "If off, only status dots are shown."
+msgstr ""
+
 #: src/components/login/forgot-pass-form.tsx
 msgid "If you've lost the password to your admin account, you may reset it using the following command."
 msgstr "如果您丢失了管理员账户的密码，可以使用以下命令重置。"
@@ -954,18 +1131,33 @@ msgstr "镜像"
 msgid "Inactive"
 msgstr "非活跃"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/routes/monitor.tsx
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Interval"
 msgstr "间隔"
+
+#: src/components/add-monitor.tsx
+msgid "Interval (sec)"
+msgstr ""
 
 #: src/components/login/auth-form.tsx
 msgid "Invalid email address."
 msgstr "无效的电子邮件地址。"
 
+#: src/components/add-monitor.tsx
+msgid "JSON query (optional)"
+msgstr ""
+
 #: src/components/routes/settings/general.tsx
 msgid "Language"
 msgstr "语言"
 
+#: src/components/routes/monitor.tsx
+msgid "Latency of each check over time"
+msgstr ""
+
+#: src/components/monitors-table/monitors-table.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "Layout"
 msgstr "布局"
@@ -1008,6 +1200,10 @@ msgstr "负载"
 msgid "Load state"
 msgstr "加载状态"
 
+#: src/components/routes/status-pages.tsx
+msgid "Loading status pages..."
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Loading..."
 msgstr "加载中..."
@@ -1018,8 +1214,8 @@ msgid "Log Out"
 msgstr "登出"
 
 #: src/components/login/login.tsx
-msgid "Login"
-msgstr "登录"
+#~ msgid "Login"
+#~ msgstr "登录"
 
 #: src/components/login/auth-form.tsx
 #: src/components/login/forgot-pass-form.tsx
@@ -1035,6 +1231,10 @@ msgstr "日志"
 #: src/components/routes/settings/notifications.tsx
 msgid "Looking instead for where to create alerts? Click the bell <0/> icons in the systems table."
 msgstr "在寻找创建警报的位置吗？点击系统表中的铃铛<0/>图标。"
+
+#: src/components/routes/status-pages.tsx
+msgid "Lowercase letters, numbers, and dashes. Used in the public URL."
+msgstr ""
 
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Main PID"
@@ -1080,14 +1280,43 @@ msgstr "内存使用率"
 msgid "Memory usage of docker containers"
 msgstr "Docker 容器的内存使用率"
 
+#: src/components/add-monitor.tsx
+msgid "Method"
+msgstr ""
+
 #. Device model
 #: src/components/routes/system/smart-table.tsx
 msgid "Model"
 msgstr "型号"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "Monitor"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Monitor a website, TCP port, host, DNS record, Docker container, WebSocket endpoint, Steam app, or a push heartbeat. The type determines which fields are required."
+msgstr ""
+
+#: src/components/routes/monitor.tsx
+msgid "Monitor type"
+msgstr ""
+
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/navbar.tsx
+#: src/components/navbar.tsx
+#: src/components/routes/monitors.tsx
+msgid "Monitors"
+msgstr ""
+
+#: src/components/routes/monitor.tsx
+msgid "Most recent first"
+msgstr ""
+
+#: src/components/add-monitor.tsx
 #: src/components/add-system.tsx
 #: src/components/alerts-history-columns.tsx
 #: src/components/containers-table/containers-table-columns.tsx
+#: src/components/routes/status-pages.tsx
 #: src/components/systemd-table/systemd-table-columns.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Name"
@@ -1114,11 +1343,32 @@ msgstr "公共接口的网络流量"
 msgid "Network unit"
 msgstr "网络单位"
 
+#: src/components/routes/status-pages.tsx
+#: src/components/routes/status-pages.tsx
+msgid "New Status Page"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "No"
 msgstr "否"
+
+#: src/components/routes/monitor.tsx
+msgid "No check data available yet"
+msgstr ""
+
+#: src/components/routes/monitor.tsx
+msgid "No checks yet"
+msgstr ""
+
+#: src/components/routes/status-page.tsx
+msgid "No monitors are assigned to this status page yet."
+msgstr ""
+
+#: src/components/monitors-table/monitors-table.tsx
+msgid "No monitors configured yet."
+msgstr ""
 
 #: src/components/command-palette.tsx
 #: src/components/systemd-table/systemd-table.tsx
@@ -1138,10 +1388,18 @@ msgstr "无结果。"
 msgid "No S.M.A.R.T. attributes available for this device."
 msgstr "此设备没有可用的 S.M.A.R.T. 属性。"
 
+#: src/components/routes/status-pages.tsx
+msgid "No status pages yet"
+msgstr ""
+
 #: src/components/systems-table/systems-table.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "No systems found."
 msgstr "未找到系统。"
+
+#: src/components/add-monitor.tsx
+msgid "None"
+msgstr ""
 
 #: src/components/command-palette.tsx
 #: src/components/routes/settings/layout.tsx
@@ -1165,6 +1423,10 @@ msgstr "一次性"
 #: src/components/login/auth-form.tsx
 msgid "One-time password"
 msgstr "一次性密码"
+
+#: src/components/add-monitor.tsx
+msgid "Only required if the hub runs in a container or reaches Docker over the network."
+msgstr ""
 
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/tokens-fingerprints.tsx
@@ -1223,10 +1485,17 @@ msgstr "已收到密码重置请求"
 msgid "Past"
 msgstr "过去"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Pause"
 msgstr "暂停"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/routes/monitor.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Paused"
 msgstr "已暂停"
@@ -1238,6 +1507,12 @@ msgstr "已暂停 ({pausedSystemsLength})"
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Payload format"
 msgstr "有效载荷 (Payload) 格式"
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/routes/monitor.tsx
+msgid "Pending"
+msgstr ""
 
 #: src/components/routes/system/cpu-sheet.tsx
 #: src/components/routes/system/cpu-sheet.tsx
@@ -1259,6 +1534,10 @@ msgstr "永久"
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "Persistence"
 msgstr "持久性"
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "Ping"
+msgstr ""
 
 #: src/components/routes/settings/notifications.tsx
 msgid "Please <0>configure an SMTP server</0> to ensure alerts are delivered."
@@ -1293,6 +1572,7 @@ msgstr "请参阅<0>文档</0>以获取说明。"
 msgid "Please sign in to your account"
 msgstr "请登录您的账户"
 
+#: src/components/add-monitor.tsx
 #: src/components/add-system.tsx
 msgid "Port"
 msgstr "端口"
@@ -1302,10 +1582,18 @@ msgctxt "Container ports"
 msgid "Ports"
 msgstr "端口"
 
+#: src/components/add-monitor.tsx
+msgid "POST to this URL (curl, cron, or your service) to record a heartbeat. The monitor is down if no heartbeat arrives within the check interval."
+msgstr ""
+
 #. Power On Time
 #: src/components/routes/system/smart-table.tsx
 msgid "Power On"
 msgstr "开机时间"
+
+#: src/components/routes/status-page.tsx
+msgid "Powered by"
+msgstr ""
 
 #: src/components/routes/system/charts/gpu-charts.tsx
 #: src/components/routes/system/charts/memory-charts.tsx
@@ -1329,6 +1617,22 @@ msgstr ""
 msgid "Public Key"
 msgstr "公钥"
 
+#: src/components/routes/status-pages.tsx
+msgid "Public status page that shows the status of your assigned monitors."
+msgstr ""
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "Push"
+msgstr ""
+
+#: src/components/routes/monitor.tsx
+msgid "Push heartbeat"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Push token"
+msgstr ""
+
 #: src/components/routes/system/disk-io-sheet.tsx
 msgctxt "Disk I/O average queue depth"
 msgid "Queue Depth"
@@ -1349,6 +1653,14 @@ msgstr "读取"
 #: src/components/routes/system/charts/network-charts.tsx
 msgid "Received"
 msgstr "接收"
+
+#: src/components/routes/monitor.tsx
+msgid "Recent checks"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Record type"
+msgstr ""
 
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
@@ -1386,13 +1698,30 @@ msgstr "重置密码"
 msgid "Resolved"
 msgstr "已解决"
 
+#: src/components/routes/monitor.tsx
+msgid "Response time"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Restarts"
 msgstr "重启次数"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Resume"
 msgstr "恢复"
+
+#: src/components/add-monitor.tsx
+msgid "Retries"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Retry on failure"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+#~ msgid "Retry the check a few times before marking as down"
+#~ msgstr ""
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgctxt "Root disk label"
@@ -1419,6 +1748,10 @@ msgstr "S.M.A.R.T. 详情"
 msgid "S.M.A.R.T. Self-Test"
 msgstr "S.M.A.R.T. 自检"
 
+#: src/components/routes/status-pages.tsx
+msgid "Save"
+msgstr ""
+
 #: src/components/add-system.tsx
 msgid "Save {foo}"
 msgstr "保存 {foo}"
@@ -1426,6 +1759,10 @@ msgstr "保存 {foo}"
 #: src/components/routes/settings/notifications.tsx
 msgid "Save address using enter key or comma. Leave blank to disable email notifications."
 msgstr "使用回车键或逗号保存地址。留空以禁用电子邮件通知。"
+
+#: src/components/add-monitor.tsx
+msgid "Save Monitor"
+msgstr ""
 
 #: src/components/routes/settings/general.tsx
 #: src/components/routes/settings/notifications.tsx
@@ -1435,6 +1772,11 @@ msgstr "保存设置"
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "Saved in the database and does not expire until you disable it."
 msgstr "保存在数据库中的数据，在您禁用之前不会过期。"
+
+#: src/components/add-monitor.tsx
+#: src/components/routes/status-pages.tsx
+msgid "Saving..."
+msgstr ""
 
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Schedule"
@@ -1459,6 +1801,10 @@ msgstr "搜索系统或设置..."
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Seconds between pings (default: 60)"
 msgstr "Ping 之间的秒数 (默认：60)"
+
+#: src/components/add-monitor.tsx
+msgid "Secure (skip TLS verify)"
+msgstr ""
 
 #: src/components/alerts/alerts-sheet.tsx
 msgid "See <0>notification settings</0> to configure how you receive alerts."
@@ -1519,9 +1865,17 @@ msgstr "设置"
 msgid "Settings saved"
 msgstr "设置已保存"
 
+#: src/components/routes/status-pages.tsx
+msgid "Show monitor names"
+msgstr ""
+
 #: src/components/login/auth-form.tsx
 msgid "Sign in"
 msgstr "登录"
+
+#: src/components/routes/status-pages.tsx
+msgid "Slug"
+msgstr ""
 
 #: src/components/command-palette.tsx
 msgid "SMTP settings"
@@ -1544,12 +1898,34 @@ msgid "State"
 msgstr "状态"
 
 #: src/components/containers-table/containers-table-columns.tsx
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/routes/system/smart-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 #: src/components/systems-table/systems-table.tsx
 #: src/lib/alerts.ts
 msgid "Status"
 msgstr "状态"
+
+#: src/components/add-monitor.tsx
+msgid "Status page (optional)"
+msgstr ""
+
+#: src/components/routes/status-page.tsx
+msgid "Status page not found"
+msgstr ""
+
+#: src/components/navbar.tsx
+#: src/components/navbar.tsx
+msgid "Status Pages"
+msgstr ""
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "Steam"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Steam App ID"
+msgstr ""
 
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
@@ -1603,6 +1979,7 @@ msgstr "系统"
 msgid "Systems may be managed in a <0>config.yml</0> file inside your data directory."
 msgstr "系统可以在数据目录中的<0>config.yml</0>文件中管理。"
 
+#: src/components/monitors-table/monitors-table.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "Table"
 msgstr "表格"
@@ -1615,6 +1992,10 @@ msgstr "标签页"
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Tasks"
 msgstr "任务数"
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "TCP"
+msgstr ""
 
 #. Temperature label in systems table
 #: src/components/routes/system/smart-table.tsx
@@ -1655,13 +2036,22 @@ msgstr "当所有系统都正常运行时，整体状态为 <0>ok</0>；当触�
 msgid "Then log into the backend and reset your user account password in the users table."
 msgstr "然后登录到后台并在用户表中重置您的用户账户密码。"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "This action cannot be undone. This will permanently delete all current records for {name} from the database."
 msgstr "此操作无法撤销。这将永久删除数据库中{name}的所有当前记录。"
 
+#: src/components/routes/status-page.tsx
+msgid "This status page does not exist or is disabled."
+msgstr ""
+
 #: src/components/routes/settings/alerts-history-data-table.tsx
 msgid "This will permanently delete all selected records from the database."
 msgstr "这将永久删除数据库中所有选定的记录。"
+
+#: src/components/routes/status-pages.tsx
+msgid "This will permanently remove the status page. Monitors that reference it will be unaffected."
+msgstr ""
 
 #: src/components/routes/system/charts/disk-charts.tsx
 msgid "Throughput of {extraFsName}"
@@ -1674,6 +2064,14 @@ msgstr "根文件系统的吞吐量"
 #: src/components/routes/settings/general.tsx
 msgid "Time format"
 msgstr "时间格式"
+
+#: src/components/routes/monitor.tsx
+msgid "Time range"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Timeout (sec)"
+msgstr ""
 
 #: src/components/routes/settings/notifications.tsx
 msgid "To email(s)"
@@ -1773,6 +2171,9 @@ msgstr "当状态在上线与掉线之间切换时触发"
 msgid "Triggers when usage of any disk exceeds a threshold"
 msgstr "当任何磁盘的使用率超过阈值时触发"
 
+#: src/components/add-monitor.tsx
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/routes/monitor.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/system/smart-table.tsx
@@ -1804,6 +2205,13 @@ msgid "Unlimited"
 msgstr "无限制"
 
 #. Context: System is up
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/routes/monitor.tsx
+#: src/components/routes/monitor.tsx
 #: src/components/routes/system/info-bar.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Up"
@@ -1831,10 +2239,15 @@ msgstr "每 10 分钟更新一次。"
 msgid "Upload"
 msgstr "上传"
 
+#: src/components/routes/monitor.tsx
 #: src/components/routes/system/info-bar.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Uptime"
 msgstr "运行时间"
+
+#: src/components/add-monitor.tsx
+msgid "URL"
+msgstr ""
 
 #: src/components/routes/system/charts/disk-charts.tsx
 #: src/components/routes/system/charts/gpu-charts.tsx
@@ -1847,6 +2260,10 @@ msgstr "使用"
 #: src/components/routes/system/charts/disk-charts.tsx
 msgid "Usage of root partition"
 msgstr "根分区的使用"
+
+#: src/components/monitors-table/monitors-table.tsx
+msgid "Use the Add Monitor button to get started."
+msgstr ""
 
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/charts/memory-charts.tsx
@@ -1867,10 +2284,16 @@ msgstr "利用率"
 msgid "Value"
 msgstr "值"
 
+#: src/components/monitors-table/monitors-table.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "View"
 msgstr "视图"
 
+#: src/components/routes/monitor.tsx
+msgid "View less"
+msgstr ""
+
+#: src/components/routes/monitor.tsx
 #: src/components/routes/system/cpu-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/network-sheet.tsx
@@ -1908,6 +2331,14 @@ msgstr "警告阈值"
 #: src/components/routes/settings/notifications.tsx
 msgid "Webhook / Push notifications"
 msgstr "Webhook / 推送通知"
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "WebSocket"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "WebSocket URL"
+msgstr ""
 
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "When enabled, this token allows agents to self-register without prior system creation."

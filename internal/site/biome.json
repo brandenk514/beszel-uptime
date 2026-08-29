@@ -12,7 +12,13 @@
 		"lineWidth": 120,
 		"formatWithErrors": true
 	},
-	"assist": { "actions": { "source": { "organizeImports": "off" } } },
+	"assist": {
+		"actions": {
+			"source": {
+				"organizeImports": "off"
+			}
+		}
+	},
 	"linter": {
 		"enabled": true,
 		"rules": {
@@ -52,7 +58,8 @@
 			"suspicious": {
 				"useAwait": "error",
 				"noEvolvingTypes": "error",
-				"noArrayIndexKey": "off"
+				"noArrayIndexKey": "off",
+				"noExplicitAny": "warn"
 			}
 		}
 	},
@@ -61,7 +68,8 @@
 			"quoteStyle": "double",
 			"trailingCommas": "es5",
 			"semicolons": "asNeeded"
-		}
+		},
+		"globals": ["BESZEL"]
 	},
 	"overrides": [
 		{
@@ -83,6 +91,20 @@
 					}
 				}
 			}
+		},
+		{
+			"includes": ["**/*.css"],
+			"linter": {
+				"rules": {
+					"suspicious": {
+						"noUnknownAtRules": "off"
+					}
+				}
+			}
 		}
-	]
+	],
+	"files": {
+		"experimentalScannerIgnores": ["**/*.css"],
+		"includes": ["**", "!src/locales/**/*.ts"]
+	}
 }

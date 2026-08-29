@@ -50,6 +50,11 @@ msgstr "{count, plural, one {{countString} minuta} few {{countString} minuty} ma
 msgid "{threads, plural, one {# thread} other {# threads}}"
 msgstr "{threads, plural, one {# vlákno} few {# vlákna} many {# vláken} other {# vláken}}"
 
+#. placeholder {0}: monitors.length
+#: src/components/routes/status-page.tsx
+msgid "{upCount} of {0} monitors operational"
+msgstr ""
+
 #: src/lib/utils.ts
 msgid "1 hour"
 msgstr "1 hodina"
@@ -89,6 +94,14 @@ msgstr "30 dní"
 msgid "5 min"
 msgstr "5 min"
 
+#: src/components/routes/monitor.tsx
+msgid "Across the {totalChecks} checks in the last {rangeLabel}"
+msgstr ""
+
+#: src/components/routes/monitor.tsx
+#~ msgid "Across the {totalChecks} most recent checks"
+#~ msgstr ""
+
 #. Table column
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/tokens-fingerprints.tsx
@@ -120,6 +133,12 @@ msgstr "Aktivní stav"
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Add {foo}"
 msgstr "Přidat {foo}"
+
+#: src/components/add-monitor.tsx
+#: src/components/add-monitor.tsx
+#: src/components/navbar.tsx
+msgid "Add Monitor"
+msgstr ""
 
 #: src/components/routes/settings/notifications.tsx
 msgid "Add URL"
@@ -162,6 +181,10 @@ msgstr "Historie upozornění"
 msgid "Alerts"
 msgstr "Výstrahy"
 
+#: src/components/monitors-table/monitors-table.tsx
+msgid "All"
+msgstr ""
+
 #: src/components/command-palette.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/navbar.tsx
@@ -179,6 +202,11 @@ msgstr "Všechny kontejnery"
 msgid "All Systems"
 msgstr "Všechny systémy"
 
+#: src/components/add-monitor.tsx
+msgid "Allow self-signed or invalid certificates"
+msgstr ""
+
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Are you sure you want to delete {name}?"
 msgstr "Opravdu chcete odstranit {name}?"
@@ -317,8 +345,10 @@ msgstr "Může spustit"
 msgid "Can stop"
 msgstr "Může zastavit"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/settings/quiet-hours.tsx
+#: src/components/routes/status-pages.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Cancel"
 msgstr "Zrušit"
@@ -368,9 +398,22 @@ msgstr "Šířka grafu"
 msgid "Check {email} for a reset link."
 msgstr "Zkontrolujte {email} pro odkaz na obnovení."
 
+#: src/components/add-monitor.tsx
+msgid "Check certificate expiry"
+msgstr ""
+
+#: src/components/routes/monitor.tsx
+msgid "Check frequency"
+msgstr ""
+
 #: src/components/routes/settings/layout.tsx
 msgid "Check logs for more details."
 msgstr "Pro více informací zkontrolujte logy."
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/routes/monitor.tsx
+msgid "Check now"
+msgstr ""
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Check your monitoring service"
@@ -381,6 +424,7 @@ msgid "Check your notification service"
 msgstr "Zkontrolujte službu upozornění"
 
 #: src/components/containers-table/containers-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
 #: src/components/routes/system/smart-table.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "Clear"
@@ -394,6 +438,10 @@ msgstr "Klikněte na kontejner pro zobrazení dalších informací."
 msgid "Click on a device to view more information."
 msgstr "Klikněte na zařízení pro zobrazení dalších informací."
 
+#: src/components/monitors-table/monitors-table.tsx
+msgid "Click on a monitor to view more information."
+msgstr ""
+
 #: src/components/systems-table/systems-table.tsx
 msgid "Click on a system to view more information."
 msgstr "Klikněte na systém pro zobrazení více informací."
@@ -402,10 +450,18 @@ msgstr "Klikněte na systém pro zobrazení více informací."
 msgid "Click to copy"
 msgstr "Klikněte pro zkopírování"
 
+#: src/components/monitors-table/monitors-table.tsx
+msgid "Columns"
+msgstr ""
+
 #: src/components/login/forgot-pass-form.tsx
 #: src/components/login/forgot-pass-form.tsx
 msgid "Command line instructions"
 msgstr "Instrukce příkazového řádku"
+
+#: src/components/add-monitor.tsx
+#~ msgid "Configure an uptime monitor. The type determines which fields are required."
+#~ msgstr ""
 
 #: src/components/routes/settings/notifications.tsx
 msgid "Configure how you receive alert notifications."
@@ -424,10 +480,15 @@ msgstr "Konflikty"
 msgid "Connection is down"
 msgstr "Připojení je nedostupné"
 
+#: src/components/add-monitor.tsx
+msgid "Container name or ID"
+msgstr ""
+
 #: src/components/routes/system.tsx
 msgid "Containers"
 msgstr "Kontejnery"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Continue"
@@ -474,6 +535,10 @@ msgstr "Kopírovat název"
 
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "Copy public key"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Copy push URL"
 msgstr ""
 
 #: src/components/copy-to-clipboard.tsx
@@ -527,8 +592,13 @@ msgid "CPU Usage"
 msgstr "Využití procesoru"
 
 #: src/components/routes/settings/quiet-hours.tsx
+#: src/components/routes/status-pages.tsx
 msgid "Create"
 msgstr "Vytvořit"
+
+#: src/components/routes/status-pages.tsx
+msgid "Create a public status page that lists your monitors and their current status."
+msgstr ""
 
 #: src/components/login/auth-form.tsx
 msgid "Create account"
@@ -577,8 +647,14 @@ msgstr "Výchozí"
 msgid "Default time period"
 msgstr "Výchozí doba"
 
+#: src/components/add-monitor.tsx
+msgid "Delay (sec)"
+msgstr ""
+
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/settings/quiet-hours.tsx
+#: src/components/routes/status-pages.tsx
 #: src/components/routes/system/smart-table.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Delete"
@@ -588,9 +664,17 @@ msgstr "Odstranit"
 msgid "Delete fingerprint"
 msgstr "Smazat identifikátor"
 
+#: src/components/routes/status-pages.tsx
+msgid "Delete status page?"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Description"
 msgstr "Popis"
+
+#: src/components/routes/status-pages.tsx
+msgid "Description (optional)"
+msgstr ""
 
 #: src/components/containers-table/containers-table.tsx
 msgid "Detail"
@@ -599,6 +683,10 @@ msgstr "Detail"
 #: src/components/routes/system/smart-table.tsx
 msgid "Device"
 msgstr "Zařízení"
+
+#: src/components/routes/status-pages.tsx
+msgid "Disabled pages are not publicly accessible."
+msgstr ""
 
 #. Context: Battery state
 #: src/lib/i18n.ts
@@ -633,6 +721,14 @@ msgctxt "Layout display options"
 msgid "Display"
 msgstr "Zobrazení"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "DNS"
+msgstr ""
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "Docker"
+msgstr ""
+
 #: src/components/routes/system/charts/cpu-charts.tsx
 msgid "Docker CPU Usage"
 msgstr "Využití CPU Dockeru"
@@ -645,13 +741,28 @@ msgstr "Využití paměti Dockeru"
 msgid "Docker Network I/O"
 msgstr "Síťové I/O Dockeru"
 
+#: src/components/add-monitor.tsx
+msgid "Docker socket / API"
+msgstr ""
+
 #: src/components/command-palette.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Documentation"
 msgstr "Dokumentace"
 
+#: src/components/add-monitor.tsx
+msgid "Domain"
+msgstr ""
+
 #. Context: System is down
 #: src/components/alerts-history-columns.tsx
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/routes/monitor.tsx
+#: src/components/routes/monitor.tsx
 #: src/components/routes/system/info-bar.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 #: src/lib/alerts.ts
@@ -670,6 +781,8 @@ msgstr "Stažení"
 msgid "Duration"
 msgstr "Doba trvání"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/routes/monitor.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Edit"
@@ -679,6 +792,14 @@ msgstr "Upravit"
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Edit {foo}"
 msgstr "Upravit {foo}"
+
+#: src/components/add-monitor.tsx
+msgid "Edit Monitor"
+msgstr ""
+
+#: src/components/routes/status-pages.tsx
+msgid "Edit Status Page"
+msgstr ""
 
 #: src/components/login/auth-form.tsx
 #: src/components/login/forgot-pass-form.tsx
@@ -694,6 +815,11 @@ msgstr "Emailová upozornění"
 #: src/lib/i18n.ts
 msgid "Empty"
 msgstr "Prázdná"
+
+#: src/components/routes/status-pages.tsx
+#: src/components/routes/status-pages.tsx
+msgid "Enabled"
+msgstr ""
 
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
@@ -760,6 +886,26 @@ msgstr "Stávající systémy, které nejsou definovány v <0>config.yml</0>, bu
 msgid "Exited active"
 msgstr "Ukončeno aktivně"
 
+#: src/components/add-monitor.tsx
+msgid "Expected body"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+#~ msgid "Expected Body"
+#~ msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Expected status"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+#~ msgid "Expected Status"
+#~ msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Expected value"
+msgstr ""
+
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "Expires after one hour or on hub restart."
 msgstr "Vyprší po jedné hodině nebo při restartu hubu."
@@ -776,9 +922,17 @@ msgstr "Exportovat konfiguraci"
 msgid "Export your current systems configuration."
 msgstr "Exportovat aktuální konfiguraci systémů."
 
+#: src/components/add-monitor.tsx
+msgid "Extra attempts before marking as down"
+msgstr ""
+
 #: src/components/routes/settings/general.tsx
 msgid "Fahrenheit (°F)"
 msgstr "Fahrenheita (°F)"
+
+#: src/components/add-monitor.tsx
+msgid "Fail if the TLS certificate expires within 14 days"
+msgstr ""
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Failed"
@@ -820,6 +974,7 @@ msgid "Fans"
 msgstr ""
 
 #: src/components/containers-table/containers-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/system/chart-card.tsx
 #: src/components/routes/system/smart-table.tsx
@@ -862,6 +1017,10 @@ msgstr "Plná"
 msgid "General"
 msgstr "Obecné"
 
+#: src/components/add-monitor.tsx
+msgid "Generate"
+msgstr ""
+
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Global"
 msgstr "Globální"
@@ -882,6 +1041,7 @@ msgstr "Spotřeba energie GPU"
 msgid "GPU Usage"
 msgstr "Využití GPU"
 
+#: src/components/monitors-table/monitors-table.tsx
 #: src/components/routes/system/info-bar.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "Grid"
@@ -909,9 +1069,18 @@ msgctxt "Button to copy install command"
 msgid "Homebrew command"
 msgstr "Homebrew příkaz"
 
+#: src/components/add-monitor.tsx
+msgid "Host"
+msgstr ""
+
+#: src/components/add-monitor.tsx
 #: src/components/add-system.tsx
 msgid "Host / IP"
 msgstr "Hostitel / IP"
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "HTTP"
+msgstr ""
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "HTTP Method"
@@ -920,6 +1089,10 @@ msgstr "HTTP metoda"
 #: src/components/routes/settings/heartbeat.tsx
 msgid "HTTP method: POST, GET, or HEAD (default: POST)"
 msgstr "HTTP metoda: POST, GET nebo HEAD (výchozí: POST)"
+
+#: src/components/add-monitor.tsx
+#~ msgid "HTTP(S)"
+#~ msgstr ""
 
 #: src/components/routes/system/disk-io-sheet.tsx
 msgctxt "Disk I/O average operation time (iostat await)"
@@ -941,6 +1114,10 @@ msgstr "I/O Využití"
 msgid "Idle"
 msgstr "Neaktivní"
 
+#: src/components/routes/status-pages.tsx
+msgid "If off, only status dots are shown."
+msgstr ""
+
 #: src/components/login/forgot-pass-form.tsx
 msgid "If you've lost the password to your admin account, you may reset it using the following command."
 msgstr "Pokud jste ztratili heslo k vašemu účtu správce, můžete jej obnovit pomocí následujícího příkazu."
@@ -954,18 +1131,33 @@ msgstr "Obraz"
 msgid "Inactive"
 msgstr "Neaktivní"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/routes/monitor.tsx
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Interval"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Interval (sec)"
 msgstr ""
 
 #: src/components/login/auth-form.tsx
 msgid "Invalid email address."
 msgstr "Neplatná e-mailová adresa."
 
+#: src/components/add-monitor.tsx
+msgid "JSON query (optional)"
+msgstr ""
+
 #: src/components/routes/settings/general.tsx
 msgid "Language"
 msgstr "Jazyk"
 
+#: src/components/routes/monitor.tsx
+msgid "Latency of each check over time"
+msgstr ""
+
+#: src/components/monitors-table/monitors-table.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "Layout"
 msgstr "Rozvržení"
@@ -1008,6 +1200,10 @@ msgstr "Prům. zatížení"
 msgid "Load state"
 msgstr "Stav načtení"
 
+#: src/components/routes/status-pages.tsx
+msgid "Loading status pages..."
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Loading..."
 msgstr "Načítání..."
@@ -1018,8 +1214,8 @@ msgid "Log Out"
 msgstr "Odhlásit"
 
 #: src/components/login/login.tsx
-msgid "Login"
-msgstr "Přihlásit"
+#~ msgid "Login"
+#~ msgstr "Přihlásit"
 
 #: src/components/login/auth-form.tsx
 #: src/components/login/forgot-pass-form.tsx
@@ -1035,6 +1231,10 @@ msgstr "Logy"
 #: src/components/routes/settings/notifications.tsx
 msgid "Looking instead for where to create alerts? Click the bell <0/> icons in the systems table."
 msgstr "Hledáte místo kde vytvářet upozornění? Klikněte na ikonu zvonku <0/> v systémové tabulce."
+
+#: src/components/routes/status-pages.tsx
+msgid "Lowercase letters, numbers, and dashes. Used in the public URL."
+msgstr ""
 
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Main PID"
@@ -1080,14 +1280,43 @@ msgstr "Využití paměti"
 msgid "Memory usage of docker containers"
 msgstr "Využití paměti docker kontejnerů"
 
+#: src/components/add-monitor.tsx
+msgid "Method"
+msgstr ""
+
 #. Device model
 #: src/components/routes/system/smart-table.tsx
 msgid "Model"
 msgstr ""
 
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "Monitor"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Monitor a website, TCP port, host, DNS record, Docker container, WebSocket endpoint, Steam app, or a push heartbeat. The type determines which fields are required."
+msgstr ""
+
+#: src/components/routes/monitor.tsx
+msgid "Monitor type"
+msgstr ""
+
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/navbar.tsx
+#: src/components/navbar.tsx
+#: src/components/routes/monitors.tsx
+msgid "Monitors"
+msgstr ""
+
+#: src/components/routes/monitor.tsx
+msgid "Most recent first"
+msgstr ""
+
+#: src/components/add-monitor.tsx
 #: src/components/add-system.tsx
 #: src/components/alerts-history-columns.tsx
 #: src/components/containers-table/containers-table-columns.tsx
+#: src/components/routes/status-pages.tsx
 #: src/components/systemd-table/systemd-table-columns.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Name"
@@ -1114,11 +1343,32 @@ msgstr "Síťový provoz veřejných rozhraní"
 msgid "Network unit"
 msgstr "Síťová jednotka"
 
+#: src/components/routes/status-pages.tsx
+#: src/components/routes/status-pages.tsx
+msgid "New Status Page"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "No"
 msgstr "Ne"
+
+#: src/components/routes/monitor.tsx
+msgid "No check data available yet"
+msgstr ""
+
+#: src/components/routes/monitor.tsx
+msgid "No checks yet"
+msgstr ""
+
+#: src/components/routes/status-page.tsx
+msgid "No monitors are assigned to this status page yet."
+msgstr ""
+
+#: src/components/monitors-table/monitors-table.tsx
+msgid "No monitors configured yet."
+msgstr ""
 
 #: src/components/command-palette.tsx
 #: src/components/systemd-table/systemd-table.tsx
@@ -1138,10 +1388,18 @@ msgstr "Žádné výsledky."
 msgid "No S.M.A.R.T. attributes available for this device."
 msgstr "Pro toto zařízení nejsou k dispozici žádné atributy S.M.A.R.T."
 
+#: src/components/routes/status-pages.tsx
+msgid "No status pages yet"
+msgstr ""
+
 #: src/components/systems-table/systems-table.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "No systems found."
 msgstr "Nenalezeny žádné systémy."
+
+#: src/components/add-monitor.tsx
+msgid "None"
+msgstr ""
 
 #: src/components/command-palette.tsx
 #: src/components/routes/settings/layout.tsx
@@ -1165,6 +1423,10 @@ msgstr "Jednorázové"
 #: src/components/login/auth-form.tsx
 msgid "One-time password"
 msgstr "Jednorázové heslo"
+
+#: src/components/add-monitor.tsx
+msgid "Only required if the hub runs in a container or reaches Docker over the network."
+msgstr ""
 
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/tokens-fingerprints.tsx
@@ -1223,10 +1485,17 @@ msgstr "Žádost o obnovu hesla byla přijata"
 msgid "Past"
 msgstr "Minulé"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Pause"
 msgstr "Pozastavit"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/routes/monitor.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Paused"
 msgstr "Pozastaveno"
@@ -1238,6 +1507,12 @@ msgstr "Pozastaveno ({pausedSystemsLength})"
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Payload format"
 msgstr "Formát payloadu"
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/routes/monitor.tsx
+msgid "Pending"
+msgstr ""
 
 #: src/components/routes/system/cpu-sheet.tsx
 #: src/components/routes/system/cpu-sheet.tsx
@@ -1259,6 +1534,10 @@ msgstr "Trvalý"
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "Persistence"
 msgstr "Trvalost"
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "Ping"
+msgstr ""
 
 #: src/components/routes/settings/notifications.tsx
 msgid "Please <0>configure an SMTP server</0> to ensure alerts are delivered."
@@ -1293,6 +1572,7 @@ msgstr "Instrukce naleznete v <0>dokumentaci</0>."
 msgid "Please sign in to your account"
 msgstr "Přihlaste se prosím k vašemu účtu"
 
+#: src/components/add-monitor.tsx
 #: src/components/add-system.tsx
 msgid "Port"
 msgstr ""
@@ -1302,10 +1582,18 @@ msgctxt "Container ports"
 msgid "Ports"
 msgstr "Porty"
 
+#: src/components/add-monitor.tsx
+msgid "POST to this URL (curl, cron, or your service) to record a heartbeat. The monitor is down if no heartbeat arrives within the check interval."
+msgstr ""
+
 #. Power On Time
 #: src/components/routes/system/smart-table.tsx
 msgid "Power On"
 msgstr "Zapnutí"
+
+#: src/components/routes/status-page.tsx
+msgid "Powered by"
+msgstr ""
 
 #: src/components/routes/system/charts/gpu-charts.tsx
 #: src/components/routes/system/charts/memory-charts.tsx
@@ -1329,6 +1617,22 @@ msgstr ""
 msgid "Public Key"
 msgstr "Veřejný klíč"
 
+#: src/components/routes/status-pages.tsx
+msgid "Public status page that shows the status of your assigned monitors."
+msgstr ""
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "Push"
+msgstr ""
+
+#: src/components/routes/monitor.tsx
+msgid "Push heartbeat"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Push token"
+msgstr ""
+
 #: src/components/routes/system/disk-io-sheet.tsx
 msgctxt "Disk I/O average queue depth"
 msgid "Queue Depth"
@@ -1349,6 +1653,14 @@ msgstr "Číst"
 #: src/components/routes/system/charts/network-charts.tsx
 msgid "Received"
 msgstr "Přijato"
+
+#: src/components/routes/monitor.tsx
+msgid "Recent checks"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Record type"
+msgstr ""
 
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
@@ -1386,13 +1698,30 @@ msgstr "Obnovit heslo"
 msgid "Resolved"
 msgstr "Vyřešeno"
 
+#: src/components/routes/monitor.tsx
+msgid "Response time"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Restarts"
 msgstr "Restarty"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Resume"
 msgstr "Pokračovat"
+
+#: src/components/add-monitor.tsx
+msgid "Retries"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Retry on failure"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+#~ msgid "Retry the check a few times before marking as down"
+#~ msgstr ""
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgctxt "Root disk label"
@@ -1419,6 +1748,10 @@ msgstr "S.M.A.R.T. Detaily"
 msgid "S.M.A.R.T. Self-Test"
 msgstr "S.M.A.R.T. Vlastní test"
 
+#: src/components/routes/status-pages.tsx
+msgid "Save"
+msgstr ""
+
 #: src/components/add-system.tsx
 msgid "Save {foo}"
 msgstr "Uložit {foo}"
@@ -1426,6 +1759,10 @@ msgstr "Uložit {foo}"
 #: src/components/routes/settings/notifications.tsx
 msgid "Save address using enter key or comma. Leave blank to disable email notifications."
 msgstr "Adresu uložte pomocí klávesy enter nebo čárky. Pro deaktivaci e-mailových oznámení ponechte prázdné pole."
+
+#: src/components/add-monitor.tsx
+msgid "Save Monitor"
+msgstr ""
 
 #: src/components/routes/settings/general.tsx
 #: src/components/routes/settings/notifications.tsx
@@ -1435,6 +1772,11 @@ msgstr "Uložit nastavení"
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "Saved in the database and does not expire until you disable it."
 msgstr "Uložen v databázi a nevyprší, dokud jej nezablokujete."
+
+#: src/components/add-monitor.tsx
+#: src/components/routes/status-pages.tsx
+msgid "Saving..."
+msgstr ""
 
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Schedule"
@@ -1459,6 +1801,10 @@ msgstr "Hledat systémy nebo nastavení..."
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Seconds between pings (default: 60)"
 msgstr "Sekundy mezi pingy (výchozí: 60)"
+
+#: src/components/add-monitor.tsx
+msgid "Secure (skip TLS verify)"
+msgstr ""
 
 #: src/components/alerts/alerts-sheet.tsx
 msgid "See <0>notification settings</0> to configure how you receive alerts."
@@ -1519,9 +1865,17 @@ msgstr "Nastavení"
 msgid "Settings saved"
 msgstr "Nastavení uloženo"
 
+#: src/components/routes/status-pages.tsx
+msgid "Show monitor names"
+msgstr ""
+
 #: src/components/login/auth-form.tsx
 msgid "Sign in"
 msgstr "Přihlásit se"
+
+#: src/components/routes/status-pages.tsx
+msgid "Slug"
+msgstr ""
 
 #: src/components/command-palette.tsx
 msgid "SMTP settings"
@@ -1544,12 +1898,34 @@ msgid "State"
 msgstr "Stav"
 
 #: src/components/containers-table/containers-table-columns.tsx
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/routes/system/smart-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 #: src/components/systems-table/systems-table.tsx
 #: src/lib/alerts.ts
 msgid "Status"
 msgstr "Stav"
+
+#: src/components/add-monitor.tsx
+msgid "Status page (optional)"
+msgstr ""
+
+#: src/components/routes/status-page.tsx
+msgid "Status page not found"
+msgstr ""
+
+#: src/components/navbar.tsx
+#: src/components/navbar.tsx
+msgid "Status Pages"
+msgstr ""
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "Steam"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Steam App ID"
+msgstr ""
 
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
@@ -1603,6 +1979,7 @@ msgstr "Systémy"
 msgid "Systems may be managed in a <0>config.yml</0> file inside your data directory."
 msgstr "Systémy lze spravovat v souboru <0>config.yml</0> uvnitř datového adresáře."
 
+#: src/components/monitors-table/monitors-table.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "Table"
 msgstr "Tabulka"
@@ -1615,6 +1992,10 @@ msgstr "Karty"
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Tasks"
 msgstr "Úlohy"
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "TCP"
+msgstr ""
 
 #. Temperature label in systems table
 #: src/components/routes/system/smart-table.tsx
@@ -1655,13 +2036,22 @@ msgstr "Celkový stav je <0>ok</0>, když jsou všechny systémy v provozu, <1>w
 msgid "Then log into the backend and reset your user account password in the users table."
 msgstr "Poté se přihlaste do backendu a obnovte heslo k uživatelskému účtu v tabulce uživatelů."
 
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "This action cannot be undone. This will permanently delete all current records for {name} from the database."
 msgstr "Tuto akci nelze vzít zpět. Tím se z databáze trvale odstraní všechny aktuální záznamy pro {name}."
 
+#: src/components/routes/status-page.tsx
+msgid "This status page does not exist or is disabled."
+msgstr ""
+
 #: src/components/routes/settings/alerts-history-data-table.tsx
 msgid "This will permanently delete all selected records from the database."
 msgstr "Tímto trvale odstraníte všechny vybrané záznamy z databáze."
+
+#: src/components/routes/status-pages.tsx
+msgid "This will permanently remove the status page. Monitors that reference it will be unaffected."
+msgstr ""
 
 #: src/components/routes/system/charts/disk-charts.tsx
 msgid "Throughput of {extraFsName}"
@@ -1674,6 +2064,14 @@ msgstr "Propustnost kořenového souborového systému"
 #: src/components/routes/settings/general.tsx
 msgid "Time format"
 msgstr "Formát času"
+
+#: src/components/routes/monitor.tsx
+msgid "Time range"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Timeout (sec)"
+msgstr ""
 
 #: src/components/routes/settings/notifications.tsx
 msgid "To email(s)"
@@ -1773,6 +2171,9 @@ msgstr "Spouští se, když se změní dostupnost"
 msgid "Triggers when usage of any disk exceeds a threshold"
 msgstr "Spustí se, když využití disku překročí prahovou hodnotu"
 
+#: src/components/add-monitor.tsx
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/routes/monitor.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/system/smart-table.tsx
@@ -1804,6 +2205,13 @@ msgid "Unlimited"
 msgstr "Neomezeno"
 
 #. Context: System is up
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/routes/monitor.tsx
+#: src/components/routes/monitor.tsx
 #: src/components/routes/system/info-bar.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Up"
@@ -1831,10 +2239,15 @@ msgstr "Aktualizováno každých 10 minut."
 msgid "Upload"
 msgstr "Odeslání"
 
+#: src/components/routes/monitor.tsx
 #: src/components/routes/system/info-bar.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Uptime"
 msgstr "Doba provozu"
+
+#: src/components/add-monitor.tsx
+msgid "URL"
+msgstr ""
 
 #: src/components/routes/system/charts/disk-charts.tsx
 #: src/components/routes/system/charts/gpu-charts.tsx
@@ -1847,6 +2260,10 @@ msgstr "Využití"
 #: src/components/routes/system/charts/disk-charts.tsx
 msgid "Usage of root partition"
 msgstr "Využití kořenového oddílu"
+
+#: src/components/monitors-table/monitors-table.tsx
+msgid "Use the Add Monitor button to get started."
+msgstr ""
 
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/charts/memory-charts.tsx
@@ -1867,10 +2284,16 @@ msgstr "Využití"
 msgid "Value"
 msgstr "Hodnota"
 
+#: src/components/monitors-table/monitors-table.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "View"
 msgstr "Zobrazení"
 
+#: src/components/routes/monitor.tsx
+msgid "View less"
+msgstr ""
+
+#: src/components/routes/monitor.tsx
 #: src/components/routes/system/cpu-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/network-sheet.tsx
@@ -1908,6 +2331,14 @@ msgstr "Prahové hodnoty pro varování"
 #: src/components/routes/settings/notifications.tsx
 msgid "Webhook / Push notifications"
 msgstr "Webhook / Push oznámení"
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "WebSocket"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "WebSocket URL"
+msgstr ""
 
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "When enabled, this token allows agents to self-register without prior system creation."

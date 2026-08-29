@@ -4,7 +4,9 @@ import { getPagePath } from "@nanostores/router"
 import {
 	ContainerIcon,
 	DatabaseBackupIcon,
+	GlobeIcon,
 	HardDriveIcon,
+	HeartPulseIcon,
 	LogOutIcon,
 	LogsIcon,
 	MenuIcon,
@@ -31,6 +33,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { isAdmin, isReadOnlyUser, logOut, pb } from "@/lib/api"
 import { cn, runOnce } from "@/lib/utils"
+import { AddMonitorDialog } from "./add-monitor"
 import { AddSystemDialog } from "./add-system"
 import { Logo } from "./logo"
 import { ModeToggle } from "./mode-toggle"
@@ -43,6 +46,7 @@ const isMac = navigator.platform.toUpperCase().indexOf("MAC") >= 0
 
 export default function Navbar() {
 	const [addSystemDialogOpen, setAddSystemDialogOpen] = useState(false)
+	const [addMonitorDialogOpen, setAddMonitorDialogOpen] = useState(false)
 	const [commandPaletteOpen, setCommandPaletteOpen] = useState(false)
 
 	const AdminLinks = AdminDropdownGroup()
@@ -55,6 +59,7 @@ export default function Navbar() {
 				<CommandPalette open={commandPaletteOpen} setOpen={setCommandPaletteOpen} />
 			</Suspense>
 			<AddSystemDialog open={addSystemDialogOpen} setOpen={setAddSystemDialogOpen} />
+			<AddMonitorDialog open={addMonitorDialogOpen} setOpen={setAddMonitorDialogOpen} />
 
 			<Link
 				href={basePath}
@@ -107,7 +112,21 @@ export default function Navbar() {
 							<DropdownMenuItem onClick={() => navigate(getPagePath($router, "smart"))} className="flex items-center">
 								<HardDriveIcon className="h-4 w-4 me-2.5" strokeWidth={1.5} />
 								<span>S.M.A.R.T.</span>
+							</DropdownMenuItem>{" "}
+							<DropdownMenuItem
+								onClick={() => navigate(getPagePath($router, "monitors"))}
+								className="flex items-center"
+							>
+								<HeartPulseIcon className="h-4 w-4 me-2.5" strokeWidth={1.5} />
+								<Trans>Monitors</Trans>
 							</DropdownMenuItem>
+							<DropdownMenuItem
+								onClick={() => navigate(getPagePath($router, "statusPages"))}
+								className="flex items-center"
+							>
+								<GlobeIcon className="h-4 w-4 me-2.5" strokeWidth={1.5} />
+								<Trans>Status Pages</Trans>
+							</DropdownMenuItem>{" "}
 							<DropdownMenuItem
 								onClick={() => navigate(getPagePath($router, "settings", { name: "general" }))}
 								className="flex items-center"
@@ -179,6 +198,34 @@ export default function Navbar() {
 					</TooltipTrigger>
 					<TooltipContent>S.M.A.R.T.</TooltipContent>
 				</Tooltip>
+				<Tooltip>
+					<TooltipTrigger asChild>
+						<Link
+							href={getPagePath($router, "monitors")}
+							className={cn("hidden md:grid", buttonVariants({ variant: "ghost", size: "icon" }))}
+							aria-label="Monitors"
+						>
+							<HeartPulseIcon className="h-[1.2rem] w-[1.2rem]" strokeWidth={1.5} />
+						</Link>
+					</TooltipTrigger>
+					<TooltipContent>
+						<Trans>Monitors</Trans>
+					</TooltipContent>
+				</Tooltip>
+				<Tooltip>
+					<TooltipTrigger asChild>
+						<Link
+							href={getPagePath($router, "statusPages")}
+							className={cn("hidden md:grid", buttonVariants({ variant: "ghost", size: "icon" }))}
+							aria-label="Status Pages"
+						>
+							<GlobeIcon className="h-[1.2rem] w-[1.2rem]" strokeWidth={1.5} />
+						</Link>
+					</TooltipTrigger>
+					<TooltipContent>
+						<Trans>Status Pages</Trans>
+					</TooltipContent>
+				</Tooltip>
 				<ModeToggle />
 				<Tooltip>
 					<TooltipTrigger asChild>
@@ -218,10 +265,16 @@ export default function Navbar() {
 					</DropdownMenuContent>
 				</DropdownMenu>
 				{!isReadOnlyUser() && (
-					<Button variant="outline" className="flex gap-1 ms-2" onClick={() => setAddSystemDialogOpen(true)}>
-						<PlusIcon className="h-4 w-4 -ms-1" />
-						<Trans>Add {{ foo: systemTranslation }}</Trans>
-					</Button>
+					<>
+						<Button variant="outline" className="flex gap-1 ms-2" onClick={() => setAddSystemDialogOpen(true)}>
+							<PlusIcon className="h-4 w-4 -ms-1" />
+							<Trans>Add {{ foo: systemTranslation }}</Trans>
+						</Button>
+						<Button variant="outline" className="flex gap-1 ms-2" onClick={() => setAddMonitorDialogOpen(true)}>
+							<PlusIcon className="h-4 w-4 -ms-1" />
+							<Trans>Add Monitor</Trans>
+						</Button>
+					</>
 				)}
 			</div>
 		</div>

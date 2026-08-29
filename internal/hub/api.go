@@ -2,6 +2,7 @@ package hub
 
 import (
 	"context"
+	"database/sql"
 	"net/http"
 	"regexp"
 	"strings"
@@ -127,6 +128,12 @@ func (h *Hub) registerApiRoutes(se *core.ServeEvent) error {
 	apiAuth.POST("/smart/refresh", h.refreshSmartData).BindFunc(excludeReadOnlyRole)
 	// get systemd service details
 	apiAuth.GET("/systemd/info", h.getSystemdInfo)
+	// run an uptime monitor check now
+	apiAuth.GET("/uptime/check-now", h.runMonitorCheckNow).BindFunc(excludeReadOnlyRole)
+	// record a push monitor heartbeat (uptime-kuma /api/push style), unauthenticated by design
+	apiNoAuth.POST("/uptime/push", h.runMonitorPush)
+	// public status page (uptime-kuma style), unauthenticated by design
+	apiNoAuth.GET("/status-page", h.getPublicStatusPage)
 	// /containers routes
 	if enabled, _ := utils.GetEnv("CONTAINER_DETAILS"); enabled != "false" {
 		// get container logs
@@ -388,4 +395,96 @@ func (h *Hub) refreshSmartData(e *core.RequestEvent) error {
 	}
 
 	return e.JSON(http.StatusOK, map[string]string{"status": "ok"})
+}
+
+// runMonitorCheckNow handles GET /api/beszel/uptime/check-now?monitor=<id>
+func (h *Hub) runMonitorCheckNow(e *core.RequestEvent) error {
+	monitorID := e.Request.URL.Query().Get("monitor")
+	if monitorID == "" {
+		return e.BadRequestError("Missing monitor parameter", nil)
+	}
+	// verify ownership
+	monitor, err := h.FindFirstRecordByFilter("monitors", "id = {:id} && user = {:user}", dbx.Params{"id": monitorID, "user": e.Auth.Id})
+	if err != nil {
+		return e.NotFoundError("", nil)
+	}
+	h.mm.RunCheckNow(monitor.Id)
+	return e.JSON(http.StatusOK, map[string]string{"status": "ok"})
+}
+
+// runMonitorPush records a heartbeat for a push-type monitor. It is unauthenticated:
+// the push token (generated per monitor) is the only credential, matching
+// uptime-kuma's public push endpoint.
+func (h *Hub) runMonitorPush(e *core.RequestEvent) error {
+	token := e.Request.URL.Query().Get("token")
+	if token == "" {
+		if err := e.Request.ParseForm(); err == nil {
+			token = e.Request.Form.Get("token")
+		}
+	}
+	if token == "" {
+		return e.BadRequestError("Missing token parameter", nil)
+	}
+
+	monitor, err := h.FindFirstRecordByFilter("monitors", "push_token = {:token} && type = \"push\"", dbx.Params{"token": token})
+	if err != nil {
+		return e.NotFoundError("", nil)
+	}
+
+	h.mm.RunPush(monitor.Id)
+	return e.JSON(http.StatusOK, map[string]string{"status": "ok"})
+}
+
+// getPublicStatusPage returns an enabled status page by slug together with
+// the current status of its attached monitors (unauthenticated,
+// uptime-kuma style public status page). Monitors are fetched server-side
+// with a parameterized query so the public page has no dependency on the
+// monitors collection rules.
+func (h *Hub) getPublicStatusPage(e *core.RequestEvent) error {
+	slug := strings.TrimSpace(e.Request.URL.Query().Get("slug"))
+	if slug == "" {
+		return e.BadRequestError("Missing slug parameter", nil)
+	}
+
+	page, err := h.FindFirstRecordByFilter("status_pages", "slug = {:slug} && enabled = true", dbx.Params{"slug": slug})
+	if err != nil {
+		return e.NotFoundError("", nil)
+	}
+
+	type publicMonitor struct {
+		ID       string `json:"id"`
+		Name     string `json:"name"`
+		Type     string `json:"type"`
+		Status   string `json:"status"`
+		LastPing string `json:"last_ping,omitempty"`
+	}
+
+	var rows []struct {
+		ID       string
+		Name     string
+		Type     string
+		Status   string
+		LastPing sql.NullString
+	}
+	if err := e.App.DB().
+		NewQuery("SELECT m.id, m.name, m.type, m.status, m.last_ping FROM monitors AS m WHERE m.status_page = {:pageId} ORDER BY m.name ASC").
+		Bind(dbx.Params{"pageId": page.Id}).
+		All(&rows); err != nil {
+		return err
+	}
+
+	monitors := make([]publicMonitor, 0, len(rows))
+	for _, row := range rows {
+		m := publicMonitor{ID: row.ID, Name: row.Name, Type: row.Type, Status: row.Status, LastPing: row.LastPing.String}
+		monitors = append(monitors, m)
+	}
+
+	return e.JSON(http.StatusOK, map[string]any{
+		"id":            page.Id,
+		"name":          page.GetString("name"),
+		"slug":          page.GetString("slug"),
+		"description":   page.GetString("description"),
+		"show_monitors": page.GetBool("show_monitors"),
+		"monitors":      monitors,
+	})
 }

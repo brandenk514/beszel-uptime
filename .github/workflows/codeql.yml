@@ -1,0 +1,46 @@
+# For most projects, this workflow file will not need to be modified.
+#
+# For more information on GitHub CodeQL, see:
+#   https://docs.github.com/en/code-security/code-scanning/creating-an-advanced-workflow-for-codeql
+
+name: "CodeQL"
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Only "javascript-typescript" supports autodetection, so we have to
+        # list languages twice if you have a mix of source languages.
+        include:
+          - language: go
+          - language: javascript-typescript
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      # Autodetection: CodeQL installs and builds Go automatically.
+      # For Go, CodeQL performs its own `go mod download` + build, so no
+      # manual setup is required here.
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: ${{ matrix.language }}
+          queries: security-extended
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v4
+        with:
+          category: "/language:${{ matrix.language }}"

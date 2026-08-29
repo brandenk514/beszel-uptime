@@ -5,6 +5,10 @@ const routes = {
 	containers: "/containers",
 	smart: "/smart",
 	system: `/system/:id`,
+	monitors: "/monitors",
+	monitor: `/monitor/:id`,
+	statusPages: "/status-pages",
+	statusPage: `/status/:slug`,
 	settings: `/settings/:name?`,
 	forgot_password: `/forgot-password`,
 	request_otp: `/request-otp`,
@@ -42,6 +46,7 @@ export function Link(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
 	return (
 		<a
 			{...props}
+			href={props.href || "#"}
 			onClick={(e) => {
 				e.preventDefault()
 				const href = props.href || ""

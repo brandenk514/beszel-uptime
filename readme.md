@@ -1,6 +1,10 @@
-# Beszel
+# Beszel-Uptime
 
-Beszel is a lightweight server monitoring platform that includes Docker statistics, historical data, and alert functions.
+**This project was coded using AI (Qwen3.8:27B to be precise).I love Bezsel and wanted to add an uptime monitoring feature to simplify my monitoring stack. Feel free to use it, but please understand this was a vibed coded project**
+
+**I highly recommend checking out the original Beszel project and supporting them!**
+
+Beszel-Uptime is a lightweight server monitoring platform that includes Docker statistics, historical data, monitoring, and alert functions.
 
 It has a friendly web interface, simple configuration, and is ready to use out of the box. It supports automatic backup, multi-user, OAuth authentication, and API access.
 
