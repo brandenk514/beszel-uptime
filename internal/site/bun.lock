@@ -5,7 +5,7 @@
     "": {
       "name": "beszel",
       "dependencies": {
-        "@henrygd/queue": "^1.0.7",
+        "@henrygd/queue": "^1.2.0",
         "@henrygd/semaphore": "^0.0.2",
         "@lingui/detect-locale": "^5.4.1",
         "@lingui/macro": "^5.4.1",
@@ -184,7 +184,7 @@
 
     "@floating-ui/utils": ["@floating-ui/utils@0.2.10", "", {}, "sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ=="],
 
-    "@henrygd/queue": ["@henrygd/queue@1.0.7", "", {}, "sha512-Jmt/iO6yDlz9UYGILkm/Qzi/ckkEiTNZcqDvt3QFLE4OThPeiCj6tKsynHFm/ppl8RumWXAx1dZPBPiRPaaGig=="],
+    "@henrygd/queue": ["@henrygd/queue@1.2.0", "", {}, "sha512-jW/BLSTpcvExDhqJGxtIPgGr2O0IFF8XUNDwEbfCfhrXT8a4xztQ9Lv6U/vbYzYC0xVWn+3zv6YnLUh3bEFUKA=="],
 
     "@henrygd/semaphore": ["@henrygd/semaphore@0.0.2", "", {}, "sha512-N3W7MKwTRmAxOjeG0NAT18oe2Xn3KdjkpMR6crbkF1UDamMGPjyigqEsefiv+qTaxibtc1a+zXCVzb9YXANVqw=="],
 

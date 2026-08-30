@@ -12,7 +12,7 @@
 		"sync_and_purge": "lingui extract --overwrite --clean && lingui compile"
 	},
 	"dependencies": {
-		"@henrygd/queue": "^1.0.7",
+		"@henrygd/queue": "^1.2.0",
 		"@henrygd/semaphore": "^0.0.2",
 		"@lingui/detect-locale": "^5.4.1",
 		"@lingui/macro": "^5.4.1",
