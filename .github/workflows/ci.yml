@@ -51,7 +51,7 @@ jobs:
           bun run build
 
       - name: Lint (golangci-lint)
-        uses: golangci/golangci-lint-action@v8
+        uses: golangci/golangci-lint-action@v9
         with:
           version: latest
           # --new-from-rev=origin/main: this PR enables linters (gosec, revive, ...)
