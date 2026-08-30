@@ -613,13 +613,29 @@ msgstr "Date de création"
 msgid "Critical (%)"
 msgstr "Critique (%)"
 
+#: src/components/routes/system/disk-io-sheet.tsx
+msgid "Cumulative data read since boot"
+msgstr ""
+
+#: src/components/routes/system/disk-io-sheet.tsx
+msgid "Cumulative data written since boot"
+msgstr ""
+
 #: src/components/routes/system/network-sheet.tsx
 msgid "Cumulative Download"
 msgstr "Téléchargement cumulatif"
 
+#: src/components/routes/system/disk-io-sheet.tsx
+msgid "Cumulative Read"
+msgstr ""
+
 #: src/components/routes/system/network-sheet.tsx
 msgid "Cumulative Upload"
 msgstr "Téléversement cumulatif"
+
+#: src/components/routes/system/disk-io-sheet.tsx
+msgid "Cumulative Write"
+msgstr ""
 
 #. Context: Battery state
 #. Context: Battery state
@@ -699,14 +715,13 @@ msgid "Disk"
 msgstr "Disque"
 
 #: src/components/routes/system/charts/disk-charts.tsx
-msgid "Disk I/O"
-msgstr "Entrée/Sortie disque"
+#~ msgid "Disk I/O"
+#~ msgstr "Entrée/Sortie disque"
 
 #: src/components/routes/settings/general.tsx
 msgid "Disk unit"
 msgstr "Unité disque"
 
-#: src/components/routes/system/charts/disk-charts.tsx
 #: src/components/routes/system/charts/disk-charts.tsx
 #: src/lib/alerts.ts
 msgid "Disk Usage"
@@ -715,6 +730,10 @@ msgstr "Utilisation du disque"
 #: src/components/routes/system/charts/disk-charts.tsx
 msgid "Disk usage of {extraFsName}"
 msgstr "Utilisation du disque de {extraFsName}"
+
+#: src/components/routes/system/charts/disk-charts.tsx
+msgid "Disk usage of {rootLabel}"
+msgstr ""
 
 #: src/components/routes/system/info-bar.tsx
 msgctxt "Layout display options"
@@ -1647,6 +1666,7 @@ msgstr "Heures calmes"
 #: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx
+#: src/components/routes/system/disk-io-sheet.tsx
 msgid "Read"
 msgstr "Lecture"
 
@@ -1722,6 +1742,11 @@ msgstr ""
 #: src/components/add-monitor.tsx
 #~ msgid "Retry the check a few times before marking as down"
 #~ msgstr ""
+
+#: src/components/routes/system/charts/disk-charts.tsx
+#: src/components/routes/system/charts/disk-charts.tsx
+msgid "Root"
+msgstr ""
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgctxt "Root disk label"
@@ -2058,8 +2083,12 @@ msgid "Throughput of {extraFsName}"
 msgstr "Débit de {extraFsName}"
 
 #: src/components/routes/system/charts/disk-charts.tsx
-msgid "Throughput of root filesystem"
-msgstr "Débit du système de fichiers racine"
+msgid "Throughput of {rootLabel}"
+msgstr ""
+
+#: src/components/routes/system/charts/disk-charts.tsx
+#~ msgid "Throughput of root filesystem"
+#~ msgstr "Débit du système de fichiers racine"
 
 #: src/components/routes/settings/general.tsx
 msgid "Time format"
@@ -2250,6 +2279,7 @@ msgid "URL"
 msgstr ""
 
 #: src/components/routes/system/charts/disk-charts.tsx
+#: src/components/routes/system/charts/disk-charts.tsx
 #: src/components/routes/system/charts/gpu-charts.tsx
 #: src/components/routes/system/charts/gpu-charts.tsx
 #: src/components/routes/system/charts/gpu-charts.tsx
@@ -2258,8 +2288,8 @@ msgid "Usage"
 msgstr "Utilisation"
 
 #: src/components/routes/system/charts/disk-charts.tsx
-msgid "Usage of root partition"
-msgstr "Utilisation de la partition racine"
+#~ msgid "Usage of root partition"
+#~ msgstr "Utilisation de la partition racine"
 
 #: src/components/monitors-table/monitors-table.tsx
 msgid "Use the Add Monitor button to get started."
@@ -2356,6 +2386,7 @@ msgstr "Commande Windows"
 
 #. Disk write
 #: src/components/routes/system/charts/disk-charts.tsx
+#: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx

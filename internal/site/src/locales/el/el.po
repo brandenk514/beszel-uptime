@@ -50,6 +50,11 @@ msgstr "{count, plural, one {{countString} λεπτό} other {{countString} λε
 msgid "{threads, plural, one {# thread} other {# threads}}"
 msgstr "{threads, plural, one {# thread} other {# threads}}"
 
+#. placeholder {0}: monitors.length
+#: src/components/routes/status-page.tsx
+msgid "{upCount} of {0} monitors operational"
+msgstr ""
+
 #: src/lib/utils.ts
 msgid "1 hour"
 msgstr "1 ώρα"
@@ -89,6 +94,10 @@ msgstr "30 ημέρες"
 msgid "5 min"
 msgstr "5 λ"
 
+#: src/components/routes/monitor.tsx
+msgid "Across the {totalChecks} checks in the last {rangeLabel}"
+msgstr ""
+
 #. Table column
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/tokens-fingerprints.tsx
@@ -120,6 +129,12 @@ msgstr "Ενεργή κατάσταση"
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Add {foo}"
 msgstr "Προσθήκη {foo}"
+
+#: src/components/add-monitor.tsx
+#: src/components/add-monitor.tsx
+#: src/components/navbar.tsx
+msgid "Add Monitor"
+msgstr ""
 
 #: src/components/routes/settings/notifications.tsx
 msgid "Add URL"
@@ -162,6 +177,10 @@ msgstr "Ιστορικό ειδοποιήσεων"
 msgid "Alerts"
 msgstr "Ειδοποιήσεις"
 
+#: src/components/monitors-table/monitors-table.tsx
+msgid "All"
+msgstr ""
+
 #: src/components/command-palette.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/navbar.tsx
@@ -179,6 +198,11 @@ msgstr "Όλα τα κοντέινερ"
 msgid "All Systems"
 msgstr "Όλα τα συστήματα"
 
+#: src/components/add-monitor.tsx
+msgid "Allow self-signed or invalid certificates"
+msgstr ""
+
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Are you sure you want to delete {name}?"
 msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε το {name};"
@@ -317,8 +341,10 @@ msgstr "Δυνατότητα εκκίνησης"
 msgid "Can stop"
 msgstr "Δυνατότητα διακοπής"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/settings/quiet-hours.tsx
+#: src/components/routes/status-pages.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Cancel"
 msgstr "Ακύρωση"
@@ -368,9 +394,22 @@ msgstr "Πλάτος γραφήματος"
 msgid "Check {email} for a reset link."
 msgstr "Ελέγξτε το {email} για έναν σύνδεσμο επαναφοράς."
 
+#: src/components/add-monitor.tsx
+msgid "Check certificate expiry"
+msgstr ""
+
+#: src/components/routes/monitor.tsx
+msgid "Check frequency"
+msgstr ""
+
 #: src/components/routes/settings/layout.tsx
 msgid "Check logs for more details."
 msgstr "Ελέγξτε τα αρχεία καταγραφής για περισσότερες λεπτομέρειες."
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/routes/monitor.tsx
+msgid "Check now"
+msgstr ""
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Check your monitoring service"
@@ -381,6 +420,7 @@ msgid "Check your notification service"
 msgstr "Ελέγξτε την υπηρεσία ειδοποιήσεών σας"
 
 #: src/components/containers-table/containers-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
 #: src/components/routes/system/smart-table.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "Clear"
@@ -394,6 +434,10 @@ msgstr "Κάντε κλικ σε ένα κοντέινερ για να δείτ�
 msgid "Click on a device to view more information."
 msgstr "Κάντε κλικ σε μια συσκευή για να δείτε περισσότερες πληροφορίες."
 
+#: src/components/monitors-table/monitors-table.tsx
+msgid "Click on a monitor to view more information."
+msgstr ""
+
 #: src/components/systems-table/systems-table.tsx
 msgid "Click on a system to view more information."
 msgstr "Κάντε κλικ σε ένα σύστημα για να δείτε περισσότερες πληροφορίες."
@@ -401,6 +445,10 @@ msgstr "Κάντε κλικ σε ένα σύστημα για να δείτε π
 #: src/components/ui/input-copy.tsx
 msgid "Click to copy"
 msgstr "Κάντε κλικ για αντιγραφή"
+
+#: src/components/monitors-table/monitors-table.tsx
+msgid "Columns"
+msgstr ""
 
 #: src/components/login/forgot-pass-form.tsx
 #: src/components/login/forgot-pass-form.tsx
@@ -424,10 +472,15 @@ msgstr "Διενέξεις"
 msgid "Connection is down"
 msgstr "Η σύνδεση είναι εκτός λειτουργίας"
 
+#: src/components/add-monitor.tsx
+msgid "Container name or ID"
+msgstr ""
+
 #: src/components/routes/system.tsx
 msgid "Containers"
 msgstr "Κοντέινερ"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Continue"
@@ -475,6 +528,10 @@ msgstr "Αντιγραφή ονόματος"
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "Copy public key"
 msgstr "Αντιγραφή δημόσιου κλειδιού"
+
+#: src/components/add-monitor.tsx
+msgid "Copy push URL"
+msgstr ""
 
 #: src/components/copy-to-clipboard.tsx
 msgid "Copy text"
@@ -527,8 +584,13 @@ msgid "CPU Usage"
 msgstr "Χρήση CPU"
 
 #: src/components/routes/settings/quiet-hours.tsx
+#: src/components/routes/status-pages.tsx
 msgid "Create"
 msgstr "Δημιουργία"
+
+#: src/components/routes/status-pages.tsx
+msgid "Create a public status page that lists your monitors and their current status."
+msgstr ""
 
 #: src/components/login/auth-form.tsx
 msgid "Create account"
@@ -543,13 +605,29 @@ msgstr "Δημιουργήθηκε"
 msgid "Critical (%)"
 msgstr "Κρίσιμο (%)"
 
+#: src/components/routes/system/disk-io-sheet.tsx
+msgid "Cumulative data read since boot"
+msgstr ""
+
+#: src/components/routes/system/disk-io-sheet.tsx
+msgid "Cumulative data written since boot"
+msgstr ""
+
 #: src/components/routes/system/network-sheet.tsx
 msgid "Cumulative Download"
 msgstr "Συνολική λήψη"
 
+#: src/components/routes/system/disk-io-sheet.tsx
+msgid "Cumulative Read"
+msgstr ""
+
 #: src/components/routes/system/network-sheet.tsx
 msgid "Cumulative Upload"
 msgstr "Συνολική αποστολή"
+
+#: src/components/routes/system/disk-io-sheet.tsx
+msgid "Cumulative Write"
+msgstr ""
 
 #. Context: Battery state
 #. Context: Battery state
@@ -577,8 +655,14 @@ msgstr "Προεπιλογή"
 msgid "Default time period"
 msgstr "Προεπιλεγμένη χρονική περίοδος"
 
+#: src/components/add-monitor.tsx
+msgid "Delay (sec)"
+msgstr ""
+
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/settings/quiet-hours.tsx
+#: src/components/routes/status-pages.tsx
 #: src/components/routes/system/smart-table.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Delete"
@@ -588,9 +672,17 @@ msgstr "Διαγραφή"
 msgid "Delete fingerprint"
 msgstr "Διαγραφή αποτυπώματος"
 
+#: src/components/routes/status-pages.tsx
+msgid "Delete status page?"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Description"
 msgstr "Περιγραφή"
+
+#: src/components/routes/status-pages.tsx
+msgid "Description (optional)"
+msgstr ""
 
 #: src/components/containers-table/containers-table.tsx
 msgid "Detail"
@@ -599,6 +691,10 @@ msgstr "Λεπτομέρεια"
 #: src/components/routes/system/smart-table.tsx
 msgid "Device"
 msgstr "Συσκευή"
+
+#: src/components/routes/status-pages.tsx
+msgid "Disabled pages are not publicly accessible."
+msgstr ""
 
 #. Context: Battery state
 #: src/lib/i18n.ts
@@ -611,14 +707,13 @@ msgid "Disk"
 msgstr "Δίσκος"
 
 #: src/components/routes/system/charts/disk-charts.tsx
-msgid "Disk I/O"
-msgstr "I/O δίσκου"
+#~ msgid "Disk I/O"
+#~ msgstr "I/O δίσκου"
 
 #: src/components/routes/settings/general.tsx
 msgid "Disk unit"
 msgstr "Μονάδα δίσκου"
 
-#: src/components/routes/system/charts/disk-charts.tsx
 #: src/components/routes/system/charts/disk-charts.tsx
 #: src/lib/alerts.ts
 msgid "Disk Usage"
@@ -628,10 +723,22 @@ msgstr "Χρήση δίσκου"
 msgid "Disk usage of {extraFsName}"
 msgstr "Χρήση δίσκου του {extraFsName}"
 
+#: src/components/routes/system/charts/disk-charts.tsx
+msgid "Disk usage of {rootLabel}"
+msgstr ""
+
 #: src/components/routes/system/info-bar.tsx
 msgctxt "Layout display options"
 msgid "Display"
 msgstr "Εμφάνιση"
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "DNS"
+msgstr ""
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "Docker"
+msgstr ""
 
 #: src/components/routes/system/charts/cpu-charts.tsx
 msgid "Docker CPU Usage"
@@ -645,13 +752,28 @@ msgstr "Χρήση μνήμης Docker"
 msgid "Docker Network I/O"
 msgstr "I/O δικτύου Docker"
 
+#: src/components/add-monitor.tsx
+msgid "Docker socket / API"
+msgstr ""
+
 #: src/components/command-palette.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Documentation"
 msgstr "Τεκμηρίωση"
 
+#: src/components/add-monitor.tsx
+msgid "Domain"
+msgstr ""
+
 #. Context: System is down
 #: src/components/alerts-history-columns.tsx
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/routes/monitor.tsx
+#: src/components/routes/monitor.tsx
 #: src/components/routes/system/info-bar.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 #: src/lib/alerts.ts
@@ -670,6 +792,8 @@ msgstr "Λήψη"
 msgid "Duration"
 msgstr "Διάρκεια"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/routes/monitor.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Edit"
@@ -679,6 +803,14 @@ msgstr "Επεξεργασία"
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Edit {foo}"
 msgstr "Επεξεργασία {foo}"
+
+#: src/components/add-monitor.tsx
+msgid "Edit Monitor"
+msgstr ""
+
+#: src/components/routes/status-pages.tsx
+msgid "Edit Status Page"
+msgstr ""
 
 #: src/components/login/auth-form.tsx
 #: src/components/login/forgot-pass-form.tsx
@@ -694,6 +826,11 @@ msgstr "Ειδοποιήσεις μέσω email"
 #: src/lib/i18n.ts
 msgid "Empty"
 msgstr "Άδειο"
+
+#: src/components/routes/status-pages.tsx
+#: src/components/routes/status-pages.tsx
+msgid "Enabled"
+msgstr ""
 
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
@@ -760,6 +897,18 @@ msgstr "Τα υπάρχοντα συστήματα που δεν ορίζοντ�
 msgid "Exited active"
 msgstr "Ενεργό μετά την έξοδο"
 
+#: src/components/add-monitor.tsx
+msgid "Expected body"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Expected status"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Expected value"
+msgstr ""
+
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "Expires after one hour or on hub restart."
 msgstr "Λήγει μετά από μία ώρα ή με επανεκκίνηση του κόμβου."
@@ -776,9 +925,17 @@ msgstr "Εξαγωγή διαμόρφωσης"
 msgid "Export your current systems configuration."
 msgstr "Εξαγάγετε την τρέχουσα διαμόρφωση των συστημάτων σας."
 
+#: src/components/add-monitor.tsx
+msgid "Extra attempts before marking as down"
+msgstr ""
+
 #: src/components/routes/settings/general.tsx
 msgid "Fahrenheit (°F)"
 msgstr "Φαρενάιτ (°F)"
+
+#: src/components/add-monitor.tsx
+msgid "Fail if the TLS certificate expires within 14 days"
+msgstr ""
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Failed"
@@ -820,6 +977,7 @@ msgid "Fans"
 msgstr "Ανεμιστήρες"
 
 #: src/components/containers-table/containers-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/system/chart-card.tsx
 #: src/components/routes/system/smart-table.tsx
@@ -862,6 +1020,10 @@ msgstr "Πλήρες"
 msgid "General"
 msgstr "Γενικά"
 
+#: src/components/add-monitor.tsx
+msgid "Generate"
+msgstr ""
+
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Global"
 msgstr "Καθολικό"
@@ -882,6 +1044,7 @@ msgstr "Κατανάλωση ισχύος GPU"
 msgid "GPU Usage"
 msgstr "Χρήση GPU"
 
+#: src/components/monitors-table/monitors-table.tsx
 #: src/components/routes/system/info-bar.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "Grid"
@@ -909,9 +1072,18 @@ msgctxt "Button to copy install command"
 msgid "Homebrew command"
 msgstr "Εντολή Homebrew"
 
+#: src/components/add-monitor.tsx
+msgid "Host"
+msgstr ""
+
+#: src/components/add-monitor.tsx
 #: src/components/add-system.tsx
 msgid "Host / IP"
 msgstr "Κεντρικός υπολογιστής / IP"
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "HTTP"
+msgstr ""
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "HTTP Method"
@@ -941,6 +1113,10 @@ msgstr "Χρήση I/O"
 msgid "Idle"
 msgstr "Αδράνεια"
 
+#: src/components/routes/status-pages.tsx
+msgid "If off, only status dots are shown."
+msgstr ""
+
 #: src/components/login/forgot-pass-form.tsx
 msgid "If you've lost the password to your admin account, you may reset it using the following command."
 msgstr "Αν έχετε χάσει τον κωδικό πρόσβασης του λογαριασμού διαχειριστή σας, μπορείτε να τον επαναφέρετε χρησιμοποιώντας την ακόλουθη εντολή."
@@ -954,18 +1130,33 @@ msgstr "Εικόνα"
 msgid "Inactive"
 msgstr "Ανενεργό"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/routes/monitor.tsx
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Interval"
 msgstr "Διάστημα"
+
+#: src/components/add-monitor.tsx
+msgid "Interval (sec)"
+msgstr ""
 
 #: src/components/login/auth-form.tsx
 msgid "Invalid email address."
 msgstr "Μη έγκυρη διεύθυνση email."
 
+#: src/components/add-monitor.tsx
+msgid "JSON query (optional)"
+msgstr ""
+
 #: src/components/routes/settings/general.tsx
 msgid "Language"
 msgstr "Γλώσσα"
 
+#: src/components/routes/monitor.tsx
+msgid "Latency of each check over time"
+msgstr ""
+
+#: src/components/monitors-table/monitors-table.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "Layout"
 msgstr "Διάταξη"
@@ -1008,6 +1199,10 @@ msgstr "Μέσ. φορτίο"
 msgid "Load state"
 msgstr "Κατάσταση φόρτωσης"
 
+#: src/components/routes/status-pages.tsx
+msgid "Loading status pages..."
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Loading..."
 msgstr "Φόρτωση..."
@@ -1018,8 +1213,8 @@ msgid "Log Out"
 msgstr "Αποσύνδεση"
 
 #: src/components/login/login.tsx
-msgid "Login"
-msgstr "Σύνδεση"
+#~ msgid "Login"
+#~ msgstr "Σύνδεση"
 
 #: src/components/login/auth-form.tsx
 #: src/components/login/forgot-pass-form.tsx
@@ -1035,6 +1230,10 @@ msgstr "Αρχεία καταγραφής"
 #: src/components/routes/settings/notifications.tsx
 msgid "Looking instead for where to create alerts? Click the bell <0/> icons in the systems table."
 msgstr "Ψάχνετε πού μπορείτε να δημιουργήσετε ειδοποιήσεις; Κάντε κλικ στο καμπανάκι <0/> στον πίνακα συστημάτων."
+
+#: src/components/routes/status-pages.tsx
+msgid "Lowercase letters, numbers, and dashes. Used in the public URL."
+msgstr ""
 
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Main PID"
@@ -1080,14 +1279,43 @@ msgstr "Χρήση μνήμης"
 msgid "Memory usage of containers"
 msgstr "Χρήση μνήμης των κοντέινερ"
 
+#: src/components/add-monitor.tsx
+msgid "Method"
+msgstr ""
+
 #. Device model
 #: src/components/routes/system/smart-table.tsx
 msgid "Model"
 msgstr "Μοντέλο"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "Monitor"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Monitor a website, TCP port, host, DNS record, Docker container, WebSocket endpoint, Steam app, or a push heartbeat. The type determines which fields are required."
+msgstr ""
+
+#: src/components/routes/monitor.tsx
+msgid "Monitor type"
+msgstr ""
+
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/navbar.tsx
+#: src/components/navbar.tsx
+#: src/components/routes/monitors.tsx
+msgid "Monitors"
+msgstr ""
+
+#: src/components/routes/monitor.tsx
+msgid "Most recent first"
+msgstr ""
+
+#: src/components/add-monitor.tsx
 #: src/components/add-system.tsx
 #: src/components/alerts-history-columns.tsx
 #: src/components/containers-table/containers-table-columns.tsx
+#: src/components/routes/status-pages.tsx
 #: src/components/systemd-table/systemd-table-columns.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Name"
@@ -1114,11 +1342,32 @@ msgstr "Κίνηση δικτύου δημόσιων interfaces"
 msgid "Network unit"
 msgstr "Μονάδα δικτύου"
 
+#: src/components/routes/status-pages.tsx
+#: src/components/routes/status-pages.tsx
+msgid "New Status Page"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "No"
 msgstr "Όχι"
+
+#: src/components/routes/monitor.tsx
+msgid "No check data available yet"
+msgstr ""
+
+#: src/components/routes/monitor.tsx
+msgid "No checks yet"
+msgstr ""
+
+#: src/components/routes/status-page.tsx
+msgid "No monitors are assigned to this status page yet."
+msgstr ""
+
+#: src/components/monitors-table/monitors-table.tsx
+msgid "No monitors configured yet."
+msgstr ""
 
 #: src/components/command-palette.tsx
 #: src/components/systemd-table/systemd-table.tsx
@@ -1138,10 +1387,18 @@ msgstr "Κανένα αποτέλεσμα."
 msgid "No S.M.A.R.T. attributes available for this device."
 msgstr "Δεν υπάρχουν διαθέσιμα χαρακτηριστικά S.M.A.R.T. για αυτήν τη συσκευή."
 
+#: src/components/routes/status-pages.tsx
+msgid "No status pages yet"
+msgstr ""
+
 #: src/components/systems-table/systems-table.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "No systems found."
 msgstr "Δεν βρέθηκαν συστήματα."
+
+#: src/components/add-monitor.tsx
+msgid "None"
+msgstr ""
 
 #: src/components/command-palette.tsx
 #: src/components/routes/settings/layout.tsx
@@ -1165,6 +1422,10 @@ msgstr "Μία φορά"
 #: src/components/login/auth-form.tsx
 msgid "One-time password"
 msgstr "Κωδικός μίας χρήσης"
+
+#: src/components/add-monitor.tsx
+msgid "Only required if the hub runs in a container or reaches Docker over the network."
+msgstr ""
 
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/tokens-fingerprints.tsx
@@ -1223,10 +1484,17 @@ msgstr "Το αίτημα επαναφοράς κωδικού πρόσβασης
 msgid "Past"
 msgstr "Παρελθόν"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Pause"
 msgstr "Παύση"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/routes/monitor.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Paused"
 msgstr "Σε παύση"
@@ -1238,6 +1506,12 @@ msgstr "Σε παύση ({pausedSystemsLength})"
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Payload format"
 msgstr "Μορφή payload"
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/routes/monitor.tsx
+msgid "Pending"
+msgstr ""
 
 #: src/components/routes/system/cpu-sheet.tsx
 #: src/components/routes/system/cpu-sheet.tsx
@@ -1259,6 +1533,10 @@ msgstr "Μόνιμο"
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "Persistence"
 msgstr "Διατήρηση"
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "Ping"
+msgstr ""
 
 #: src/components/routes/settings/notifications.tsx
 msgid "Please <0>configure an SMTP server</0> to ensure alerts are delivered."
@@ -1293,6 +1571,7 @@ msgstr "Ανατρέξτε στην <0>τεκμηρίωση</0> για οδηγ�
 msgid "Please sign in to your account"
 msgstr "Συνδεθείτε στον λογαριασμό σας"
 
+#: src/components/add-monitor.tsx
 #: src/components/add-system.tsx
 msgid "Port"
 msgstr "Θύρα"
@@ -1302,10 +1581,18 @@ msgctxt "Container ports"
 msgid "Ports"
 msgstr "Θύρες"
 
+#: src/components/add-monitor.tsx
+msgid "POST to this URL (curl, cron, or your service) to record a heartbeat. The monitor is down if no heartbeat arrives within the check interval."
+msgstr ""
+
 #. Power On Time
 #: src/components/routes/system/smart-table.tsx
 msgid "Power On"
 msgstr "Χρόνος λειτουργίας"
+
+#: src/components/routes/status-page.tsx
+msgid "Powered by"
+msgstr ""
 
 #: src/components/routes/system/charts/gpu-charts.tsx
 #: src/components/routes/system/charts/memory-charts.tsx
@@ -1329,6 +1616,22 @@ msgstr "Δημόσιο κλειδί"
 msgid "Public Key"
 msgstr "Δημόσιο κλειδί"
 
+#: src/components/routes/status-pages.tsx
+msgid "Public status page that shows the status of your assigned monitors."
+msgstr ""
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "Push"
+msgstr ""
+
+#: src/components/routes/monitor.tsx
+msgid "Push heartbeat"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Push token"
+msgstr ""
+
 #: src/components/routes/system/disk-io-sheet.tsx
 msgctxt "Disk I/O average queue depth"
 msgid "Queue Depth"
@@ -1343,12 +1646,21 @@ msgstr "Ώρες σίγασης"
 #: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx
+#: src/components/routes/system/disk-io-sheet.tsx
 msgid "Read"
 msgstr "Ανάγνωση"
 
 #: src/components/routes/system/charts/network-charts.tsx
 msgid "Received"
 msgstr "Λήφθηκαν"
+
+#: src/components/routes/monitor.tsx
+msgid "Recent checks"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Record type"
+msgstr ""
 
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
@@ -1386,13 +1698,31 @@ msgstr "Επαναφορά κωδικού πρόσβασης"
 msgid "Resolved"
 msgstr "Επιλύθηκε"
 
+#: src/components/routes/monitor.tsx
+msgid "Response time"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Restarts"
 msgstr "Επανεκκινήσεις"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Resume"
 msgstr "Συνέχιση"
+
+#: src/components/add-monitor.tsx
+msgid "Retries"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Retry on failure"
+msgstr ""
+
+#: src/components/routes/system/charts/disk-charts.tsx
+#: src/components/routes/system/charts/disk-charts.tsx
+msgid "Root"
+msgstr ""
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgctxt "Root disk label"
@@ -1419,6 +1749,10 @@ msgstr "Λεπτομέρειες S.M.A.R.T."
 msgid "S.M.A.R.T. Self-Test"
 msgstr "Αυτοέλεγχος S.M.A.R.T."
 
+#: src/components/routes/status-pages.tsx
+msgid "Save"
+msgstr ""
+
 #: src/components/add-system.tsx
 msgid "Save {foo}"
 msgstr "Αποθήκευση {foo}"
@@ -1426,6 +1760,10 @@ msgstr "Αποθήκευση {foo}"
 #: src/components/routes/settings/notifications.tsx
 msgid "Save address using enter key or comma. Leave blank to disable email notifications."
 msgstr "Αποθηκεύστε τη διεύθυνση με Enter ή κόμμα. Αφήστε κενό για να απενεργοποιήσετε τις ειδοποιήσεις email."
+
+#: src/components/add-monitor.tsx
+msgid "Save Monitor"
+msgstr ""
 
 #: src/components/routes/settings/general.tsx
 #: src/components/routes/settings/notifications.tsx
@@ -1435,6 +1773,11 @@ msgstr "Αποθήκευση ρυθμίσεων"
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "Saved in the database and does not expire until you disable it."
 msgstr "Αποθηκεύεται στη βάση δεδομένων και δεν λήγει μέχρι να το απενεργοποιήσετε."
+
+#: src/components/add-monitor.tsx
+#: src/components/routes/status-pages.tsx
+msgid "Saving..."
+msgstr ""
 
 #: src/components/routes/settings/quiet-hours.tsx
 msgid "Schedule"
@@ -1459,6 +1802,10 @@ msgstr "Αναζήτηση συστημάτων ή ρυθμίσεων..."
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Seconds between pings (default: 60)"
 msgstr "Δευτερόλεπτα μεταξύ ping (προεπιλογή: 60)"
+
+#: src/components/add-monitor.tsx
+msgid "Secure (skip TLS verify)"
+msgstr ""
 
 #: src/components/alerts/alerts-sheet.tsx
 msgid "See <0>notification settings</0> to configure how you receive alerts."
@@ -1519,9 +1866,17 @@ msgstr "Ρυθμίσεις"
 msgid "Settings saved"
 msgstr "Οι ρυθμίσεις αποθηκεύτηκαν"
 
+#: src/components/routes/status-pages.tsx
+msgid "Show monitor names"
+msgstr ""
+
 #: src/components/login/auth-form.tsx
 msgid "Sign in"
 msgstr "Σύνδεση"
+
+#: src/components/routes/status-pages.tsx
+msgid "Slug"
+msgstr ""
 
 #: src/components/command-palette.tsx
 msgid "SMTP settings"
@@ -1544,12 +1899,34 @@ msgid "State"
 msgstr "Κατάσταση"
 
 #: src/components/containers-table/containers-table-columns.tsx
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/routes/system/smart-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 #: src/components/systems-table/systems-table.tsx
 #: src/lib/alerts.ts
 msgid "Status"
 msgstr "Κατάσταση"
+
+#: src/components/add-monitor.tsx
+msgid "Status page (optional)"
+msgstr ""
+
+#: src/components/routes/status-page.tsx
+msgid "Status page not found"
+msgstr ""
+
+#: src/components/navbar.tsx
+#: src/components/navbar.tsx
+msgid "Status Pages"
+msgstr ""
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "Steam"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Steam App ID"
+msgstr ""
 
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
@@ -1603,6 +1980,7 @@ msgstr "Συστήματα"
 msgid "Systems may be managed in a <0>config.yml</0> file inside your data directory."
 msgstr "Η διαχείριση των συστημάτων μπορεί να γίνεται σε ένα αρχείο <0>config.yml</0> μέσα στον κατάλογο δεδομένων σας."
 
+#: src/components/monitors-table/monitors-table.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "Table"
 msgstr "Πίνακας"
@@ -1615,6 +1993,10 @@ msgstr "Καρτέλες"
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Tasks"
 msgstr "Εργασίες"
+
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "TCP"
+msgstr ""
 
 #. Temperature label in systems table
 #: src/components/routes/system/smart-table.tsx
@@ -1655,25 +2037,46 @@ msgstr "Η συνολική κατάσταση είναι <0>ok</0> όταν ό�
 msgid "Then log into the backend and reset your user account password in the users table."
 msgstr "Στη συνέχεια, συνδεθείτε στο backend και επαναφέρετε τον κωδικό πρόσβασης του λογαριασμού χρήστη στον πίνακα χρηστών."
 
+#: src/components/monitors-table/monitors-table-columns.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "This action cannot be undone. This will permanently delete all current records for {name} from the database."
 msgstr "Αυτή η ενέργεια δεν μπορεί να αναιρεθεί. Θα διαγράψει οριστικά όλες τις τρέχουσες εγγραφές για το {name} από τη βάση δεδομένων."
 
+#: src/components/routes/status-page.tsx
+msgid "This status page does not exist or is disabled."
+msgstr ""
+
 #: src/components/routes/settings/alerts-history-data-table.tsx
 msgid "This will permanently delete all selected records from the database."
 msgstr "Αυτό θα διαγράψει οριστικά όλες τις επιλεγμένες εγγραφές από τη βάση δεδομένων."
+
+#: src/components/routes/status-pages.tsx
+msgid "This will permanently remove the status page. Monitors that reference it will be unaffected."
+msgstr ""
 
 #: src/components/routes/system/charts/disk-charts.tsx
 msgid "Throughput of {extraFsName}"
 msgstr "Ρυθμός μεταφοράς του {extraFsName}"
 
 #: src/components/routes/system/charts/disk-charts.tsx
-msgid "Throughput of root filesystem"
-msgstr "Ρυθμός μεταφοράς του ριζικού συστήματος αρχείων"
+msgid "Throughput of {rootLabel}"
+msgstr ""
+
+#: src/components/routes/system/charts/disk-charts.tsx
+#~ msgid "Throughput of root filesystem"
+#~ msgstr "Ρυθμός μεταφοράς του ριζικού συστήματος αρχείων"
 
 #: src/components/routes/settings/general.tsx
 msgid "Time format"
 msgstr "Μορφή ώρας"
+
+#: src/components/routes/monitor.tsx
+msgid "Time range"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "Timeout (sec)"
+msgstr ""
 
 #: src/components/routes/settings/notifications.tsx
 msgid "To email(s)"
@@ -1773,6 +2176,9 @@ msgstr "Ενεργοποιείται όταν η κατάσταση εναλλά
 msgid "Triggers when usage of any disk exceeds a threshold"
 msgstr "Ενεργοποιείται όταν η χρήση οποιουδήποτε δίσκου υπερβαίνει ένα όριο"
 
+#: src/components/add-monitor.tsx
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/routes/monitor.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/system/smart-table.tsx
@@ -1804,6 +2210,13 @@ msgid "Unlimited"
 msgstr "Απεριόριστο"
 
 #. Context: System is up
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table-columns.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/monitors-table/monitors-table.tsx
+#: src/components/routes/monitor.tsx
+#: src/components/routes/monitor.tsx
 #: src/components/routes/system/info-bar.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Up"
@@ -1831,11 +2244,17 @@ msgstr "Ενημερώνεται κάθε 10 λεπτά."
 msgid "Upload"
 msgstr "Αποστολή"
 
+#: src/components/routes/monitor.tsx
 #: src/components/routes/system/info-bar.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "Uptime"
 msgstr "Χρόνος λειτουργίας"
 
+#: src/components/add-monitor.tsx
+msgid "URL"
+msgstr ""
+
+#: src/components/routes/system/charts/disk-charts.tsx
 #: src/components/routes/system/charts/disk-charts.tsx
 #: src/components/routes/system/charts/gpu-charts.tsx
 #: src/components/routes/system/charts/gpu-charts.tsx
@@ -1845,8 +2264,12 @@ msgid "Usage"
 msgstr "Χρήση"
 
 #: src/components/routes/system/charts/disk-charts.tsx
-msgid "Usage of root partition"
-msgstr "Χρήση διαμερίσματος root"
+#~ msgid "Usage of root partition"
+#~ msgstr "Χρήση διαμερίσματος root"
+
+#: src/components/monitors-table/monitors-table.tsx
+msgid "Use the Add Monitor button to get started."
+msgstr ""
 
 #: src/components/routes/system/charts/memory-charts.tsx
 #: src/components/routes/system/charts/memory-charts.tsx
@@ -1867,10 +2290,16 @@ msgstr "Χρήση"
 msgid "Value"
 msgstr "Τιμή"
 
+#: src/components/monitors-table/monitors-table.tsx
 #: src/components/systems-table/systems-table.tsx
 msgid "View"
 msgstr "Προβολή"
 
+#: src/components/routes/monitor.tsx
+msgid "View less"
+msgstr ""
+
+#: src/components/routes/monitor.tsx
 #: src/components/routes/system/cpu-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/network-sheet.tsx
@@ -1909,6 +2338,14 @@ msgstr "Όρια προειδοποίησης"
 msgid "Webhook / Push notifications"
 msgstr "Webhook / Ειδοποιήσεις Push"
 
+#: src/components/monitors-table/monitors-table-columns.tsx
+msgid "WebSocket"
+msgstr ""
+
+#: src/components/add-monitor.tsx
+msgid "WebSocket URL"
+msgstr ""
+
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "When enabled, this token allows agents to self-register without prior system creation."
 msgstr "Όταν είναι ενεργοποιημένο, αυτό το διακριτικό επιτρέπει στους πράκτορες να αυτοκαταχωρίζονται χωρίς προηγούμενη δημιουργία συστήματος."
@@ -1925,6 +2362,7 @@ msgstr "Εντολή Windows"
 
 #. Disk write
 #: src/components/routes/system/charts/disk-charts.tsx
+#: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx

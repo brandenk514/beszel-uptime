@@ -613,13 +613,29 @@ msgstr "Создано"
 msgid "Critical (%)"
 msgstr "Критический (%)"
 
+#: src/components/routes/system/disk-io-sheet.tsx
+msgid "Cumulative data read since boot"
+msgstr ""
+
+#: src/components/routes/system/disk-io-sheet.tsx
+msgid "Cumulative data written since boot"
+msgstr ""
+
 #: src/components/routes/system/network-sheet.tsx
 msgid "Cumulative Download"
 msgstr "Совокупная загрузка"
 
+#: src/components/routes/system/disk-io-sheet.tsx
+msgid "Cumulative Read"
+msgstr ""
+
 #: src/components/routes/system/network-sheet.tsx
 msgid "Cumulative Upload"
 msgstr "Совокупная отдача"
+
+#: src/components/routes/system/disk-io-sheet.tsx
+msgid "Cumulative Write"
+msgstr ""
 
 #. Context: Battery state
 #. Context: Battery state
@@ -699,14 +715,13 @@ msgid "Disk"
 msgstr "Диск"
 
 #: src/components/routes/system/charts/disk-charts.tsx
-msgid "Disk I/O"
-msgstr "Дисковый ввод/вывод"
+#~ msgid "Disk I/O"
+#~ msgstr "Дисковый ввод/вывод"
 
 #: src/components/routes/settings/general.tsx
 msgid "Disk unit"
 msgstr "Единицы измерения дисковой активности"
 
-#: src/components/routes/system/charts/disk-charts.tsx
 #: src/components/routes/system/charts/disk-charts.tsx
 #: src/lib/alerts.ts
 msgid "Disk Usage"
@@ -715,6 +730,10 @@ msgstr "Использование диска"
 #: src/components/routes/system/charts/disk-charts.tsx
 msgid "Disk usage of {extraFsName}"
 msgstr "Использование диска {extraFsName}"
+
+#: src/components/routes/system/charts/disk-charts.tsx
+msgid "Disk usage of {rootLabel}"
+msgstr ""
 
 #: src/components/routes/system/info-bar.tsx
 msgctxt "Layout display options"
@@ -1647,6 +1666,7 @@ msgstr "Тихие часы"
 #: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx
+#: src/components/routes/system/disk-io-sheet.tsx
 msgid "Read"
 msgstr "Чтение"
 
@@ -1722,6 +1742,11 @@ msgstr ""
 #: src/components/add-monitor.tsx
 #~ msgid "Retry the check a few times before marking as down"
 #~ msgstr ""
+
+#: src/components/routes/system/charts/disk-charts.tsx
+#: src/components/routes/system/charts/disk-charts.tsx
+msgid "Root"
+msgstr ""
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgctxt "Root disk label"
@@ -2058,8 +2083,12 @@ msgid "Throughput of {extraFsName}"
 msgstr "Пропускная способность {extraFsName}"
 
 #: src/components/routes/system/charts/disk-charts.tsx
-msgid "Throughput of root filesystem"
-msgstr "Пропускная способность корневой файловой системы"
+msgid "Throughput of {rootLabel}"
+msgstr ""
+
+#: src/components/routes/system/charts/disk-charts.tsx
+#~ msgid "Throughput of root filesystem"
+#~ msgstr "Пропускная способность корневой файловой системы"
 
 #: src/components/routes/settings/general.tsx
 msgid "Time format"
@@ -2250,6 +2279,7 @@ msgid "URL"
 msgstr ""
 
 #: src/components/routes/system/charts/disk-charts.tsx
+#: src/components/routes/system/charts/disk-charts.tsx
 #: src/components/routes/system/charts/gpu-charts.tsx
 #: src/components/routes/system/charts/gpu-charts.tsx
 #: src/components/routes/system/charts/gpu-charts.tsx
@@ -2258,8 +2288,8 @@ msgid "Usage"
 msgstr "Использование"
 
 #: src/components/routes/system/charts/disk-charts.tsx
-msgid "Usage of root partition"
-msgstr "Использование корневого раздела"
+#~ msgid "Usage of root partition"
+#~ msgstr "Использование корневого раздела"
 
 #: src/components/monitors-table/monitors-table.tsx
 msgid "Use the Add Monitor button to get started."
@@ -2356,6 +2386,7 @@ msgstr "Команда Windows"
 
 #. Disk write
 #: src/components/routes/system/charts/disk-charts.tsx
+#: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx

@@ -608,13 +608,29 @@ msgstr "Created"
 msgid "Critical (%)"
 msgstr "Critical (%)"
 
+#: src/components/routes/system/disk-io-sheet.tsx
+msgid "Cumulative data read since boot"
+msgstr "Cumulative data read since boot"
+
+#: src/components/routes/system/disk-io-sheet.tsx
+msgid "Cumulative data written since boot"
+msgstr "Cumulative data written since boot"
+
 #: src/components/routes/system/network-sheet.tsx
 msgid "Cumulative Download"
 msgstr "Cumulative Download"
 
+#: src/components/routes/system/disk-io-sheet.tsx
+msgid "Cumulative Read"
+msgstr "Cumulative Read"
+
 #: src/components/routes/system/network-sheet.tsx
 msgid "Cumulative Upload"
 msgstr "Cumulative Upload"
+
+#: src/components/routes/system/disk-io-sheet.tsx
+msgid "Cumulative Write"
+msgstr "Cumulative Write"
 
 #. Context: Battery state
 #. Context: Battery state
@@ -694,14 +710,13 @@ msgid "Disk"
 msgstr "Disk"
 
 #: src/components/routes/system/charts/disk-charts.tsx
-msgid "Disk I/O"
-msgstr "Disk I/O"
+#~ msgid "Disk I/O"
+#~ msgstr "Disk I/O"
 
 #: src/components/routes/settings/general.tsx
 msgid "Disk unit"
 msgstr "Disk unit"
 
-#: src/components/routes/system/charts/disk-charts.tsx
 #: src/components/routes/system/charts/disk-charts.tsx
 #: src/lib/alerts.ts
 msgid "Disk Usage"
@@ -710,6 +725,10 @@ msgstr "Disk Usage"
 #: src/components/routes/system/charts/disk-charts.tsx
 msgid "Disk usage of {extraFsName}"
 msgstr "Disk usage of {extraFsName}"
+
+#: src/components/routes/system/charts/disk-charts.tsx
+msgid "Disk usage of {rootLabel}"
+msgstr "Disk usage of {rootLabel}"
 
 #: src/components/routes/system/info-bar.tsx
 msgctxt "Layout display options"
@@ -1642,6 +1661,7 @@ msgstr "Quiet Hours"
 #: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx
+#: src/components/routes/system/disk-io-sheet.tsx
 msgid "Read"
 msgstr "Read"
 
@@ -1717,6 +1737,11 @@ msgstr "Retry on failure"
 #: src/components/add-monitor.tsx
 #~ msgid "Retry the check a few times before marking as down"
 #~ msgstr "Retry the check a few times before marking as down"
+
+#: src/components/routes/system/charts/disk-charts.tsx
+#: src/components/routes/system/charts/disk-charts.tsx
+msgid "Root"
+msgstr "Root"
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgctxt "Root disk label"
@@ -2053,8 +2078,12 @@ msgid "Throughput of {extraFsName}"
 msgstr "Throughput of {extraFsName}"
 
 #: src/components/routes/system/charts/disk-charts.tsx
-msgid "Throughput of root filesystem"
-msgstr "Throughput of root filesystem"
+msgid "Throughput of {rootLabel}"
+msgstr "Throughput of {rootLabel}"
+
+#: src/components/routes/system/charts/disk-charts.tsx
+#~ msgid "Throughput of root filesystem"
+#~ msgstr "Throughput of root filesystem"
 
 #: src/components/routes/settings/general.tsx
 msgid "Time format"
@@ -2245,6 +2274,7 @@ msgid "URL"
 msgstr "URL"
 
 #: src/components/routes/system/charts/disk-charts.tsx
+#: src/components/routes/system/charts/disk-charts.tsx
 #: src/components/routes/system/charts/gpu-charts.tsx
 #: src/components/routes/system/charts/gpu-charts.tsx
 #: src/components/routes/system/charts/gpu-charts.tsx
@@ -2253,8 +2283,8 @@ msgid "Usage"
 msgstr "Usage"
 
 #: src/components/routes/system/charts/disk-charts.tsx
-msgid "Usage of root partition"
-msgstr "Usage of root partition"
+#~ msgid "Usage of root partition"
+#~ msgstr "Usage of root partition"
 
 #: src/components/monitors-table/monitors-table.tsx
 msgid "Use the Add Monitor button to get started."
@@ -2351,6 +2381,7 @@ msgstr "Windows command"
 
 #. Disk write
 #: src/components/routes/system/charts/disk-charts.tsx
+#: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx
 #: src/components/routes/system/disk-io-sheet.tsx
