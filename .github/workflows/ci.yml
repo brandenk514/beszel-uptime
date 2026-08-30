@@ -51,7 +51,7 @@ jobs:
           bun run build
 
       - name: Lint (golangci-lint)
-        uses: golangci/golangci-lint-action@v8
+        uses: golangci/golangci-lint-action@v9
         with:
           version: latest
           # --new-from-rev=origin/main: this PR enables linters (gosec, revive, ...)
@@ -78,7 +78,7 @@ jobs:
 
       - name: Upload coverage
         if: always() && !cancelled()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: go-coverage
           path: coverage.out

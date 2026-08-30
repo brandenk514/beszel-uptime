@@ -1,6 +1,6 @@
 # Beszel-Uptime
 
-**This project was coded using AI (Qwen3.8:27B to be precise).I love Bezsel and wanted to add an uptime monitoring feature to simplify my monitoring stack. Feel free to use it, but please understand this was a vibed coded project**
+**This project was built on the shoulder of giants. I love Bezsel and wanted to add an uptime monitoring feature to simplify my monitoring stack. This project was coded using AI (Qwen3.8:27B to be precise). Feel free to use it, but please understand this was a vibed coded project!**
 
 **I highly recommend checking out the original Beszel project and supporting them!**
 
