@@ -279,20 +279,22 @@ export function ExtraFsCharts({ systemData }: { systemData: SystemData }) {
 
 	return (
 		<div className="grid xl:grid-cols-2 gap-4">
-			{Object.keys(extraFs).sort((a, b) => a.localeCompare(b)).map((extraFsName) => {
-				let diskSize = systemStats.at(-1)?.stats.efs?.[extraFsName].d ?? NaN
-				// round to nearest GB
-				if (diskSize >= 100) {
-					diskSize = Math.round(diskSize)
-				}
-				return (
-					<div key={extraFsName} className="contents">
-						<DiskUsageChart systemData={systemData} extraFsName={extraFsName} />
+			{Object.keys(extraFs)
+				.sort((a, b) => a.localeCompare(b))
+				.map((extraFsName) => {
+					let diskSize = systemStats.at(-1)?.stats.efs?.[extraFsName].d ?? NaN
+					// round to nearest GB
+					if (diskSize >= 100) {
+						diskSize = Math.round(diskSize)
+					}
+					return (
+						<div key={extraFsName} className="contents">
+							<DiskUsageChart systemData={systemData} extraFsName={extraFsName} />
 
-						<DiskIOChart systemData={systemData} extraFsName={extraFsName} />
-					</div>
-				)
-			})}
+							<DiskIOChart systemData={systemData} extraFsName={extraFsName} />
+						</div>
+					)
+				})}
 		</div>
 	)
 }

@@ -281,7 +281,7 @@ export default memo(function DiskIOSheet({
 						>
 							<AreaChartDefault
 								chartData={chartData}
-                chartProps={{syncId: "c"}}
+								chartProps={{ syncId: "c" }}
 								dataPoints={[
 									{
 										label: t`Read`,
@@ -312,7 +312,7 @@ export default memo(function DiskIOSheet({
 						>
 							<AreaChartDefault
 								chartData={chartData}
-                chartProps={{syncId: "c"}}
+								chartProps={{ syncId: "c" }}
 								dataPoints={[
 									{
 										label: t`Write`,
@@ -332,7 +332,6 @@ export default memo(function DiskIOSheet({
 							/>
 						</ChartCard>
 					)}
-
 				</SheetContent>
 			)}
 		</Sheet>
