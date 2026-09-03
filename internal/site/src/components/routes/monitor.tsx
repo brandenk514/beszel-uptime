@@ -98,7 +98,6 @@ function UptimeChart({ checks, range }: { checks: MonitorCheckRecord[]; range: C
 			.map((c) => ({
 				time: new Date(c.created).getTime(),
 				rawMs: c.ms ?? null,
-				ms: c.ms ?? null,
 			}))
 			.filter((d) => d.time >= windowStart)
 
@@ -107,12 +106,14 @@ function UptimeChart({ checks, range }: { checks: MonitorCheckRecord[]; range: C
 		// raw per-check value (rawMs) for accuracy. Down checks (rawMs == null)
 		// stay null so outage periods still show as gaps.
 		const windowMs = 15 * 60 * 1000
+		const smoothed: { time: number; rawMs: number | null; ms: number | null }[] = []
 		for (let i = 0; i < points.length; i++) {
-			if (points[i].rawMs == null) {
-				points[i].ms = null
+			const { time, rawMs } = points[i]
+			if (rawMs == null) {
+				smoothed.push({ time, rawMs, ms: null })
 				continue
 			}
-			const start = points[i].time - windowMs
+			const start = time - windowMs
 			let sum = 0
 			let count = 0
 			for (let j = i; j >= 0; j--) {
@@ -122,16 +123,16 @@ function UptimeChart({ checks, range }: { checks: MonitorCheckRecord[]; range: C
 					count++
 				}
 			}
-			points[i].ms = count > 0 ? sum / count : null
+			smoothed.push({ time, rawMs, ms: count > 0 ? sum / count : null })
 		}
 
 		// downsample to keep the SVG light on long ranges
 		const maxPoints = 1000
-		if (points.length > maxPoints) {
-			const step = Math.ceil(points.length / maxPoints)
-			return points.filter((_, i) => i % step === 0 || i === points.length - 1)
+		if (smoothed.length > maxPoints) {
+			const step = Math.ceil(smoothed.length / maxPoints)
+			return smoothed.filter((_, i) => i % step === 0 || i === smoothed.length - 1)
 		}
-		return points
+		return smoothed
 	}, [checks, windowStart])
 
 	const now = Date.now()
