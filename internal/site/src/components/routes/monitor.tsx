@@ -97,14 +97,39 @@ function UptimeChart({ checks, range }: { checks: MonitorCheckRecord[]; range: C
 			.reverse()
 			.map((c) => ({
 				time: new Date(c.created).getTime(),
+				rawMs: c.ms ?? null,
 				ms: c.ms ?? null,
 			}))
 			.filter((d) => d.time >= windowStart)
+
+		// Smooth the line with a rolling mean over a 15-minute window so the
+		// chart doesn't jump on every individual check. The tooltip keeps the
+		// raw per-check value (rawMs) for accuracy. Down checks (rawMs == null)
+		// stay null so outage periods still show as gaps.
+		const windowMs = 15 * 60 * 1000
+		for (let i = 0; i < points.length; i++) {
+			if (points[i].rawMs == null) {
+				points[i].ms = null
+				continue
+			}
+			const start = points[i].time - windowMs
+			let sum = 0
+			let count = 0
+			for (let j = i; j >= 0; j--) {
+				if (points[j].time < start) break
+				if (points[j].rawMs != null) {
+					sum += points[j].rawMs
+					count++
+				}
+			}
+			points[i].ms = count > 0 ? sum / count : null
+		}
+
 		// downsample to keep the SVG light on long ranges
 		const maxPoints = 1000
 		if (points.length > maxPoints) {
 			const step = Math.ceil(points.length / maxPoints)
-			return points.filter((_, i) => i % step === 0)
+			return points.filter((_, i) => i % step === 0 || i === points.length - 1)
 		}
 		return points
 	}, [checks, windowStart])
@@ -153,9 +178,19 @@ function UptimeChart({ checks, range }: { checks: MonitorCheckRecord[]; range: C
 				/>
 				<Tooltip
 					labelFormatter={(val) => new Date(val as number).toLocaleString()}
-					formatter={(value) => [formatMs(value as number), "Response time"]}
+					formatter={(_value, _name, item) => {
+						const raw = (item?.payload as { rawMs?: number | null } | undefined)?.rawMs
+						return [raw != null ? formatMs(raw) : "—", "Response time"]
+					}}
 				/>
-				<Area type="stepAfter" dataKey="ms" stroke="var(--chart-1)" fill="url(#msGradient)" name="Response time" />
+				<Area
+					type="monotoneX"
+					strokeLinejoin="round"
+					dataKey="ms"
+					stroke="var(--chart-1)"
+					fill="url(#msGradient)"
+					name="Response time"
+				/>
 			</AreaChart>
 		</ResponsiveContainer>
 	)

@@ -1738,13 +1738,13 @@ msgstr "Retry on failure"
 #~ msgid "Retry the check a few times before marking as down"
 #~ msgstr "Retry the check a few times before marking as down"
 
-#: src/components/routes/system/charts/disk-charts.tsx
-#: src/components/routes/system/charts/disk-charts.tsx
+#: src/components/systems-table/systems-table-columns.tsx
+msgctxt "Root disk label"
 msgid "Root"
 msgstr "Root"
 
-#: src/components/systems-table/systems-table-columns.tsx
-msgctxt "Root disk label"
+#: src/components/routes/system/charts/disk-charts.tsx
+#: src/components/routes/system/charts/disk-charts.tsx
 msgid "Root"
 msgstr "Root"
 
