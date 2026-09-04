@@ -23,3 +23,4 @@ dockerfile_agent_dev
 .cr-release-packages
 .tmp
 .continue/*
+.worktrees/
